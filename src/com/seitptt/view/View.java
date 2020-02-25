@@ -1,15 +1,21 @@
 package com.seitptt.view;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 /**
  * View - creates the GUI view for the teacher admin application
@@ -24,9 +30,9 @@ public class View extends JFrame {
 
 	// view unit
 	final int UNIT = 30;
-    //homescreen class attributes
-	 private JTextField usernameEntry;
-	 private JTextField passwordEntry;
+	// homescreen class attributes
+	private JTextField usernameEntry;
+	private JTextField passwordEntry;
 
 	/**
 	 * view constructor sets the model and controller and creates homescreen view
@@ -39,55 +45,53 @@ public class View extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(1, 1));
 		createHomeScreen();
-		
-		
-        
 
 	}
+
 	/**
 	 * creates home screen
 	 */
 	private void createHomeScreen() {
-		//create and add homepage panel
-				homePanel=new JPanel();
-				homePanel.setLayout(new GridLayout(3,1));
-				this.add(homePanel);
-				
-				//create and add app logo panel
-				JLabel appLogo=new JLabel("TeacherAdmin App",SwingConstants.CENTER);
-		        appLogo.setFont(new java.awt.Font("Arial", Font.BOLD, 75));
-		        homePanel.add(appLogo);
-		        
-		        //create and add login panel
-		        JPanel loginPanel= new JPanel();
-		        loginPanel.setLayout(new GridLayout(4,1));
-		        homePanel.add(loginPanel);
-		        
-		        //create and add username and password panels to login panel
-		        JPanel usernamePanel=new JPanel();
-		        JLabel usernameLabel=new JLabel("Username:");
-		        usernameEntry= new JTextField();
-		        usernameEntry.setColumns(20);
-		        usernamePanel.add(usernameLabel);
-		        usernamePanel.add(usernameEntry);
-		        loginPanel.add(usernamePanel);
-		        
-		        JPanel passwordPanel=new JPanel();
-		        JLabel passwordLabel=new JLabel("Password:");
-		        passwordEntry= new JTextField();
-		        passwordEntry.setColumns(20);
-		        passwordPanel.add(passwordLabel);
-		        passwordPanel.add(passwordEntry);
-		        loginPanel.add(passwordPanel);
-		     
-		        //create and add login button panel to login panel
-		        JPanel loginButtonPanel= new JPanel();
-		        loginButtonPanel.setLayout(new GridBagLayout());
-		        JButton loginButton = new JButton("Login");
-		        //COMMENTED OUT CONTROLLER ACTION LISTENER
-		        //loginButton.addActionListener(l);
-		        loginButtonPanel.add(loginButton);
-		        loginPanel.add(loginButtonPanel);
+		// create and add homepage panel
+		homePanel = new JPanel();
+		homePanel.setLayout(new GridLayout(3, 1));
+		this.add(homePanel);
+
+		// create and add app logo panel
+		JLabel appLogo = new JLabel("TeacherAdmin App", SwingConstants.CENTER);
+		appLogo.setFont(new java.awt.Font("Arial", Font.BOLD, 75));
+		homePanel.add(appLogo);
+
+		// create and add login panel
+		JPanel loginPanel = new JPanel();
+		loginPanel.setLayout(new GridLayout(4, 1));
+		homePanel.add(loginPanel);
+
+		// create and add username and password panels to login panel
+		JPanel usernamePanel = new JPanel();
+		JLabel usernameLabel = new JLabel("Username:");
+		usernameEntry = new JTextField();
+		usernameEntry.setColumns(20);
+		usernamePanel.add(usernameLabel);
+		usernamePanel.add(usernameEntry);
+		loginPanel.add(usernamePanel);
+
+		JPanel passwordPanel = new JPanel();
+		JLabel passwordLabel = new JLabel("Password:");
+		passwordEntry = new JTextField();
+		passwordEntry.setColumns(20);
+		passwordPanel.add(passwordLabel);
+		passwordPanel.add(passwordEntry);
+		loginPanel.add(passwordPanel);
+
+		// create and add login button panel to login panel
+		JPanel loginButtonPanel = new JPanel();
+		loginButtonPanel.setLayout(new GridBagLayout());
+		JButton loginButton = new JButton("Login");
+		// COMMENTED OUT CONTROLLER ACTION LISTENER
+		// loginButton.addActionListener(l);
+		loginButtonPanel.add(loginButton);
+		loginPanel.add(loginButtonPanel);
 	}
 
 	/**
@@ -96,7 +100,10 @@ public class View extends JFrame {
 	public String getUsername() {
 		return usernameEntry.getText();
 	}
-	
+
+	/**
+	 * returns password from home screen
+	 */
 	public String getPassword() {
 		return passwordEntry.getText();
 	}
@@ -105,7 +112,7 @@ public class View extends JFrame {
 	 * creates class director screen
 	 */
 	public void createClassDirScreen() {
-      
+
 	}
 
 	/**
@@ -119,21 +126,60 @@ public class View extends JFrame {
 	 * creates admin screen
 	 */
 	public void createAdminScreen() {
-
+		this.remove(homePanel);
 	}
 
 	/**
 	 * updates admin screen
 	 */
 	public void updateAdminScreen() {
-
+		this.remove(homePanel);
 	}
 
 	/**
 	 * creates PTT director screen
 	 */
 	public void createPTTDirScreen() {
-
+		//remove homePanel
+		this.remove(homePanel);
+		//create and add PTTDirPanel
+		pttDirPanel=new JPanel();
+		pttDirPanel.setLayout(new BorderLayout());
+        Border pttDirBorder = BorderFactory.createEmptyBorder(2*UNIT,2*UNIT,3*UNIT,2*UNIT);
+        pttDirPanel.setBorder(pttDirBorder);
+		this.add(pttDirPanel);
+		
+		//create and add headerPanel
+		JPanel headerPanel=new JPanel();
+		headerPanel.setLayout(new GridLayout(2,1));
+		pttDirPanel.add(headerPanel,BorderLayout.NORTH);
+		JLabel pttDirHeader=new JLabel("List of Requirements",SwingConstants.CENTER);
+		pttDirHeader.setFont(new java.awt.Font("Arial", Font.BOLD, 30));
+		headerPanel.add(pttDirHeader);
+		//create and add filter to list of requirements
+		//will be replaced by model call
+		String[] reqStatusOptions= {"All","Pending"}; 
+		JComboBox filterRequirements= new JComboBox(reqStatusOptions);
+		headerPanel.add(filterRequirements);
+		
+		//create and add display of requirements list
+		//will be replaced by model call
+		String[] testReqs= {"Request1","Request2","Request3"};
+		JList requirementsDisplay = new JList(testReqs);
+		pttDirPanel.add(requirementsDisplay,BorderLayout.CENTER);
+		
+		//create and add action buttons
+		JPanel buttonsPanel=new JPanel();
+		buttonsPanel.setLayout(new GridLayout(1,2));
+		pttDirPanel.add(buttonsPanel,BorderLayout.SOUTH);
+		JButton approveButton = new JButton("Approve");
+		JButton denyButton= new JButton("Deny");
+		buttonsPanel.add(approveButton);
+		buttonsPanel.add(denyButton);
+	
+		//update screen
+		 this.revalidate();
+	     this.repaint();
 	}
 
 	/**
@@ -145,8 +191,10 @@ public class View extends JFrame {
 
 	// test main will remove
 	public static void main(String[] args) {
-			View gui=new View();
-			gui.setVisible(true);
+		View gui = new View();
+		gui.setVisible(true);
+		//code to test the different screens
+	    gui.createPTTDirScreen();
 	}
 
 }
