@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -112,14 +113,82 @@ public class View extends JFrame {
 	 * creates class director screen
 	 */
 	public void createClassDirScreen() {
-
+		//remove homePanel
+		this.remove(homePanel);
+		//create and add ClassDirPanel
+		classDirPanel=new JPanel();
+		classDirPanel.setLayout(new GridLayout(1,2));
+		Border classDirBorder = BorderFactory.createEmptyBorder(2*UNIT,2*UNIT,3*UNIT,2*UNIT);
+        classDirPanel.setBorder(classDirBorder);
+		this.add(classDirPanel);
+		
+		//create and add teaching requirement addition panel
+		JPanel addRequirementPanel=new JPanel();
+		classDirPanel.add(addRequirementPanel);
+		addRequirementPanel.setLayout(new GridLayout(10,1));
+		JLabel requirementsPanelHeader=new JLabel("Add Requirement", SwingConstants.CENTER); 
+		requirementsPanelHeader.setFont(new java.awt.Font("Arial", Font.BOLD, 20));
+		addRequirementPanel.add(requirementsPanelHeader);
+		JPanel selectClassPanel=new JPanel();
+		addRequirementPanel.add(selectClassPanel);
+		JLabel selectClassLabel=new JLabel("Select a class");
+		//will be replaced by model call
+		String[] testClasses= {"Class1","Class2","Class3","Class4","Class5"};
+		JComboBox classSelector= new JComboBox(testClasses);
+		selectClassPanel.add(selectClassLabel);
+		selectClassPanel.add(classSelector);
+		
+		
+		JPanel enterNumTutorsPanel=new JPanel();
+		addRequirementPanel.add(enterNumTutorsPanel);
+		JLabel enterNumTutorsLabel=new JLabel("# Tutors");
+		//will be replaced by model call
+		JTextField enterNumTutors= new JTextField();
+		enterNumTutors.setColumns(5);
+		enterNumTutorsPanel.add(enterNumTutorsLabel);
+		enterNumTutorsPanel.add(enterNumTutors);
+		
+		
+		JPanel enterNumDemonstratorsPanel=new JPanel();
+		addRequirementPanel.add(enterNumDemonstratorsPanel);
+		JLabel enterNumDemonstratorsLabel=new JLabel("# Demonstrators");
+		JTextField enterNumDemonstrators= new JTextField();
+		enterNumDemonstrators.setColumns(5);
+		enterNumDemonstratorsPanel.add(enterNumDemonstratorsLabel);
+		enterNumDemonstratorsPanel.add(enterNumDemonstrators);
+		
+		JPanel addRequirementButtonPanel=new JPanel();
+		addRequirementPanel.add(addRequirementButtonPanel);
+	
+		JButton addRequirementButton= new JButton("Add");
+		addRequirementButtonPanel.add(addRequirementButton);
+		
+		
+		//create and add requirements list
+		JPanel requirementsListPanel = new JPanel();
+		requirementsListPanel.setLayout(new BorderLayout());
+		classDirPanel.add(requirementsListPanel);
+		//will be replaced by model call
+		String[] requirementsTestList= {"Class #Tutors #Demonstrators","History 1    2"};
+		JList requirementsList=new JList(requirementsTestList);
+		requirementsListPanel.add(requirementsList,BorderLayout.CENTER);
+		//create remove button
+		JButton removeRequirementButton = new JButton("Remove");
+		requirementsListPanel.add(removeRequirementButton,BorderLayout.SOUTH);
+	
+		
+		
+		//update screen
+		 this.revalidate();
+	     this.repaint();
 	}
 
 	/**
 	 * updates class director screen
 	 */
 	public void updateClassDirScreen() {
-
+	
+		
 	}
 
 	/**
@@ -133,7 +202,7 @@ public class View extends JFrame {
 	 * updates admin screen
 	 */
 	public void updateAdminScreen() {
-		this.remove(homePanel);
+		
 	}
 
 	/**
@@ -194,7 +263,10 @@ public class View extends JFrame {
 		View gui = new View();
 		gui.setVisible(true);
 		//code to test the different screens
-	    gui.createPTTDirScreen();
+	    //gui.createPTTDirScreen();
+		gui.createClassDirScreen();
+	    
+	  
 	}
 
 }
