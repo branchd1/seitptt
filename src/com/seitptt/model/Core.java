@@ -13,7 +13,7 @@ public class Core {
 	private Semester currentSemester;
 	
 	public Core() {
-		Database.LoadDatabase();
+		Database.LoadCaches();
 	}
 	
 	public Employee login(String username, String password) {
@@ -22,7 +22,7 @@ public class Core {
 	}
 	
 	public static void main(String[] args) {
-		Database.LoadDatabase();
+		Database.LoadCaches();
 		
 		
 		

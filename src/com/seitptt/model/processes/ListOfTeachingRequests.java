@@ -1,4 +1,5 @@
 package com.seitptt.model.processes;
 
-public class TeachingRequirements {
+public class ListOfTeachingRequests {
+
 }

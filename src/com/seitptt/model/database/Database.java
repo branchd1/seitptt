@@ -1,6 +1,7 @@
 package com.seitptt.model.database;
 
 import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +13,11 @@ import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
+import com.seitptt.model.processes.ListOfTeachingRequests;
+import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.TeachingRequest;
+import com.seitptt.model.processes.TeachingRequirement;
 
 public class Database {
 	public static void setEmployeesCacheFromDB() {
@@ -126,7 +131,93 @@ public class Database {
 		return DatabaseCache.getSemestersCache();
 	}
 	
-	public static void LoadDatabase() {
+	public static ListOfTeachingRequests getTeachingRequestsFromDB() {
+		final String dbFile = "teaching_requests.txt";
+		final ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
+		
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		s.nextLine();
+		
+		while(s.hasNextLine()) {
+			while(s.hasNext()) {
+//				final int semesterNumber = s.nextInt();
+//				final int semesterYear = s.nextInt();
+//				final String username = s.next();
+//				final String className = s.next();
+//				
+//				final Semester semester = new Semester(semesterNumber, semesterYear);
+				
+//				TeachingRequest teachingRequest = new TeachingRequest(username, className, semester);
+				TeachingRequest teachingRequest = new TeachingRequest();
+				
+//				listOfTeachingRequests.add(teachingRequest);
+				
+			}
+		}
+		
+		try{
+			fr.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		s.close();
+		return listOfTeachingRequests;
+	}
+	
+	public static ListOfTeachingRequirements getTeachingRequirementsFromDB() {
+		final String dbFile = "teaching_requirements.txt";
+		final ListOfTeachingRequirements listOfTeachingRequirements= new ListOfTeachingRequirements();
+		
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		s.nextLine();
+		
+		while(s.hasNextLine()) {
+			while(s.hasNext()) {
+//				final int semesterNumber = s.nextInt();
+//				final int semesterYear = s.nextInt();
+//				final String username = s.next();
+//				final String className = s.next();
+//				
+//				final Semester semester = new Semester(semesterNumber, semesterYear);
+				
+//				TeachingRequest teachingRequest = new TeachingRequest(username, className, semester);
+				TeachingRequirement teachingRequirement = new TeachingRequirement();
+				
+//				listOfTeachingRequests.add(teachingRequest);
+				
+			}
+		}
+		
+		try{
+			fr.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		s.close();
+		return listOfTeachingRequirements;
+	}
+	
+	public static void LoadCaches() {
 		Database.setEmployeesCacheFromDB();
 		Database.setSemesterCacheFromDB();
 	}
