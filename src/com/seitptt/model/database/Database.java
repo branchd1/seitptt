@@ -3,6 +3,7 @@ package com.seitptt.model.database;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.seitptt.model.personnel.Administrator;
@@ -11,6 +12,7 @@ import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
+import com.seitptt.model.processes.Semester;
 
 public class Database {
 	public static void setEmployeesCacheFromDB() {
@@ -82,7 +84,50 @@ public class Database {
 		return DatabaseCache.getEmployeesCache();
 	}
 	
+	public static void setSemesterCacheFromDB() {
+		final String dbFile = "semesters.txt";
+		final ArrayList<Semester> listOfSemesters = new ArrayList<Semester>();
+		
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		s.nextLine();
+		
+		while(s.hasNextLine()) {
+			while(s.hasNext()) {
+				final int number = s.nextInt();
+				final int year = s.nextInt();
+				
+				Semester semester = new Semester(number, year);
+				
+				listOfSemesters.add(semester);
+				
+			}
+		}
+		
+		try{
+			fr.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		s.close();
+		DatabaseCache.setSemestersCache(listOfSemesters);
+	}
+	
+	public static ArrayList<Semester> getSemestersFromDB() {
+		return DatabaseCache.getSemestersCache();
+	}
+	
 	public static void LoadDatabase() {
 		Database.setEmployeesCacheFromDB();
+		Database.setSemesterCacheFromDB();
 	}
 }

@@ -1,4 +1,4 @@
-package com.seitptt.model.classesandrequirements;
+package com.seitptt.model.processes;
 
 public class Semester {
 	private int number;
@@ -35,7 +35,7 @@ public class Semester {
 			}
 			
 		} else {
-			throw new RuntimeException("Cannot compare a semester with a non-semester");
+			throw new RuntimeException("Cannot compare a semester with a non-semester object");
 		}
 		
 		return false;
