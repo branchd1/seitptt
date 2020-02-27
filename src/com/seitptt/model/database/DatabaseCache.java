@@ -1,13 +1,11 @@
 package com.seitptt.model.database;
 
-import java.util.ArrayList;
-
 import com.seitptt.model.personnel.ListOfEmployees;
-import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.ListOfSemesters;
 
 public class DatabaseCache {
 	private static ListOfEmployees employeesCache;
-	private static ArrayList<Semester> semestersCache;
+	private static ListOfSemesters semestersCache;
 
 	public static ListOfEmployees getEmployeesCache() {
 		return DatabaseCache.employeesCache;
@@ -17,11 +15,11 @@ public class DatabaseCache {
 		DatabaseCache.employeesCache = employeesCache;
 	}
 	
-	public static ArrayList<Semester> getSemestersCache() {
+	public static ListOfSemesters getSemestersCache() {
 		return DatabaseCache.semestersCache;
 	}
 
-	public static void setSemestersCache(ArrayList<Semester> semestersCache) {
+	public static void setSemestersCache(ListOfSemesters semestersCache) {
 		DatabaseCache.semestersCache = semestersCache;
 	}
 	

@@ -3,9 +3,9 @@ package com.seitptt.model.database;
 import java.io.FileNotFoundException;
 
 
+
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.seitptt.model.personnel.Administrator;
@@ -21,6 +21,7 @@ import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.model.processes.Class;
 import com.seitptt.model.processes.ListOfClasses;
+import com.seitptt.model.processes.ListOfSemesters;
 
 public class Database {
 	public static void setEmployeesCacheFromDB() {
@@ -94,7 +95,7 @@ public class Database {
 	
 	public static void setSemesterCacheFromDB() {
 		final String dbFile = "semesters.txt";
-		final ArrayList<Semester> listOfSemesters = new ArrayList<Semester>();
+		final ListOfSemesters listOfSemesters = new ListOfSemesters();
 		
 		FileReader fr = null;
 		
@@ -131,7 +132,7 @@ public class Database {
 		DatabaseCache.setSemestersCache(listOfSemesters);
 	}
 	
-	public static ArrayList<Semester> getSemestersFromDB() {
+	public static ListOfSemesters getSemestersFromDB() {
 		return DatabaseCache.getSemestersCache();
 	}
 	
