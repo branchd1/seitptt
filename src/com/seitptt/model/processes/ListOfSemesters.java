@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.seitptt.interfaces.Findable;
 
-public class listOfSemesters implements Findable{
+public class ListOfSemesters implements Findable{
 
 	private ArrayList<Semester> loS;
 

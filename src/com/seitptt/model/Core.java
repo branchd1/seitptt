@@ -11,15 +11,12 @@ import com.seitptt.model.processes.Semester;
 public class Core {
 	
 	private Semester currentSemester;
+	private Employee currentUser;
 	
 	public Core() {
 		Database.LoadCaches();
 	}
 	
-	public Employee login(String username, String password) {
-		final Employee employee = Auth.login(username, password);
-		return employee;
-	}
 	
 	public static void main(String[] args) {
 		Database.LoadCaches();
@@ -72,6 +69,12 @@ public class Core {
 				"1 2022");
 		System.out.println("-------------------\nEND\n-------------------");
 	}
+	
+	public listOfSemesters
+	
+	public Employee login(String username, String password) {
+		return Auth.login(username, password);
+	}
 
 	public Semester getCurrentSemester() {
 		return currentSemester;
@@ -79,5 +82,13 @@ public class Core {
 
 	public void setCurrentSemester(Semester currentSemester) {
 		this.currentSemester = currentSemester;
+	}
+
+	public Employee getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(Employee currentUser) {
+		this.currentUser = currentUser;
 	}
 }
