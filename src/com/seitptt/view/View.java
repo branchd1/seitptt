@@ -34,6 +34,15 @@ public class View extends JFrame {
 	// homescreen class attributes
 	private JTextField usernameEntry;
 	private JTextField passwordEntry;
+	//class director class attributes
+	private JTextField enterNumTutors;
+	private JTextField enterNumDemonstrators;
+	private JList requirementsList;
+
+	//PTT Director class attributes
+
+	private JList requirementsDisplay;
+	
 
 	/**
 	 * view constructor sets the model and controller and creates homescreen view
@@ -135,6 +144,8 @@ public class View extends JFrame {
 		//will be replaced by model call
 		String[] testClasses= {"Class1","Class2","Class3","Class4","Class5"};
 		JComboBox classSelector= new JComboBox(testClasses);
+		//ACTION LISTENER FOR CONTROLLER
+		//classSelector.addActionListener(l);
 		selectClassPanel.add(selectClassLabel);
 		selectClassPanel.add(classSelector);
 		
@@ -152,7 +163,7 @@ public class View extends JFrame {
 		JPanel enterNumDemonstratorsPanel=new JPanel();
 		addRequirementPanel.add(enterNumDemonstratorsPanel);
 		JLabel enterNumDemonstratorsLabel=new JLabel("# Demonstrators");
-		JTextField enterNumDemonstrators= new JTextField();
+		enterNumDemonstrators= new JTextField();
 		enterNumDemonstrators.setColumns(5);
 		enterNumDemonstratorsPanel.add(enterNumDemonstratorsLabel);
 		enterNumDemonstratorsPanel.add(enterNumDemonstrators);
@@ -161,6 +172,8 @@ public class View extends JFrame {
 		addRequirementPanel.add(addRequirementButtonPanel);
 	
 		JButton addRequirementButton= new JButton("Add");
+		//ACTION LISTENER FOR CONTROLLER COMMENT OUT
+		//addRequirementButton.addActionListener(l);
 		addRequirementButtonPanel.add(addRequirementButton);
 		
 		
@@ -170,7 +183,7 @@ public class View extends JFrame {
 		classDirPanel.add(requirementsListPanel);
 		//will be replaced by model call
 		String[] requirementsTestList= {"Class #Tutors #Demonstrators","History 1    2"};
-		JList requirementsList=new JList(requirementsTestList);
+		requirementsList=new JList(requirementsTestList);
 		requirementsListPanel.add(requirementsList,BorderLayout.CENTER);
 		//create remove button
 		JButton removeRequirementButton = new JButton("Remove");
@@ -187,9 +200,32 @@ public class View extends JFrame {
 	 * updates class director screen
 	 */
 	public void updateClassDirScreen() {
-	
-		
+		//MAKE MODEL CALL HERE 
+		//requirementsList=new JList(REFERENCING MODEL CALL);
 	}
+	
+	/**
+	 * returns numbers of tutors from class director screen 
+	 */
+	public String getNumTutors() {
+		
+		return enterNumTutors.getText();
+	}
+	
+	/**
+	 * returns numbers of demonstrators from class director screen 
+	 */
+	public String getNumDemonstrators() {
+		
+		return enterNumDemonstrators.getText();
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * creates admin screen
@@ -229,12 +265,14 @@ public class View extends JFrame {
 		//will be replaced by model call
 		String[] reqStatusOptions= {"All","Pending"}; 
 		JComboBox filterRequirements= new JComboBox(reqStatusOptions);
+		//ADD ACTION LISTENER FOR CONTROLLER
+		//filterRequirements.addActionListener(l);
 		headerPanel.add(filterRequirements);
 		
 		//create and add display of requirements list
 		//will be replaced by model call
 		String[] testReqs= {"Request1","Request2","Request3"};
-		JList requirementsDisplay = new JList(testReqs);
+		requirementsDisplay = new JList(testReqs);
 		pttDirPanel.add(requirementsDisplay,BorderLayout.CENTER);
 		
 		//create and add action buttons
@@ -242,7 +280,11 @@ public class View extends JFrame {
 		buttonsPanel.setLayout(new GridLayout(1,2));
 		pttDirPanel.add(buttonsPanel,BorderLayout.SOUTH);
 		JButton approveButton = new JButton("Approve");
+		//ACTION LISTENER FOR CONTROLLER
+		//approveButton.addActionListener(l);
 		JButton denyButton= new JButton("Deny");
+		//DENY LISTENER FOR CONTROLLER
+		//denyButton.addActionListener(l);
 		buttonsPanel.add(approveButton);
 		buttonsPanel.add(denyButton);
 	
@@ -263,9 +305,9 @@ public class View extends JFrame {
 		View gui = new View();
 		gui.setVisible(true);
 		//code to test the different screens
-	    //gui.createPTTDirScreen();
 		gui.createClassDirScreen();
-	    
+	    //gui.createPTTDirScreen();
+	
 	  
 	}
 
