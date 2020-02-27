@@ -1,6 +1,8 @@
 package com.seitptt.model.personnel;
 
-public abstract class Employee {
+import com.seitptt.interfaces.Hostable;
+
+public abstract class Employee implements Hostable {
 	
 	private String firstName;
 	private String lastName;

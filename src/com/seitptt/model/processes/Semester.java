@@ -1,10 +1,15 @@
 package com.seitptt.model.processes;
 
-public class Semester {
+import com.seitptt.interfaces.Hostable;
+import com.seitptt.visitors.PrintToDatabaseVisitor;
+
+public class Semester implements Hostable {
+	private int id;
 	private int number;
 	private int year;
 	
-	public Semester(int number, int year) {
+	public Semester(int id, int number, int year) {
+		this.setId(id);
 		this.setNumber(number);
 		this.setYear(year);
 	}
@@ -39,6 +44,20 @@ public class Semester {
 		}
 		
 		return false;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public void accept(PrintToDatabaseVisitor visitor) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

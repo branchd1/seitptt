@@ -2,6 +2,7 @@ package com.seitptt.model.database;
 
 import java.io.FileNotFoundException;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
+import com.seitptt.model.processes.Class;
 
 public class Database {
 	public static void setEmployeesCacheFromDB() {
@@ -107,10 +109,11 @@ public class Database {
 		
 		while(s.hasNextLine()) {
 			while(s.hasNext()) {
+				final int id = s.nextInt();
 				final int number = s.nextInt();
 				final int year = s.nextInt();
 				
-				Semester semester = new Semester(number, year);
+				Semester semester = new Semester(id, number, year);
 				
 				listOfSemesters.add(semester);
 				
@@ -149,14 +152,18 @@ public class Database {
 		
 		while(s.hasNextLine()) {
 			while(s.hasNext()) {
-//				final int semesterNumber = s.nextInt();
-//				final int semesterYear = s.nextInt();
-//				final String username = s.next();
-//				final String className = s.next();
-//				
-//				final Semester semester = new Semester(semesterNumber, semesterYear);
+				final int id = s.nextInt();
+				final String teacherUsername = s.next();
+				final String classCode = s.next();
+				final int teachingRequirementId = s.nextInt();
 				
-//				TeachingRequest teachingRequest = new TeachingRequest(username, className, semester);
+				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
+				
+				// CHANGE THESE TO USE FIND
+				Class classObj = new Class();
+				TeachingRequirement teachingRequirement = new TeachingRequirement();
+				
+//				TeachingRequest teachingRequest = new TeachingRequest(teacher, classObj, teachingRequirement);
 				TeachingRequest teachingRequest = new TeachingRequest();
 				
 //				listOfTeachingRequests.add(teachingRequest);
@@ -192,17 +199,16 @@ public class Database {
 		
 		while(s.hasNextLine()) {
 			while(s.hasNext()) {
-//				final int semesterNumber = s.nextInt();
-//				final int semesterYear = s.nextInt();
-//				final String username = s.next();
-//				final String className = s.next();
-//				
-//				final Semester semester = new Semester(semesterNumber, semesterYear);
+				final int id = s.nextInt();
+				final int numberOfTeachers = s.nextInt();
+				final String classCode = s.next();
 				
-//				TeachingRequest teachingRequest = new TeachingRequest(username, className, semester);
+				Class classObj = new Class();
+				
+//				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				TeachingRequirement teachingRequirement = new TeachingRequirement();
 				
-//				listOfTeachingRequests.add(teachingRequest);
+//				ListOfTeachingRequirements.add(teachingRequirement);
 				
 			}
 		}
