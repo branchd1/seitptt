@@ -11,6 +11,13 @@ public class TeachingRequest  implements Hostable{
 	private Class classRef;
 	private TeachingRequirement teachingRequirement;
 	
+	
+	public TeachingRequest(int id, Teacher teacher, Class classRef, TeachingRequirement teachingRequirement) {
+		this.setId(id);
+		this.setTeacher(teacher);
+		this.setClassRef(classRef);
+		this.setTeachingRequirement(teachingRequirement);
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {
