@@ -20,6 +20,7 @@ import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.model.processes.Class;
+import com.seitptt.model.processes.ListOfClasses;
 
 public class Database {
 	public static void setEmployeesCacheFromDB() {
@@ -221,6 +222,47 @@ public class Database {
 		
 		s.close();
 		return listOfTeachingRequirements;
+	}
+	
+	public static ListOfClasses getClassesFromDB() {
+		final String dbFile = "classes.txt";
+		final ListOfClasses listOfClasses= new ListOfClasses();
+		
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		s.nextLine();
+		
+		while(s.hasNextLine()) {
+			while(s.hasNext()) {
+				final String code = s.next();
+				final String name = s.next();
+				final int semesterId = s.nextInt();
+				
+				final Semester semester = Database.getSemestersFromDB().find(semesterId);
+				
+				final Class classObj = new Class(code, name, semester);
+				
+				ListOfClasses.add(classObj);
+				
+			}
+		}
+		
+		try{
+			fr.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		s.close();
+		return listOfClasses;
 	}
 	
 	public static void LoadCaches() {
