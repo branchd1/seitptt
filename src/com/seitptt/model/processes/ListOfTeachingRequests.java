@@ -31,4 +31,8 @@ public class ListOfTeachingRequests implements Findable, Iterable<TeachingReques
 	public Iterator<TeachingRequest> iterator() {
 		return this.loTR.iterator();
 	}
+	
+	public void add(TeachingRequest teachingRequest) {
+		this.loTR.add(teachingRequest);
+	}
 }

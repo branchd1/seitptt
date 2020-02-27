@@ -9,6 +9,12 @@ public class TeachingRequirement  implements Hostable{
 	private int numOfTeachers;
 	private Class classRef;
 	
+	
+	public TeachingRequirement(int id, int numOfTeachers, Class classRef) {
+		this.setId(id);
+		this.setClassRef(classRef);
+		this.setNumOfTeachers(numOfTeachers);
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {

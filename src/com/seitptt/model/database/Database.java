@@ -163,7 +163,7 @@ public class Database {
 				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
-				TeachingRequest teachingRequest = new TeachingRequest(teacher, classObj, teachingRequirement);
+				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
 				
 				listOfTeachingRequests.add(teachingRequest);
 				
@@ -206,7 +206,7 @@ public class Database {
 				
 				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
-				ListOfTeachingRequirements.add(teachingRequirement);
+				listOfTeachingRequirements.add(teachingRequirement);
 				
 			}
 		}
@@ -247,7 +247,7 @@ public class Database {
 				
 				final Class classObj = new Class(code, name, semester);
 				
-				ListOfClasses.add(classObj);
+				listOfClasses.add(classObj);
 				
 			}
 		}
