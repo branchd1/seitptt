@@ -1,8 +1,14 @@
 package com.seitptt.model.processes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.seitptt.interfaces.Findable;
 
-public class ListOfTeachingRequests implements Findable {
+public class ListOfTeachingRequests implements Findable, Iterable<TeachingRequest> {
+
+	
+	ArrayList<TeachingRequest> loTR;
 
 	@Override
 	public Findable find(int identifier) {
@@ -16,4 +22,13 @@ public class ListOfTeachingRequests implements Findable {
 		return null;
 	}
 
+	
+	public int getID() {
+		return loTR.get(loTR.size()-1).getId();
+	}
+	
+	
+	public Iterator<TeachingRequest> iterator() {
+		return this.loTR.iterator();
+	}
 }
