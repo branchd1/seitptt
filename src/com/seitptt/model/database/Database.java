@@ -160,14 +160,12 @@ public class Database {
 				
 				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
 				
-				// CHANGE THESE TO USE FIND
-				Class classObj = new Class();
-				TeachingRequirement teachingRequirement = new TeachingRequirement();
+				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
+				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
-//				TeachingRequest teachingRequest = new TeachingRequest(teacher, classObj, teachingRequirement);
-				TeachingRequest teachingRequest = new TeachingRequest();
+				TeachingRequest teachingRequest = new TeachingRequest(teacher, classObj, teachingRequirement);
 				
-//				listOfTeachingRequests.add(teachingRequest);
+				listOfTeachingRequests.add(teachingRequest);
 				
 			}
 		}
@@ -204,12 +202,11 @@ public class Database {
 				final int numberOfTeachers = s.nextInt();
 				final String classCode = s.next();
 				
-				Class classObj = new Class();
+				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
 				
-//				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
-				TeachingRequirement teachingRequirement = new TeachingRequirement();
+				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
-//				ListOfTeachingRequirements.add(teachingRequirement);
+				ListOfTeachingRequirements.add(teachingRequirement);
 				
 			}
 		}
