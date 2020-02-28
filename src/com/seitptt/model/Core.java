@@ -8,10 +8,13 @@ import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
+import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
+import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.visitors.PrintToDatabaseVisitor;
 
@@ -86,6 +89,16 @@ public class Core {
 			tr.accept(visitor);			
 		}
 	}
+	
+	public void approveRequest(TeachingRequest tr) {
+		if (!(currentUser instanceof PTTDirector)) {
+			throw new RuntimeException("Sorry current user is not a PTTDirector");
+		}else {
+			tr.isApproved();
+		}
+	}
+	
+	
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
 		if (!(currentUser instanceof ClassDirector)) {
@@ -110,16 +123,19 @@ public class Core {
 		if (!(currentUser instanceof Administrator)) {
 			throw new RuntimeException("Sorry current user is not an Administrator");
 		}else {
-			//t.train();
+			t.train();
 		}
 	}
 
 	
-	public void createRequest(Teacher t, Class c, TeachingRequirement tr) {
+	public void addRequest(Teacher t, Classes c, TeachingRequirement tr) {
 		if (!(currentUser instanceof Administrator)) {
 			throw new RuntimeException("Sorry current user is not an Administrator");
 		}else {
-			//t.train();
+			TeachingRequest teachingRequest = new TeachingRequest(t, c, tr);
+			
+			PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
+			teachingRequest.accept(visitor);	
 		}
 	}
 
