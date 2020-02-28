@@ -360,9 +360,9 @@ public class View extends JFrame {
 	public static void main(String[] args) {
 		View gui = new View();
 		gui.setVisible(true);
-		gui.noAccess();
+		//gui.noAccess();
 		//code to test the different screens
-		//gui.createClassDirScreen();
+		gui.createClassDirScreen();
 	    //gui.createPTTDirScreen();
 	
 	  
