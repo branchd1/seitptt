@@ -169,7 +169,7 @@ public class View extends JFrame {
 		//will be replaced by model call
 		String[] testClasses= {"Class1","Class2","Class3","Class4","Class5"};
 		JComboBox classSelector= new JComboBox(testClasses);
-		ACTION LISTENER FOR CONTROLLER
+//		ACTION LISTENER FOR CONTROLLER
 		classSelector.addActionListener(controller);
 		selectClassPanel.add(selectClassLabel);
 		selectClassPanel.add(classSelector);
