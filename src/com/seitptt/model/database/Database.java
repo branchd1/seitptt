@@ -24,8 +24,9 @@ import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 
 public class Database {
+	private final static String dbDir = "db/";
 	public static void setEmployeesCacheFromDB() {
-		final String dbFile = "employees.txt";
+		final String dbFile = Database.dbDir + "employees.txt";
 		final ListOfEmployees listOfEmployees = new ListOfEmployees();
 		
 		FileReader fr = null;
@@ -49,6 +50,8 @@ public class Database {
 				final String lastName = s.next();
 				
 				Employee employee = null;
+				
+				
 				
 				if (type.contains("ptt")) {
 					employee = new PTTDirector(firstName, lastName);
@@ -94,7 +97,7 @@ public class Database {
 	}
 	
 	public static void setSemesterCacheFromDB() {
-		final String dbFile = "semesters.txt";
+		final String dbFile = Database.dbDir + "semesters.txt";
 		final ListOfSemesters listOfSemesters = new ListOfSemesters();
 		
 		FileReader fr = null;
@@ -137,7 +140,7 @@ public class Database {
 	}
 	
 	public static ListOfTeachingRequests getTeachingRequestsFromDB() {
-		final String dbFile = "teaching_requests.txt";
+		final String dbFile = Database.dbDir + "teaching_requests.txt";
 		final ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
 		
 		FileReader fr = null;
@@ -182,7 +185,7 @@ public class Database {
 	}
 	
 	public static ListOfTeachingRequirements getTeachingRequirementsFromDB() {
-		final String dbFile = "teaching_requirements.txt";
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
 		final ListOfTeachingRequirements listOfTeachingRequirements= new ListOfTeachingRequirements();
 		
 		FileReader fr = null;
@@ -223,7 +226,7 @@ public class Database {
 	}
 	
 	public static ListOfClasses getClassesFromDB() {
-		final String dbFile = "classes.txt";
+		final String dbFile = Database.dbDir + "classes.txt";
 		final ListOfClasses listOfClasses= new ListOfClasses();
 		
 		FileReader fr = null;

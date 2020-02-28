@@ -1,2 +1,0 @@
-id number-of-teachers class-code
-1 
