@@ -8,15 +8,20 @@ public class TeachingRequest  implements Hostable{
 	
 	private int id;
 	private Teacher teacher;
-	private Class classRef;
+	private Classes classRef;
 	private TeachingRequirement teachingRequirement;
+	private boolean approval;
 	
 	
-	public TeachingRequest(int id, Teacher teacher, Class classRef, TeachingRequirement teachingRequirement) {
-		this.setId(id);
+	public TeachingRequest(Teacher teacher, Classes classRef, TeachingRequirement teachingRequirement) {
 		this.setTeacher(teacher);
 		this.setClassRef(classRef);
 		this.setTeachingRequirement(teachingRequirement);
+		this.approval = false;
+	}
+	
+	public boolean isApproved() {
+		return this.approval;
 	}
 
 	@Override
@@ -46,12 +51,12 @@ public class TeachingRequest  implements Hostable{
 	}
 
 
-	public Class getClassRef() {
+	public Classes getClassRef() {
 		return classRef;
 	}
 
 
-	public void setClassRef(Class classRef) {
+	public void setClassRef(Classes classRef) {
 		this.classRef = classRef;
 	}
 
