@@ -15,4 +15,13 @@ public class ListOfEmployees implements Iterable<Employee> {
 	public Iterator<Employee> iterator() {
 		return this.listOfEmployees.iterator();
 	}
+	
+	public Employee find(String username) {
+		for(Employee employee : listOfEmployees) {
+			if (employee.getUsername().contentEquals(username)) {
+				return employee;
+			}
+		}
+		return null;
+	}
 }
