@@ -37,23 +37,31 @@ public class Controller {
 	public void actionPerformed(ActionEvent e) {
 		//when e.getSource()==view.loginButton
 		//Auth.login returns employee or null
-//		if(e.getSource()==view.loginButton) {
-			Database.LoadDatabase();
-			ListOfEmployees listOfEmployees = Database.getEmployeesFromDB();
-
+		if(e.getSource()==view.loginButton) {
 			Employee typeOfEmployee=Auth.login(view.getUsername(), view.getPassword());
 
 			//first, check the user is authorized member
 			if(typeOfEmployee==null) {//wrong user. should access again. 
-				//view.resetToHome();
-				//or
-//				System.exit(0);
+				view.wrongInput();
 			}else if(typeOfEmployee instanceof ClassDirector) {//then, check the type of user: 1. ClassDirector
 				view.createClassDirScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else if(typeOfEmployee instanceof Administrator) {//2. create administrator screen
+				view.createAdminScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else if(typeOfEmployee instanceof PTTDirector) {//3. create PTTDirector screen
+				view.createPTTDirScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else {//4. when Teacher logged in
+				view.noAccess();
 			}
+		}
+		
+		//ClassDirector
+		if(e.getSource()==view.classSelector) {
+			model.addTeachingRequirement(id, view.getNumTutors(), view.classSelector);
 			
-
-//		}
+		}
 		
 		
 		
