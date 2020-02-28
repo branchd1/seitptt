@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import com.seitptt.controller.Controller;
+
 /**
  * View - creates the GUI view for the teacher admin application
  */
@@ -48,11 +50,14 @@ public class View extends JFrame {
 	private JComboBox teacherFilter;
 	private JList teacherDisplay;
 	
+	private Controller controller;
+	
 
 	/**
 	 * view constructor sets the model and controller and creates homescreen view
 	 */
-	public View() {
+	public View(Controller controller) {
+		this.controller=controller;
 		// set JFrame attributes
 		this.setLocation(20, 20);
 		this.setTitle("Teacher Admin");
@@ -103,8 +108,7 @@ public class View extends JFrame {
 		JPanel loginButtonPanel = new JPanel();
 		loginButtonPanel.setLayout(new GridBagLayout());
 		JButton loginButton = new JButton("Login");
-		// COMMENTED OUT CONTROLLER ACTION LISTENER
-		// loginButton.addActionListener(l);
+		 loginButton.addActionListener(controller);
 		loginButtonPanel.add(loginButton);
 		loginPanel.add(loginButtonPanel);
 	}
@@ -165,8 +169,8 @@ public class View extends JFrame {
 		//will be replaced by model call
 		String[] testClasses= {"Class1","Class2","Class3","Class4","Class5"};
 		JComboBox classSelector= new JComboBox(testClasses);
-		//ACTION LISTENER FOR CONTROLLER
-		//classSelector.addActionListener(l);
+		ACTION LISTENER FOR CONTROLLER
+		classSelector.addActionListener(controller);
 		selectClassPanel.add(selectClassLabel);
 		selectClassPanel.add(classSelector);
 		
@@ -193,8 +197,7 @@ public class View extends JFrame {
 		addRequirementPanel.add(addRequirementButtonPanel);
 	
 		JButton addRequirementButton= new JButton("Add");
-		//ACTION LISTENER FOR CONTROLLER COMMENT OUT
-		//addRequirementButton.addActionListener(l);
+		addRequirementButton.addActionListener(controller);
 		addRequirementButtonPanel.add(addRequirementButton);
 		
 		
@@ -261,8 +264,7 @@ public class View extends JFrame {
 		//create and add class filter
 		//WILL ADD CLASSES FROM MODEL LATER
 		teacherFilter=new JComboBox();
-		//ACTION LISTENER FROM THE CONTROLLER
-		//teacherFilter.addActionListener();
+		teacherFilter.addActionListener(controller);
 		adminPanel.add(teacherFilter,BorderLayout.NORTH);
 		
 		
@@ -321,8 +323,7 @@ public class View extends JFrame {
 		//will be replaced by model call
 		String[] reqStatusOptions= {"All","Pending"}; 
 		JComboBox filterRequirements= new JComboBox(reqStatusOptions);
-		//ADD ACTION LISTENER FOR CONTROLLER
-		//filterRequirements.addActionListener(l);
+		//filterRequirements.addActionListener(controller);
 		headerPanel.add(filterRequirements);
 		
 		//create and add display of requirements list
@@ -336,11 +337,9 @@ public class View extends JFrame {
 		buttonsPanel.setLayout(new GridLayout(1,2));
 		pttDirPanel.add(buttonsPanel,BorderLayout.SOUTH);
 		JButton approveButton = new JButton("Approve");
-		//ACTION LISTENER FOR CONTROLLER
-		//approveButton.addActionListener(l);
+        approveButton.addActionListener(controller);
 		JButton denyButton= new JButton("Deny");
-		//DENY LISTENER FOR CONTROLLER
-		//denyButton.addActionListener(l);
+		denyButton.addActionListener(controller);
 		buttonsPanel.add(approveButton);
 		buttonsPanel.add(denyButton);
 	
