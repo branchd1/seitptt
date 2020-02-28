@@ -1,7 +1,7 @@
 package com.seitptt.model.processes;
 
 
-public class Class {
+public class Classes {
 
 	
 	private String code;
@@ -9,7 +9,7 @@ public class Class {
 	private Semester semester;
 	
 	
-	public Class(String code, String name, Semester semester) {
+	public Classes(String code, String name, Semester semester) {
 		this.setCode(code);
 		this.setName(name);
 		this.setSemester(semester);

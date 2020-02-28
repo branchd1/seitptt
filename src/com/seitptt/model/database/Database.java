@@ -19,13 +19,14 @@ import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
-import com.seitptt.model.processes.Class;
+import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 
 public class Database {
+	private final static String dbDir = "db/";
 	public static void setEmployeesCacheFromDB() {
-		final String dbFile = "employees.txt";
+		final String dbFile = Database.dbDir + "employees.txt";
 		final ListOfEmployees listOfEmployees = new ListOfEmployees();
 		
 		FileReader fr = null;
@@ -49,6 +50,8 @@ public class Database {
 				final String lastName = s.next();
 				
 				Employee employee = null;
+				
+				
 				
 				if (type.contains("ptt")) {
 					employee = new PTTDirector(firstName, lastName);
@@ -94,7 +97,7 @@ public class Database {
 	}
 	
 	public static void setSemesterCacheFromDB() {
-		final String dbFile = "semesters.txt";
+		final String dbFile = Database.dbDir + "semesters.txt";
 		final ListOfSemesters listOfSemesters = new ListOfSemesters();
 		
 		FileReader fr = null;
@@ -137,7 +140,7 @@ public class Database {
 	}
 	
 	public static ListOfTeachingRequests getTeachingRequestsFromDB() {
-		final String dbFile = "teaching_requests.txt";
+		final String dbFile = Database.dbDir + "teaching_requests.txt";
 		final ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
 		
 		FileReader fr = null;
@@ -161,7 +164,7 @@ public class Database {
 				
 				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
 				
-				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
+				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
 				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
@@ -182,7 +185,7 @@ public class Database {
 	}
 	
 	public static ListOfTeachingRequirements getTeachingRequirementsFromDB() {
-		final String dbFile = "teaching_requirements.txt";
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
 		final ListOfTeachingRequirements listOfTeachingRequirements= new ListOfTeachingRequirements();
 		
 		FileReader fr = null;
@@ -203,7 +206,7 @@ public class Database {
 				final int numberOfTeachers = s.nextInt();
 				final String classCode = s.next();
 				
-				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
+				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				
 				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
@@ -223,7 +226,7 @@ public class Database {
 	}
 	
 	public static ListOfClasses getClassesFromDB() {
-		final String dbFile = "classes.txt";
+		final String dbFile = Database.dbDir + "classes.txt";
 		final ListOfClasses listOfClasses= new ListOfClasses();
 		
 		FileReader fr = null;
@@ -246,7 +249,7 @@ public class Database {
 				
 				final Semester semester = Database.getSemestersFromDB().find(semesterId);
 				
-				final Class classObj = new Class(code, name, semester);
+				final Classes classObj = new Classes(code, name, semester);
 				
 				listOfClasses.add(classObj);
 				

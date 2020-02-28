@@ -1,0 +1,6 @@
+type-username-password-first name-last name-trained
+ptt director-john_snow-os3nwi332-John Snow-
+administrator-cersei_lannister-j8weuhefu38-Cersei-Lannister
+class director-ramsey_bolton-hu33328hd28-Ramsey-Bolton
+teacher-aria_stark-839hudhufh83-Aria-Stark-true
+teacher-theon_greyjoy-nrhr48hr474-Theon-Greyjoy-false
