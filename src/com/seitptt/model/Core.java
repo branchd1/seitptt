@@ -91,7 +91,7 @@ public class Core {
 		if (!(currentUser instanceof ClassDirector)) {
 			throw new RuntimeException("Sorry current user is not a ClassDirector");
 		}else {
-			//Database.removeTeachingRequirement();
+			//Database.removeTeachingRequirementFromDB();
 		}
 	}
 

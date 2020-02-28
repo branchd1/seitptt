@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.seitptt.model.personnel.Administrator;
@@ -264,6 +266,86 @@ public class Database {
 		
 		s.close();
 		return listOfClasses;
+	}
+	
+	public void removeTeachingRequirementFromDB(TeachingRequirement teachingRequirement) {
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		String newDbString = "";
+		
+		FileReader fr = null;
+		FileWriter fw = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+			fw = new FileWriter(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		newDbString += s.nextLine();
+		
+		while(s.hasNextLine()) {
+			int fileId = s.nextInt();
+			
+			int trId = teachingRequirement.getId();
+			
+			if (!(fileId==trId)){
+				newDbString += s.nextLine();
+			}
+			
+			s.nextLine();
+		}
+		
+		s.close();
+		
+		try {
+			fw.write(newDbString);
+		} catch(IOException e) {
+			
+		}
+		
+	}
+	
+	public void removeTeachingRequestFromDB(TeachingRequest teachingRequest) {
+		final String dbFile = Database.dbDir + "teaching_requests.txt";
+		String newDbString = "";
+		
+		FileReader fr = null;
+		FileWriter fw = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+			fw = new FileWriter(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		newDbString += s.nextLine();
+		
+		while(s.hasNextLine()) {
+			int fileId = s.nextInt();
+			
+			int trId = teachingRequest.getId();
+			
+			if (!(fileId==trId)){
+				newDbString += s.nextLine();
+			}
+			
+			s.nextLine();
+		}
+		
+		s.close();
+		
+		try {
+			fw.write(newDbString);
+		} catch(IOException e) {
+			
+		}
+		
 	}
 	
 	public static void LoadCaches() {
