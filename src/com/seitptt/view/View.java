@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -42,6 +43,10 @@ public class View extends JFrame {
 	//PTT Director class attributes
 
 	private JList requirementsDisplay;
+	
+	//admin screen class attributes
+	private JComboBox teacherFilter;
+	private JList teacherDisplay;
 	
 
 	/**
@@ -102,6 +107,22 @@ public class View extends JFrame {
 		// loginButton.addActionListener(l);
 		loginButtonPanel.add(loginButton);
 		loginPanel.add(loginButtonPanel);
+	}
+	
+	
+	/**
+	 * alert box if wrong input on home screen 
+	 */
+	
+	public void wrongInput() {
+     JOptionPane errorMessage=new JOptionPane(JOptionPane.ERROR_MESSAGE);
+     errorMessage.showMessageDialog(null,"You have entered an incorrect username or password");
+
+	}
+	
+	public void noAccess() {
+     JOptionPane errorMessage=new JOptionPane(JOptionPane.ERROR_MESSAGE);
+     errorMessage.showMessageDialog(null,"You are not authorized to enter this app.");	
 	}
 
 	/**
@@ -188,7 +209,7 @@ public class View extends JFrame {
 		//create remove button
 		JButton removeRequirementButton = new JButton("Remove");
 		requirementsListPanel.add(removeRequirementButton,BorderLayout.SOUTH);
-	
+	     
 		
 		
 		//update screen
@@ -231,7 +252,42 @@ public class View extends JFrame {
 	 * creates admin screen
 	 */
 	public void createAdminScreen() {
+		//remove homePanel
 		this.remove(homePanel);
+		//create and add admin screen
+		adminPanel=new JPanel();
+		adminPanel.setLayout(new BorderLayout());
+		this.add(adminPanel);
+		//create and add class filter
+		//WILL ADD CLASSES FROM MODEL LATER
+		teacherFilter=new JComboBox();
+		//ACTION LISTENER FROM THE CONTROLLER
+		//teacherFilter.addActionListener();
+		adminPanel.add(teacherFilter,BorderLayout.NORTH);
+		
+		
+		
+		
+		
+		//create and add teacher display list
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//update screen
+		 this.revalidate();
+	     this.repaint();
 	}
 
 	/**
@@ -304,8 +360,9 @@ public class View extends JFrame {
 	public static void main(String[] args) {
 		View gui = new View();
 		gui.setVisible(true);
+		gui.noAccess();
 		//code to test the different screens
-		gui.createClassDirScreen();
+		//gui.createClassDirScreen();
 	    //gui.createPTTDirScreen();
 	
 	  
