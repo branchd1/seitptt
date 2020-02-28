@@ -19,7 +19,7 @@ import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
-import com.seitptt.model.processes.Class;
+import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 
@@ -164,7 +164,7 @@ public class Database {
 				
 				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
 				
-				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
+				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
 				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
@@ -206,7 +206,7 @@ public class Database {
 				final int numberOfTeachers = s.nextInt();
 				final String classCode = s.next();
 				
-				Class classObj = (Class)Database.getClassesFromDB().find(classCode);
+				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				
 				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
@@ -249,7 +249,7 @@ public class Database {
 				
 				final Semester semester = Database.getSemestersFromDB().find(semesterId);
 				
-				final Class classObj = new Class(code, name, semester);
+				final Classes classObj = new Classes(code, name, semester);
 				
 				listOfClasses.add(classObj);
 				

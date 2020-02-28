@@ -6,7 +6,7 @@ import com.seitptt.interfaces.Findable;
 
 public class ListOfClasses implements Findable {
 	
-	private ArrayList<Class> loc;
+	private ArrayList<Classes> loc;
 
 	@Override
 	public Object find(int identifier) {
@@ -14,9 +14,9 @@ public class ListOfClasses implements Findable {
 	}
 
 	@Override
-	public Class find(String identifier) {
+	public Classes find(String identifier) {
 		// TODO Auto-generated method stub
-		for(Class c: loc) {
+		for(Classes c: loc) {
 			if (c.getCode().equals(identifier)) {
 				return c;
 			}
@@ -25,7 +25,7 @@ public class ListOfClasses implements Findable {
 		return null;
 	}
 	
-	public void add (Class c) {
+	public void add (Classes c) {
 		loc.add(c);
 	}
 
