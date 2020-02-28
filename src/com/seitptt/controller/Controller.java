@@ -38,7 +38,7 @@ public class Controller {
 		//when e.getSource()==view.loginButton
 		//Auth.login returns employee or null
 //		if(e.getSource()==view.loginButton) {
-			Database.LoadDatabase();
+			Database.LoadCaches();
 			ListOfEmployees listOfEmployees = Database.getEmployeesFromDB();
 
 			Employee typeOfEmployee=Auth.login(view.getUsername(), view.getPassword());
