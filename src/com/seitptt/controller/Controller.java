@@ -1,6 +1,7 @@
 package com.seitptt.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import com.seitptt.model.Core;
 import com.seitptt.model.authentication.Auth;
@@ -13,7 +14,7 @@ import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.view.View;
 
-public class Controller {
+public class Controller implements ActionListener{
 	
 	private Core model;
 	private View view;
@@ -37,23 +38,31 @@ public class Controller {
 	public void actionPerformed(ActionEvent e) {
 		//when e.getSource()==view.loginButton
 		//Auth.login returns employee or null
-//		if(e.getSource()==view.loginButton) {
-			Database.LoadCaches();
-			ListOfEmployees listOfEmployees = Database.getEmployeesFromDB();
-
-			Employee typeOfEmployee=Auth.login(view.getUsername(), view.getPassword());
+		if(e.getSource()==view.loginButton) {
+			Employee typeOfEmployee=model.login(view.getUsername(), view.getPassword());
 
 			//first, check the user is authorized member
 			if(typeOfEmployee==null) {//wrong user. should access again. 
-				//view.resetToHome();
-				//or
-//				System.exit(0);
+				view.wrongInput();
 			}else if(typeOfEmployee instanceof ClassDirector) {//then, check the type of user: 1. ClassDirector
 				view.createClassDirScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else if(typeOfEmployee instanceof Administrator) {//2. create administrator screen
+				view.createAdminScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else if(typeOfEmployee instanceof PTTDirector) {//3. create PTTDirector screen
+				view.createPTTDirScreen();
+				model.setCurrentUser(typeOfEmployee);
+			}else {//4. when Teacher logged in
+				view.noAccess();
 			}
+		}
+		
+		//ClassDirector
+		if(e.getSource()==view.classSelector) {
+			model.addTeachingRequirement(id, view.getNumTutors(), view.classSelector);
 			
-
-//		}
+		}
 		
 		
 		

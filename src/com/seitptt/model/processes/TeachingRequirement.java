@@ -10,8 +10,7 @@ public class TeachingRequirement  implements Hostable{
 	private Classes classRef;
 	
 	
-	public TeachingRequirement(int id, int numOfTeachers, Classes classRef) {
-		this.setId(id);
+	public TeachingRequirement(int numOfTeachers, Classes classRef) {
 		this.setClassRef(classRef);
 		this.setNumOfTeachers(numOfTeachers);
 	}
