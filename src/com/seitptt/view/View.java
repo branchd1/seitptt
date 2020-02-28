@@ -362,7 +362,7 @@ public class View extends JFrame {
 		gui.setVisible(true);
 		gui.noAccess();
 		//code to test the different screens
-		//gui.createClassDirScreen();
+//		gui.createClassDirScreen();
 	    //gui.createPTTDirScreen();
 	
 	  

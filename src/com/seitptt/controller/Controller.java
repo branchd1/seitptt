@@ -1,6 +1,7 @@
 package com.seitptt.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import com.seitptt.model.Core;
 import com.seitptt.model.authentication.Auth;
@@ -13,7 +14,7 @@ import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.view.View;
 
-public class Controller {
+public class Controller implements ActionListener{
 	
 	private Core model;
 	private View view;
@@ -38,7 +39,7 @@ public class Controller {
 		//when e.getSource()==view.loginButton
 		//Auth.login returns employee or null
 		if(e.getSource()==view.loginButton) {
-			Employee typeOfEmployee=Auth.login(view.getUsername(), view.getPassword());
+			Employee typeOfEmployee=model.login(view.getUsername(), view.getPassword());
 
 			//first, check the user is authorized member
 			if(typeOfEmployee==null) {//wrong user. should access again. 
