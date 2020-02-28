@@ -8,11 +8,11 @@ public class TeachingRequest  implements Hostable{
 	
 	private int id;
 	private Teacher teacher;
-	private Class classRef;
+	private Classes classRef;
 	private TeachingRequirement teachingRequirement;
 	
 	
-	public TeachingRequest(int id, Teacher teacher, Class classRef, TeachingRequirement teachingRequirement) {
+	public TeachingRequest(int id, Teacher teacher, Classes classRef, TeachingRequirement teachingRequirement) {
 		this.setId(id);
 		this.setTeacher(teacher);
 		this.setClassRef(classRef);
@@ -46,12 +46,12 @@ public class TeachingRequest  implements Hostable{
 	}
 
 
-	public Class getClassRef() {
+	public Classes getClassRef() {
 		return classRef;
 	}
 
 
-	public void setClassRef(Class classRef) {
+	public void setClassRef(Classes classRef) {
 		this.classRef = classRef;
 	}
 
