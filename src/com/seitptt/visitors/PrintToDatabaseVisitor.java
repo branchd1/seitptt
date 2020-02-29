@@ -51,6 +51,8 @@ public class PrintToDatabaseVisitor {
 			
 			teachingRequestString += this.space + teachingRequest.getTeachingRequirement().getId();
 			
+			teachingRequestString += this.space + teachingRequest.isApproved();
+			
 			fileWriter.append(teachingRequestString);
 			
 			fileWriter.close();

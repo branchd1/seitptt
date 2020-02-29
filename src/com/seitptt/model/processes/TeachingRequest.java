@@ -36,6 +36,10 @@ public class TeachingRequest  implements Hostable{
 	public boolean isApproved() {
 		return this.approval;
 	}
+	
+	public void approve() {
+		this.approval = true;
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {

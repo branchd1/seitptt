@@ -97,7 +97,7 @@ public class Core {
 		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
 		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
 			System.out.println(teachingRequest.getId() + " " + teachingRequest.getTeacher().getFirstName() + " " + teachingRequest.getClassRef().getCode() + " " + 
-					teachingRequest.getTeachingRequirement().getId());
+					teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
 		System.out.println("1 Aria AP49 1\n" + 
@@ -131,82 +131,74 @@ public class Core {
 		System.out.println("-------------------\nEND\n-------------------");
 		
 	}
-
-	public void addTeachingRequirement(TeachingRequirement tr) {
-		if (!(currentUser instanceof ClassDirector)) {
-			throw new RuntimeException("Sorry current user is not a ClassDirector");
-		}else {					
-			PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
-			tr.accept(visitor);			
+	
+	private <T extends Employee> void checkPermission(Class<T> classWithPermission) {
+		if(this.getCurrentUser().getClass().equals(classWithPermission)) {
+			return;
 		}
+		throw new RuntimeException("Sorry current user is not a " + classWithPermission.getName());
+	}
+
+	
+	public void createAndAddTeachingRequirement(int numberOfTeachersNeeded, Classes classObj) {
+		this.checkPermission(ClassDirector.class);
+		
+		TeachingRequirement tr = new TeachingRequirement(numberOfTeachersNeeded, classObj);
+		
+		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
+		tr.accept(visitor);
 	}
 	
-	public void approveRequest(TeachingRequest tr) {
-		if (!(currentUser instanceof PTTDirector)) {
-			throw new RuntimeException("Sorry current user is not a PTTDirector");
-		}else {
-			tr.isApproved();
-		}
+	public void approveTeachingRequest(TeachingRequest tr) {
+		this.checkPermission(PTTDirector.class);
+		tr.approve();
 	}
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
-		if (!(currentUser instanceof ClassDirector)) {
-			throw new RuntimeException("Sorry current user is not a ClassDirector");
-		}else {
-			Database.removeTeachingRequirementFromDB(tr);
-		}
+		this.checkPermission(ClassDirector.class);
+		Database.removeTeachingRequirementFromDB(tr);
 	}
 	
 	public void removeTeachingRequest(TeachingRequest tr) {
-		if (!(currentUser instanceof ClassDirector)) {
-			throw new RuntimeException("Sorry current user is not a ClassDirector");
-		}else {
-			ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB().getAllRequirementsConnectedToARequest(tr);
-			for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
-				Database.removeTeachingRequirementFromDB(teachingRequirement);
-			}
-			Database.removeTeachingRequestFromDB(tr);
+		this.checkPermission(ClassDirector.class);
+		ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB().getAllRequirementsConnectedToARequest(tr);
+		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
+			Database.removeTeachingRequirementFromDB(teachingRequirement);
 		}
+		Database.removeTeachingRequestFromDB(tr);
 	}
 
 	public Employee findStaff(String username) {
-		if (!(currentUser instanceof Administrator)) {
-			throw new RuntimeException("Sorry current user is not an Administrator");
-		}else {
-			ListOfEmployees loE = Database.getEmployeesFromDB();
-			return loE.find(username);
-		}
+		this.checkPermission(Administrator.class);
+		ListOfEmployees loE = Database.getEmployeesFromDB();
+		return loE.find(username);
 	}
 	
 	public void organiseTraining(Teacher t) {
-		if (!(currentUser instanceof Administrator)) {
-			throw new RuntimeException("Sorry current user is not an Administrator");
-		}else {
-			t.train();
-		}
+		this.checkPermission(Administrator.class);
+		t.train();
 	}
 	
-	public void addRequest(Teacher t, Classes c, TeachingRequirement tr) {
-		if (!(currentUser instanceof Administrator)) {
-			throw new RuntimeException("Sorry current user is not an Administrator");
-		}else {
-			TeachingRequest teachingRequest = new TeachingRequest(t, c, tr);
+	public void createAndAddTeachingRequest(Teacher t, Classes c, TeachingRequirement tr) {
+		this.checkPermission(Administrator.class);
+		TeachingRequest teachingRequest = new TeachingRequest(t, c, tr);
 			
-			PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
-			teachingRequest.accept(visitor);	
-		}
+		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
+		teachingRequest.accept(visitor);
 	}
 
 	public ListOfTeachingRequirements getListOfTeachingRequirements() {
-		if (!(currentUser instanceof ClassDirector)) {
-			throw new RuntimeException("Sorry current user is not a ClassDirector");
-		}else {
-			return Database.getTeachingRequirementsFromDB();
-		}
+		this.checkPermission(ClassDirector.class);
+		return Database.getTeachingRequirementsFromDB();
 	}
 
 	public ListOfSemesters getListOfSemesters() {
 		return Database.getSemestersFromDB();
+	}
+	
+	public ListOfEmployees getListOfTeachers() {
+		this.checkPermission(Administrator.class);
+		return Database.getEmployeesFromDB().getTeachers();
 	}
 
 	public Employee login(String username, String password) {

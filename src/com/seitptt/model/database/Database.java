@@ -218,6 +218,7 @@ public class Database {
 				final String teacherUsername = s.next();
 				final String classCode = s.next();
 				final int teachingRequirementId = s.nextInt();
+				final boolean isApproved = s.nextBoolean();
 				
 				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
 				
@@ -225,6 +226,9 @@ public class Database {
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
 				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
+				if(isApproved) {
+					teachingRequest.approve();
+				}
 				
 				listOfTeachingRequests.add(teachingRequest);
 				
