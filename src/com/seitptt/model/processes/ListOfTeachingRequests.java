@@ -8,7 +8,7 @@ import com.seitptt.interfaces.Findable;
 public class ListOfTeachingRequests implements Findable, Iterable<TeachingRequest> {
 
 	
-	ArrayList<TeachingRequest> loTR;
+	ArrayList<TeachingRequest> loTR = new ArrayList<TeachingRequest>();
 
 	@Override
 	public Findable find(int identifier) {

@@ -1,16 +1,16 @@
 package com.seitptt.model.processes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfSemesters implements Findable{
+public class ListOfSemesters implements Iterable<Semester>,Findable{
 
-	private ArrayList<Semester> loS;
+	private ArrayList<Semester> loS = new ArrayList<Semester>();
 
 	@Override
 	public Semester find(int identifier) {
-		// TODO Auto-generated method stub
 		
 		for (Semester sm: loS) {
 			if (sm.getId() == identifier) {
@@ -30,6 +30,11 @@ public class ListOfSemesters implements Findable{
 	
 	public void add(Semester sm) {
 		loS.add(sm);
+	}
+
+	@Override
+	public Iterator<Semester> iterator() {
+		return loS.iterator();
 	}
 	
 }

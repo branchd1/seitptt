@@ -1,4 +1,4 @@
-code-name-semester id
-AP49-Advanced programming-1
-SE12-Software engineering-1
-ADS24-Algorithms and data structures-1
+code name semester_id
+AP49 Advanced_programming 1
+SE12 Software_engineering 1
+ADS24 Algorithms_and_data_structures 1

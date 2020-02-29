@@ -6,7 +6,7 @@ import com.seitptt.interfaces.Findable;
 
 public class ListOfClasses implements Findable {
 	
-	private ArrayList<Classes> loc;
+	private ArrayList<Classes> loc = new ArrayList<Classes>();
 
 	@Override
 	public Object find(int identifier) {

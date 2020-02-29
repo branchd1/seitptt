@@ -1,6 +1,7 @@
 package com.seitptt.model.processes;
 
 import com.seitptt.interfaces.Hostable;
+import com.seitptt.model.database.Database;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.visitors.PrintToDatabaseVisitor;
 
@@ -18,6 +19,10 @@ public class TeachingRequest  implements Hostable{
 		this.setClassRef(classRef);
 		this.setTeachingRequirement(teachingRequirement);
 		this.approval = false;
+		this.setId(Database.getLatestIdFromDB(this)+1);
+		
+		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
+		this.accept(visitor);
 	}
 	
 	public boolean isApproved() {
@@ -26,8 +31,7 @@ public class TeachingRequest  implements Hostable{
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {
-		// TODO Auto-generated method stub
-		
+		visitor.visit(this);
 	}
 
 

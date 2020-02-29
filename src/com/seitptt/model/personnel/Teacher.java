@@ -10,4 +10,8 @@ public class Teacher extends Employee{
 	public void train() {
 		this.trained = true;
 	}
+	
+	public boolean isTrained() {
+		return this.trained;
+	}
 }

@@ -6,7 +6,7 @@ import com.seitptt.interfaces.Findable;
 
 public class ListOfTeachingRequirements implements Findable {
 	
-	private ArrayList<TeachingRequirement> loR;
+	private ArrayList<TeachingRequirement> loR = new ArrayList<TeachingRequirement>();
 	
 	
 

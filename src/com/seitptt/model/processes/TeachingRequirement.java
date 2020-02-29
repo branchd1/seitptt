@@ -1,6 +1,7 @@
 package com.seitptt.model.processes;
 
 import com.seitptt.interfaces.Hostable;
+import com.seitptt.model.database.Database;
 import com.seitptt.visitors.PrintToDatabaseVisitor;
 
 public class TeachingRequirement  implements Hostable{
@@ -13,13 +14,15 @@ public class TeachingRequirement  implements Hostable{
 	public TeachingRequirement(int numOfTeachers, Classes classRef) {
 		this.setClassRef(classRef);
 		this.setNumOfTeachers(numOfTeachers);
+		this.setId(Database.getLatestIdFromDB(this)+1);
+		
+		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
+		this.accept(visitor);
 	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {
-		// TODO Auto-generated method stub
 		visitor.visit(this);
-		
 	}
 
 
