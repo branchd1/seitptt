@@ -100,8 +100,8 @@ public class Core {
 					teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("1 Aria AP49 1\n" + 
-				"2 Theon SE12 1");
+		System.out.println("1 Aria AP49 1 false\n" + 
+				"2 Theon SE12 1 false");
 		System.out.println("-------------------\nEND\n-------------------");
 		
 		System.out.println();System.out.println();
