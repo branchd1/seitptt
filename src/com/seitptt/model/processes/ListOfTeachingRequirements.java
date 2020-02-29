@@ -1,10 +1,11 @@
 package com.seitptt.model.processes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfTeachingRequirements implements Findable {
+public class ListOfTeachingRequirements implements Findable, Iterable<TeachingRequirement> {
 	
 	private ArrayList<TeachingRequirement> loR = new ArrayList<TeachingRequirement>();
 	
@@ -33,8 +34,21 @@ public class ListOfTeachingRequirements implements Findable {
 		throw new RuntimeException("Error: Please search for TeachingRequirement using an ID");
 	}
 	
-	public ArrayList<TeachingRequirement> getList() {
-		return this.loR;
+	public ListOfTeachingRequirements getAllRequirementsConnectedToARequest(TeachingRequest request) {
+		ListOfTeachingRequirements listOfTeachingRequirements = new ListOfTeachingRequirements();
+		int desiredId = request.getTeachingRequirement().getId();
+		for(TeachingRequirement teachingRequirement : this.loR) {
+			if(desiredId==teachingRequirement.getId()) {
+				listOfTeachingRequirements.add(teachingRequirement);
+			}
+		}
+		return listOfTeachingRequirements;
+	}
+
+
+	@Override
+	public Iterator<TeachingRequirement> iterator() {
+		return this.loR.iterator();
 	}
 
 }

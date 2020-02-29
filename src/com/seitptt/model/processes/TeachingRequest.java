@@ -25,6 +25,14 @@ public class TeachingRequest  implements Hostable{
 		this.accept(visitor);
 	}
 	
+	public TeachingRequest(int id, Teacher teacher, Classes classRef, TeachingRequirement teachingRequirement) {
+		this.setTeacher(teacher);
+		this.setClassRef(classRef);
+		this.setTeachingRequirement(teachingRequirement);
+		this.approval = false;
+		this.setId(id);
+	}
+	
 	public boolean isApproved() {
 		return this.approval;
 	}

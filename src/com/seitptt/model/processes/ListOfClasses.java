@@ -1,10 +1,11 @@
 package com.seitptt.model.processes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfClasses implements Findable {
+public class ListOfClasses implements Findable, Iterable<Classes> {
 	
 	private ArrayList<Classes> loc = new ArrayList<Classes>();
 
@@ -27,6 +28,11 @@ public class ListOfClasses implements Findable {
 	
 	public void add (Classes c) {
 		loc.add(c);
+	}
+
+	@Override
+	public Iterator<Classes> iterator() {
+		return this.loc.iterator();
 	}
 
 }

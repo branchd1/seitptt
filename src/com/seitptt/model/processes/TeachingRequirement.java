@@ -19,6 +19,12 @@ public class TeachingRequirement  implements Hostable{
 		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
 		this.accept(visitor);
 	}
+	
+	public TeachingRequirement(int id, int numOfTeachers, Classes classRef) {
+		this.setClassRef(classRef);
+		this.setNumOfTeachers(numOfTeachers);
+		this.setId(id);
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {

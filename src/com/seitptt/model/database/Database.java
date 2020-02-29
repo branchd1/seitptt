@@ -224,7 +224,7 @@ public class Database {
 				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
-				TeachingRequest teachingRequest = new TeachingRequest(teacher, classObj, teachingRequirement);
+				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
 				
 				listOfTeachingRequests.add(teachingRequest);
 				
@@ -265,7 +265,7 @@ public class Database {
 				
 				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				
-				TeachingRequirement teachingRequirement = new TeachingRequirement(numberOfTeachers, classObj);
+				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
 				listOfTeachingRequirements.add(teachingRequirement);
 				
@@ -301,7 +301,7 @@ public class Database {
 		while(s.hasNextLine()) {
 			while(s.hasNext()) {
 				final String code = s.next();
-				final String name = s.next();
+				final String name = s.next().replace('_', ' ');
 				final int semesterId = s.nextInt();
 				
 				final Semester semester = Database.getSemestersFromDB().find(semesterId);

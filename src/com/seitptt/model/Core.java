@@ -1,8 +1,5 @@
 package com.seitptt.model;
 
-import java.util.ArrayList;
-
-
 import com.seitptt.model.authentication.Auth;
 import com.seitptt.model.database.Database;
 import com.seitptt.model.personnel.Administrator;
@@ -12,6 +9,7 @@ import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.model.processes.Classes;
+import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.ListOfTeachingRequests;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
@@ -34,6 +32,7 @@ public class Core {
 	public static void main(String[] args) {
 		Database.LoadCaches();
 
+		System.out.println("-------------------\nTEST LIST OF EMPLOYEES");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfEmployees listOfEmployees = Database.getEmployeesFromDB();
 		for(Employee e : listOfEmployees) {
@@ -48,6 +47,7 @@ public class Core {
 				"Theon Greyjoy");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
+		System.out.println("-------------------\nTEST LOGIN");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		Employee employee = Auth.login("john_snow", "os3nwi332");
 		System.out.println(employee.getFirstName() + " " + employee.getLastName());
@@ -55,6 +55,7 @@ public class Core {
 		System.out.println("John Snow");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
+		System.out.println("-------------------\nTEST LIST OF SEMESTERS");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfSemesters listOfSemesters = Database.getSemestersFromDB();
 		for (Semester s : listOfSemesters) {
@@ -68,18 +69,30 @@ public class Core {
 				"1 2022");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
+		System.out.println("-------------------\nTEST LIST OF REQUIREMENTS");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB();
-		ArrayList<TeachingRequirement> arrayListOfTeachingRequirements = listOfTeachingRequirements.getList();
-		for(TeachingRequirement teachingRequirement : arrayListOfTeachingRequirements) {
-//			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
-			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers());
+		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
+			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-//		System.out.println("1 2 AP49");
-		System.out.println("1 2");
+		System.out.println("1 2 AP49");
+		System.out.println("-------------------\nEND\n-------------------");
+
+		System.out.println();System.out.println();
+		System.out.println("-------------------\nTEST LIST OF CLASSES");
+		System.out.println("-------------------\nASSERT\n-------------------");
+		ListOfClasses listOfClasses = Database.getClassesFromDB();
+		for(Classes classes : listOfClasses) {
+			System.out.println(classes.getCode() + " " + classes.getName());
+		}
+		System.out.println("-------------------\nEQUALS\n-------------------");
+		System.out.println("AP49 Advanced programming\n" + 
+				"SE12 Software engineering\n" + 
+				"ADS24 Algorithms and data structures");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
+		System.out.println("-------------------\nTEST LIST OF REQUESTS");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
 		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
@@ -99,24 +112,22 @@ public class Core {
 		TeachingRequirement testReq2 = new TeachingRequirement(5, new Classes("ADS24", "Algo_ds", new Semester(1, 2, 2020)));
 		Core core = new Core();
 		core.setCurrentUser(new ClassDirector("John", "Grisham"));
-		core.addTeachingRequirement(testReq);
-		core.addTeachingRequirement(testReq2);
 		ListOfTeachingRequirements listOfTeachingRequirements2 = Database.getTeachingRequirementsFromDB();
-		ArrayList<TeachingRequirement> arrayListOfTeachingRequirements2 = listOfTeachingRequirements2.getList();
 		
-		for(TeachingRequirement teachingRequirement : arrayListOfTeachingRequirements2) {
+		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements2) {
 			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		core.removeTeachingRequirement(testReq);
+		core.removeTeachingRequirement(testReq2);
 		listOfTeachingRequirements2 = Database.getTeachingRequirementsFromDB();
-		arrayListOfTeachingRequirements2 = listOfTeachingRequirements2.getList();
-		for(TeachingRequirement teachingRequirement : arrayListOfTeachingRequirements2) {
+		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements2) {
 			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("1 2\n" + 
-				"0 5\n" + 
-				"1 2");
+		System.out.println("1 5 AP49\n" + 
+				"2 5 ADS24\n" + 
+				"3 5 ADS24\n" + 
+				"1 5 AP49");
 		System.out.println("-------------------\nEND\n-------------------");
 		
 	}
@@ -137,14 +148,24 @@ public class Core {
 			tr.isApproved();
 		}
 	}
-	
-	
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
 		if (!(currentUser instanceof ClassDirector)) {
 			throw new RuntimeException("Sorry current user is not a ClassDirector");
 		}else {
 			Database.removeTeachingRequirementFromDB(tr);
+		}
+	}
+	
+	public void removeTeachingRequest(TeachingRequest tr) {
+		if (!(currentUser instanceof ClassDirector)) {
+			throw new RuntimeException("Sorry current user is not a ClassDirector");
+		}else {
+			ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB().getAllRequirementsConnectedToARequest(tr);
+			for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
+				Database.removeTeachingRequirementFromDB(teachingRequirement);
+			}
+			Database.removeTeachingRequestFromDB(tr);
 		}
 	}
 
@@ -156,8 +177,6 @@ public class Core {
 			return loE.find(username);
 		}
 	}
-
-	
 	
 	public void organiseTraining(Teacher t) {
 		if (!(currentUser instanceof Administrator)) {
@@ -166,7 +185,6 @@ public class Core {
 			t.train();
 		}
 	}
-
 	
 	public void addRequest(Teacher t, Classes c, TeachingRequirement tr) {
 		if (!(currentUser instanceof Administrator)) {
@@ -179,11 +197,11 @@ public class Core {
 		}
 	}
 
-	public ArrayList<TeachingRequirement> getListOfTeachingRequirements() {
+	public ListOfTeachingRequirements getListOfTeachingRequirements() {
 		if (!(currentUser instanceof ClassDirector)) {
 			throw new RuntimeException("Sorry current user is not a ClassDirector");
 		}else {
-			return Database.getTeachingRequirementsFromDB().getList();
+			return Database.getTeachingRequirementsFromDB();
 		}
 	}
 
