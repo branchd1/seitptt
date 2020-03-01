@@ -105,7 +105,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 
 		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller, UNIT);
+		classDirectorScreen = new ClassDirectorView(controller,model, UNIT);
 		this.add(classDirectorScreen);
 
 		// update screen
@@ -120,7 +120,7 @@ public class View extends JFrame {
 		// MAKE MODEL CALL HERE
 		// requirementsList=new JList(REFERENCING MODEL CALL);
 	}
-
+    
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
@@ -128,6 +128,35 @@ public class View extends JFrame {
 
 		return classDirectorScreen.getNumTeachers();
 	}
+	/**
+	 *Add Requirement Button Access
+	 */
+
+	public JButton getAddRequirementButton() {
+		return classDirectorScreen.addRequirementButton;
+	}
+	/**
+	 * Remove Requirement Button Access
+	 */
+
+	public JButton getRemoveRequirementButton() {
+		return classDirectorScreen.removeRequirementButton;
+	}
+	/**
+	 * Class Selector Access
+	 */
+
+	public JComboBox getClassSelector() {
+		return classDirectorScreen.classSelector;
+	}
+	/**
+	 * Semester Selector Access
+	 */
+
+	public JComboBox getSemesterSelector() {
+		return classDirectorScreen.classSelector;
+	}
+
 
 	/**
 	 * creates admin screen
@@ -184,7 +213,7 @@ public class View extends JFrame {
 		gui.setVisible(true);
 		// gui.noAccess();
 		// code to test the different screens
-//		gui.createClassDirScreen();
+		gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
 
 	}
