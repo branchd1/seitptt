@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfEmployees implements Iterable<Employee>,Findable {
+public class ListOfEmployees implements Iterable<Employee>,Findable<Employee> {
 	private final ArrayList<Employee> listOfEmployees = new ArrayList<Employee>();
 	
 	public void add(Employee employee) {
@@ -28,7 +28,7 @@ public class ListOfEmployees implements Iterable<Employee>,Findable {
 	}
 
 	@Override
-	public Object find(int identifier) {
+	public Employee find(int identifier) {
 		throw new RuntimeException("Please find a staff with a username, not an integer.");
 	}
 	

@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfTeachingRequirements implements Findable, Iterable<TeachingRequirement> {
+public class ListOfTeachingRequirements implements Findable<TeachingRequirement>, Iterable<TeachingRequirement> {
 	
 	private ArrayList<TeachingRequirement> loR = new ArrayList<TeachingRequirement>();
 	
@@ -30,7 +30,7 @@ public class ListOfTeachingRequirements implements Findable, Iterable<TeachingRe
 	}
 
 	@Override
-	public Findable find(String identifier) {
+	public TeachingRequirement find(String identifier) {
 		throw new RuntimeException("Error: Please search for TeachingRequirement using an ID");
 	}
 	

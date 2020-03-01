@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfSemesters implements Iterable<Semester>,Findable{
+public class ListOfSemesters implements Iterable<Semester>,Findable<Semester>{
 
 	private ArrayList<Semester> loS = new ArrayList<Semester>();
 
@@ -22,7 +22,7 @@ public class ListOfSemesters implements Iterable<Semester>,Findable{
 	}
 
 	@Override
-	public Findable find(String identifier) {
+	public Semester find(String identifier) {
 		throw new RuntimeException("Error: Please search for Semesters using an ID");
 	}
 

@@ -5,12 +5,12 @@ import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
-public class ListOfClasses implements Findable, Iterable<Classes> {
+public class ListOfClasses implements Findable<Classes>, Iterable<Classes> {
 	
 	private ArrayList<Classes> loc = new ArrayList<Classes>();
 
 	@Override
-	public Object find(int identifier) {
+	public Classes find(int identifier) {
 		throw new RuntimeException("Class does not have an ID. Use Class code for search.");
 	}
 
