@@ -1,6 +1,5 @@
 package com.seitptt.model;
 
-import com.seitptt.model.authentication.Auth;
 import com.seitptt.model.database.Database;
 import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
@@ -47,13 +46,6 @@ public class Core {
 				"Theon Greyjoy");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
-		System.out.println("-------------------\nTEST LOGIN");
-		System.out.println("-------------------\nASSERT\n-------------------");
-		Employee employee = Auth.login("john_snow", "os3nwi332");
-		System.out.println(employee.getFirstName() + " " + employee.getLastName());
-		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("John Snow");
-		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
 		System.out.println("-------------------\nTEST LIST OF SEMESTERS");
 		System.out.println("-------------------\nASSERT\n-------------------");
@@ -199,10 +191,6 @@ public class Core {
 	public ListOfEmployees getListOfTeachers() {
 		this.checkPermission(Administrator.class);
 		return Database.getEmployeesFromDB().getTeachers();
-	}
-
-	public Employee login(String username, String password) {
-		return Auth.login(username, password);
 	}
 	
 	public Semester getCurrentSemester() {

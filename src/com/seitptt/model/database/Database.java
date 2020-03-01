@@ -59,7 +59,7 @@ public class Database {
 		// create new scanner
 		final Scanner s = new Scanner(fr);
 		
-		// skip first line
+		// skip first line that holds meta data
 		s.nextLine();
 		
 		// while file has next line
@@ -154,7 +154,7 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
-		// skip first line
+		// skip first line that holds meta data
 		s.nextLine();
 		
 		// while file has next line
@@ -195,11 +195,17 @@ public class Database {
 		return DatabaseCache.getSemestersCache();
 	}
 	
-	
+	/**
+	 * gets the list of teaching requests from the database
+	 * @return ListOfTeachingRequests object containing the list of teaching requests
+	 */
 	public static ListOfTeachingRequests getTeachingRequestsFromDB() {
+		// db file
 		final String dbFile = Database.dbDir + "teaching_requests.txt";
+		// stores the list
 		final ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
 		
+		// init file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -210,31 +216,39 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
+		// skip first line that holds meta data
 		s.nextLine();
 		
+		// while file has next line
 		while(s.hasNextLine()) {
+			// while line has next token separated by space
 			while(s.hasNext()) {
+				// use data to create new teaching request object with correct attributes
 				final int id = s.nextInt();
 				final String teacherUsername = s.next();
 				final String classCode = s.next();
 				final int teachingRequirementId = s.nextInt();
 				final boolean isApproved = s.nextBoolean();
 				
+				// create the necessary objects
 				Teacher teacher = (Teacher)Database.getEmployeesFromDB().find(teacherUsername);
 				
 				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
 				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
+				
 				if(isApproved) {
 					teachingRequest.approve();
 				}
 				
+				// add object to the list
 				listOfTeachingRequests.add(teachingRequest);
 				
 			}
 		}
 		
+		// close file reader and scanner
 		try{
 			fr.close();
 		} catch(IOException e) {
@@ -242,13 +256,23 @@ public class Database {
 		}
 		
 		s.close();
+		
+		// return the list
 		return listOfTeachingRequests;
 	}
 	
+	/**
+	 * gets the list of teaching requirements from the database
+	 * @return ListOfTeachingRequirements object containing list of teaching requirements
+	 */
 	public static ListOfTeachingRequirements getTeachingRequirementsFromDB() {
+		// database file
 		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		
+		// list of teaching requirements
 		final ListOfTeachingRequirements listOfTeachingRequirements= new ListOfTeachingRequirements();
 		
+		// initialize file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -259,10 +283,14 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
+		// skip first line that holds meta data
 		s.nextLine();
 		
+		// while file has next line
 		while(s.hasNextLine()) {
+			// while line has next token separated by space
 			while(s.hasNext()) {
+				// use data to create new teaching requirement object
 				final int id = s.nextInt();
 				final int numberOfTeachers = s.nextInt();
 				final String classCode = s.next();
@@ -271,11 +299,13 @@ public class Database {
 				
 				TeachingRequirement teachingRequirement = new TeachingRequirement(id, numberOfTeachers, classObj);
 				
+				// add to the list
 				listOfTeachingRequirements.add(teachingRequirement);
 				
 			}
 		}
 		
+		// close scanner and file reader
 		try{
 			fr.close();
 		} catch(IOException e) {
@@ -283,13 +313,22 @@ public class Database {
 		}
 		
 		s.close();
+		
+		// return the list
 		return listOfTeachingRequirements;
 	}
 	
-	public static ListOfClasses getClassesFromDB() {
+	/**
+	 * sets the classes cache.
+	 * NOTE: we do not need to update cache because the program does not alter the classes information in its current version.
+	 * This enables us to run the program without hitting the database needlessly.
+	 */
+	public static void setClassesCacheFromDB() {
+		// database file
 		final String dbFile = Database.dbDir + "classes.txt";
-		final ListOfClasses listOfClasses= new ListOfClasses();
+		final ListOfClasses listOfClasses= new ListOfClasses(); // list of classes
 		
+		// initialize file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -300,8 +339,10 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
+		// skip first line that holds meta data
 		s.nextLine();
 		
+		// loop through the file and create new classes objects
 		while(s.hasNextLine()) {
 			while(s.hasNext()) {
 				final String code = s.next();
@@ -312,11 +353,13 @@ public class Database {
 				
 				final Classes classObj = new Classes(code, name, semester);
 				
+				// add it to the list
 				listOfClasses.add(classObj);
 				
 			}
 		}
 		
+		// close filereader and scanner
 		try{
 			fr.close();
 		} catch(IOException e) {
@@ -324,13 +367,31 @@ public class Database {
 		}
 		
 		s.close();
-		return listOfClasses;
+		
+		// set the cache
+		DatabaseCache.setClassesCache(listOfClasses);
 	}
 	
+	/**
+	 * simulates getting the list of classes from the database by getting it from the classes cache initialized in the beginning.
+	 * @return ListOfClasses object containing the list of classes
+	 */
+	public static ListOfClasses getClassesFromDB() {
+		return DatabaseCache.getClassesCache();
+	}
+	
+	/**
+	 * delete a teaching requirement from the database
+	 * @param teachingRequirement the TeachingRequirement object to be deleted
+	 */
 	public static void removeTeachingRequirementFromDB(TeachingRequirement teachingRequirement) {
+		//database file
 		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		
+		// string to contain contents of the new file
 		String newDbString = "";
 		
+		// initialize file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -340,13 +401,17 @@ public class Database {
 		}
 		
 		final Scanner s = new Scanner(fr);
+		
+		// add first line to new file
 		newDbString += s.nextLine();
 		
+		// loop through the lines and add them to new file
 		while(s.hasNextLine()) {
 			int fileId = s.nextInt();
 			
 			int trId = teachingRequirement.getId();
 			
+			// except the line where the id is the same with the teaching requirement id to be deleted
 			if (!(fileId==trId)){
 				newDbString += "\n";
 				newDbString += fileId;
@@ -356,8 +421,10 @@ public class Database {
 			}
 		}
 		
+		// close scanner
 		s.close();
 		
+		// overwrite old file with new file and close file writer
 		try {
 			FileWriter fw = null;
 			fw = new FileWriter(dbFile);
@@ -369,10 +436,18 @@ public class Database {
 		
 	}
 	
+	/**
+	 * delete a teaching request from the database
+	 * @param teachingRequest the TeachingRequest object to be deleted
+	 */
 	public static void removeTeachingRequestFromDB(TeachingRequest teachingRequest) {
+		// database file
 		final String dbFile = Database.dbDir + "teaching_requests.txt";
+		
+		// string to contain content of new file
 		String newDbString = "";
 		
+		// init file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -383,13 +458,16 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
+		// add file line to new file
 		newDbString += s.nextLine();
 		
+		// loop through the file and add the lines to new file
 		while(s.hasNextLine()) {
 			int fileId = s.nextInt();
 			
 			int trId = teachingRequest.getId();
 			
+			// except for the line where id is the same with the TeachingRequest id to be deleted
 			if (!(fileId==trId)){
 				newDbString += s.nextLine();
 			}
@@ -397,8 +475,10 @@ public class Database {
 			s.nextLine();
 		}
 		
+		// close scanner
 		s.close();
 		
+		// overwrite old file with new file and close filewriter
 		try {
 			FileWriter fw = null;
 			fw = new FileWriter(dbFile);
@@ -409,9 +489,16 @@ public class Database {
 		}
 		
 	}
-	
-	public static int getLatestIdFromDB(Object o) {
+	/**
+	 * get the last id used in the database
+	 * @param o generic object that determines the database of objects we want to search
+	 * @return integer that represents the last id used in the database
+	 */
+	public static <T> int getLatestIdFromDB(T o) {
+		// init result as 1, if no results are found, start with 1
 		int result = 1;
+		
+		// set database file based on the instance of the object
 		String dbFile = "";
 		if(o instanceof TeachingRequest) {
 			dbFile = Database.dbDir + "teaching_requests.txt";
@@ -419,6 +506,7 @@ public class Database {
 			dbFile = Database.dbDir + "teaching_requirements.txt";
 		}
 		
+		// init file reader and scanner
 		FileReader fr = null;
 		
 		try {
@@ -429,9 +517,12 @@ public class Database {
 		
 		final Scanner s = new Scanner(fr);
 		
+		// loop through file
 		while(s.hasNextLine()) {
 			String line = s.nextLine();
+			// if last line
 			if(!s.hasNextLine()) {
+				// get the first token on the line and store in result
 				try {
 					result = Integer.parseInt(line.split(" ")[0]);
 				} catch(NumberFormatException e) {
@@ -440,6 +531,7 @@ public class Database {
 			}
 		}
 		
+		// close file reader and scanner
 		try{
 			fr.close();
 		} catch(IOException e) {
@@ -447,11 +539,17 @@ public class Database {
 		}
 		
 		s.close();
+		
+		// return result
 		return result;
 	}
 	
+	/**
+	 * load constant data from database - employee list, semester list, classes list
+	 */
 	public static void LoadCaches() {
 		Database.setEmployeesCacheFromDB();
 		Database.setSemesterCacheFromDB();
+		Database.setClassesCacheFromDB();
 	}
 }
