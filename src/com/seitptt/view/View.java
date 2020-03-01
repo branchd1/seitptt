@@ -117,8 +117,10 @@ public class View extends JFrame {
 	 * updates class director screen
 	 */
 	public void updateClassDirScreen() {
-		// MAKE MODEL CALL HERE
-		// requirementsList=new JList(REFERENCING MODEL CALL);
+		 classDirectorScreen.updateClassDirScreen();
+		 this.revalidate();
+		 this.repaint();
+		 
 	}
     
 	/**
@@ -156,7 +158,9 @@ public class View extends JFrame {
 	public JComboBox getSemesterSelector() {
 		return classDirectorScreen.classSelector;
 	}
-	
+	/**
+	 *Requirements List Access
+	 */
 	public JList getRequirementsList() {
 		return classDirectorScreen.requirementsList;
 	}
