@@ -156,6 +156,10 @@ public class View extends JFrame {
 	public JComboBox getSemesterSelector() {
 		return classDirectorScreen.classSelector;
 	}
+	
+	public JList getRequirementsList() {
+		return classDirectorScreen.requirementsList;
+	}
 
 
 	/**
