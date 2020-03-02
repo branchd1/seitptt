@@ -166,6 +166,10 @@ public class View extends JFrame {
 	  
 	  public void enableClassList() {
 		  classDirectorScreen.enableClassList();
+		  
+		// update screen
+			this.revalidate();
+			this.repaint();
 	  }
 	 /**
 		 * Requirements List Access
