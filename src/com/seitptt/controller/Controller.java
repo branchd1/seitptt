@@ -36,33 +36,19 @@ public class Controller implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		//when e.getSource()==view.loginButton
-		//Auth.login returns employee or null
-		if(e.getSource()==view.loginButton) {
-			Employee typeOfEmployee=model.login(view.getUsername(), view.getPassword());
-
-			//first, check the user is authorized member
-			if(typeOfEmployee==null) {//wrong user. should access again. 
-				view.wrongInput();
-			}else if(typeOfEmployee instanceof ClassDirector) {//then, check the type of user: 1. ClassDirector
-				view.createClassDirScreen();
-				model.setCurrentUser(typeOfEmployee);
-			}else if(typeOfEmployee instanceof Administrator) {//2. create administrator screen
-				view.createAdminScreen();
-				model.setCurrentUser(typeOfEmployee);
-			}else if(typeOfEmployee instanceof PTTDirector) {//3. create PTTDirector screen
-				view.createPTTDirScreen();
-				model.setCurrentUser(typeOfEmployee);
-			}else {//4. when Teacher logged in
-				view.noAccess();
-			}
-		}
+		//1. login to each type of user
+//		if(e.getSource()==view.createClassDirScreen())
 		
 		//ClassDirector
-		if(e.getSource()==view.classSelector) {
-			model.addTeachingRequirement(id, view.getNumTutors(), view.classSelector);
-			
-		}
+		//if user selects certain class, 
+		//should pass number of teachers that entered by class director and class name to model
+		//then model will add to the list
+		//I'll call the updated list screen
+		
+//		if(e.getSource()==view.createClassDirScreen()) {
+//			
+//			view.getNumTutors()
+//		}
 		
 		
 		
