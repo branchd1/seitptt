@@ -121,7 +121,9 @@ public class Core {
 		System.out.println("1 5 AP49\n" + 
 				"2 5 ADS24\n" + 
 				"3 5 ADS24\n" + 
-				"1 5 AP49");
+				"4 5 ADS24\n" + 
+				"1 5 AP49\n" + 
+				"2 5 ADS24");
 		System.out.println("-------------------\nEND\n-------------------");
 
 	}
