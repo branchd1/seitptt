@@ -1,12 +1,25 @@
 package com.seitptt.model.personnel;
 
+/**
+ * represents an employee
+ * @author arnoldumakhihe 2445734u
+ *
+ */
 public abstract class Employee {
-	
+	/**
+	 * employee first name
+	 */
 	private String firstName;
+	
+	/**
+	 * employee last name
+	 */
 	private String lastName;
 	
+	/**
+	 * employee username
+	 */
 	private String username;
-	private String password;
 	
 	public Employee(String firstName, String lastName) {
 		this.setFirstName(firstName);
@@ -35,14 +48,6 @@ public abstract class Employee {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	

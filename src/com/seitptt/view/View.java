@@ -58,45 +58,28 @@ public class View extends JFrame {
 	 * creates home screen
 	 */
 	private void createHomeScreen() {
-		homeScreen = new HomeScreen(controller);
+		homeScreen = new HomeScreen(controller,UNIT);
 		this.add(homeScreen);
 	}
-
-	public String getUsername() {
-		return homeScreen.getUsername();
-	}
-
 	/**
-	 * returns password from home screen
+	 * return class Dir Login Button
 	 */
-	public String getPassword() {
-		return homeScreen.getPassword();
+	public JButton classDirLogin() {
+		return homeScreen.classDirLogin;
 	}
-
 	/**
-	 * alert box if wrong input on home screen
+	 * return admin login Button 
 	 */
-
-	public void wrongInput() {
-		homeScreen.wrongInput();
+	private JButton adminLogin() {
+		return homeScreen.adminLogin;
 	}
-
 	/**
-	 * alert box if user is not allowed access
+	 * return PTT Dir Login Button 
 	 */
-
-	public void noAccess() {
-		homeScreen.noAccess();
+	private JButton pttDirLogin() {
+		return homeScreen.pttDirLogin;
 	}
-
-	/**
-	 * Login Button Access
-	 */
-
-	public JButton getLoginButton() {
-		return homeScreen.loginButton;
-	}
-
+     
 	/**
 	 * creates class director screen
 	 */
