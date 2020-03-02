@@ -3,25 +3,16 @@ package com.seitptt.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import com.seitptt.model.Core;
-import com.seitptt.model.authentication.Auth;
-import com.seitptt.model.database.Database;
-import com.seitptt.model.personnel.Administrator;
-import com.seitptt.model.personnel.ClassDirector;
-import com.seitptt.model.personnel.Employee;
-import com.seitptt.model.personnel.ListOfEmployees;
-import com.seitptt.model.personnel.PTTDirector;
-import com.seitptt.model.personnel.Teacher;
 import com.seitptt.view.View;
 
-public class Controller implements ActionListener{
+public class Controller implements ActionListener, ListSelectionListener{
 	
 	private Core model;
 	private View view;
-	private ClassDirector classDirector;
-	private PTTDirector pttDirector;
-	private Administrator admin;
-	private Teacher teacher;
 	
 	/**
 	 * @param Core model
@@ -37,21 +28,31 @@ public class Controller implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		//1. login to each type of user
-//		if(e.getSource()==view.createClassDirScreen())
+		if(e.getSource()==view.getLoginButton()) {
+			view.createClassDirScreen();
+			view.createAdminScreen();
+			view.createPTTDirScreen();
+		}
 		
-		//ClassDirector
-		//if user selects certain class, 
-		//should pass number of teachers that entered by class director and class name to model
-		//then model will add to the list
-		//I'll call the updated list screen
-		
-//		if(e.getSource()==view.createClassDirScreen()) {
-//			
-//			view.getNumTutors()
-//		}
+		//2. ClassDirector Screen
+		//selecting semester
+		if(e.getSource()==view.getSemesterSelector()) {
+			view.getSemesterSelector().
+			model.setCurrentSemester(view.getSemesterSelector());
+		}
 		
 		
 		
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+		//Class director screen
+		//ClassDirectorView/requirementsList
+		
+		//updateClassDirecScreen/requirementsList
 		
 	}
 	
