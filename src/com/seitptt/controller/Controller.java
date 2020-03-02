@@ -3,11 +3,14 @@ package com.seitptt.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.seitptt.model.Core;
+import com.seitptt.model.database.Database;
 import com.seitptt.model.processes.Classes;
+import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.view.View;
 
@@ -15,6 +18,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 	
 	private Core model;
 	private View view;
+	private Semester chosenSemester;
 	
 	/**
 	 * @param Core model
@@ -28,6 +32,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 		this.view=view;
 	}
 	
+	public Semester getChosenSemester() {
+		return chosenSemester;
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		//1. login to each type of user
 		if(e.getSource()==view.classDirLogin()) {
@@ -39,20 +47,26 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 		
 		//2. ClassDirectorView
-		//selecting semester
+		//2.1. selecting semester
 		if(e.getSource()==view.getSemesterSelector()) {
-			String currentSemester=view.getSemesterSelector().toString();
-			String[] splitSemester=currentSemester.split(" ");
-			int semesterNumber=Integer.parseInt(splitSemester[1]);
-			int semesterYear=Integer.parseInt(splitSemester[2]);
+			ListOfSemesters listOfSemesters=model.getListOfSemesters();
+			int currSemesterIndex=view.getSemesterSelectedIndex();
+
+			for(Semester currSemester:listOfSemesters) {
+				if(currSemester.getId()-1==currSemesterIndex) {
+					chosenSemester=currSemester;
+				}
+			}
 			
-			model.setCurrentSemester(semesterNumber, semesterYear);
+			view.enableClassList();
 		}
 		
-		//selecting class
-		if(e.getSource()==view.getClassSelector()) {
-			Classes selectedClass=view.getClassSelector();
-			model.createAndAddTeachingRequirement(Integer.parseInt(view.getNumTeachers()), selectedClass);
+		//2.3. add requirements
+		if(e.getSource()==view.getAddRequirementButton()) {
+			String selectedClass=view.getClassSelector().toString();
+			int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
+			model.createAndAddTeachingRequirement(numberOfTeachers, selectedClass);
+			view.
 		}
 		
 		
@@ -64,9 +78,11 @@ public class Controller implements ActionListener, ListSelectionListener{
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
 		//Class director screen
-		//ClassDirectorView/requirementsList
-		
-		//updateClassDirecScreen/requirementsList
+		//requirementsListPanel-for updating list to the list panel.
+		boolean adjust=e.getValueIsAdjusting();
+		if(adjust) {
+			
+		}
 		
 	}
 	
