@@ -1,6 +1,7 @@
 package com.seitptt.model;
 
 import com.seitptt.model.database.Database;
+import com.seitptt.model.database.PrintToDatabaseVisitor;
 import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
@@ -15,7 +16,6 @@ import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
-import com.seitptt.visitors.PrintToDatabaseVisitor;
 
 public class Core {
 

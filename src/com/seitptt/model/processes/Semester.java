@@ -1,7 +1,7 @@
 package com.seitptt.model.processes;
 
 import com.seitptt.interfaces.Hostable;
-import com.seitptt.visitors.PrintToDatabaseVisitor;
+import com.seitptt.model.database.PrintToDatabaseVisitor;
 
 public class Semester implements Hostable {
 	private int id;

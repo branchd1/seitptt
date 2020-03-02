@@ -1,4 +1,4 @@
-package com.seitptt.visitors;
+package com.seitptt.model.database;
 
 import java.io.FileWriter;
 import java.io.IOException;

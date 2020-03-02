@@ -1,6 +1,6 @@
 package com.seitptt.interfaces;
 
-import com.seitptt.visitors.PrintToDatabaseVisitor;
+import com.seitptt.model.database.PrintToDatabaseVisitor;
 
 /**
  * interface for a class that accepts visitor to print to database
