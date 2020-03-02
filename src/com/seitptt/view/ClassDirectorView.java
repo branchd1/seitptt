@@ -117,6 +117,7 @@ public class ClassDirectorView extends JPanel {
 		requirementsListPanel.add(requirementsList,BorderLayout.CENTER);
 		//create remove button
 	    removeRequirementButton = new JButton("Remove");
+	    removeRequirementButton.addActionListener(controller);
 		requirementsListPanel.add(removeRequirementButton,BorderLayout.SOUTH);
 		
 		
