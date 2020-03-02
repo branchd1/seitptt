@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
+import com.seitptt.model.Core;
 
 public class PTTDirectorView extends JPanel {
 
@@ -23,8 +24,10 @@ public class PTTDirectorView extends JPanel {
 	protected JButton approveButton;
 	protected JButton denyButton;
 	private Controller controller;
+	private Core model;
 
-	public PTTDirectorView(Controller controller, int UNIT) {
+	public PTTDirectorView(Controller controller,Core model, int UNIT) {
+		this.model=model;
         this.controller=controller;
 		this.setLayout(new BorderLayout());
 		Border pttDirBorder = BorderFactory.createEmptyBorder(2 * UNIT, 2 * UNIT, 3 * UNIT, 2 * UNIT);

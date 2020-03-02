@@ -42,22 +42,22 @@ public class AdminView extends JPanel {
 		String[] trainingStatus= {"Trained","Untrained"};
 		trainingFilter=new JComboBox(trainingStatus);
 		filterPanel.add(trainingFilter);
-		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
-		ArrayList<String> listRequirements = new ArrayList();
-		while(listOfRequirements.iterator().hasNext()) {
-			listRequirements.add(listOfRequirements.iterator().next().toString());
-		}
-		requirementFilter= new JComboBox(listRequirements.toArray());
+		//ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		//ArrayList<String> listRequirements = new ArrayList();
+		//while(listOfRequirements.iterator().hasNext()) {
+			//listRequirements.add(listOfRequirements.iterator().next().toString());
+		//}
+		requirementFilter= new JComboBox();
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
 		
 		//create and add teacher list display
-		ListOfEmployees listOfTeachers = model.getListOfTeachers();
-		ArrayList<String> teacherArrayList = new ArrayList();
-		while(listOfTeachers.iterator().hasNext()) {
-			teacherArrayList.add(listOfTeachers.iterator().next().toString());
-		}
-		teacherList=new JList(teacherArrayList.toArray());
+		//ListOfEmployees listOfTeachers = model.getListOfTeachers();
+		//ArrayList<String> teacherArrayList = new ArrayList();
+		//while(listOfTeachers.iterator().hasNext()) {
+			//teacherArrayList.add(listOfTeachers.iterator().next().toString());
+		//}
+		teacherList=new JList();
 		this.add(teacherList,BorderLayout.CENTER);
 		
 		//create and add action Buttons

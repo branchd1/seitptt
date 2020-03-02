@@ -30,13 +30,8 @@ public class HomeScreen extends JPanel {
 	public HomeScreen(Controller controller, int UNIT) {
 		this.setLayout(new GridLayout(4, 1));
         Border loginPanelsBorder=BorderFactory.createEmptyBorder(UNIT,UNIT*6,UNIT,UNIT*6);
-    
-		// create and add app logo panel
-		/*
-		 * JLabel appLogo = new JLabel("TeacherAdmin App", SwingConstants.CENTER);
-		 * appLogo.setFont(new java.awt.Font("Arial", Font.BOLD, 75));
-		 * this.add(appLogo);
-		 */
+       
+		
 		//create and add home message panel
         
         JPanel homeMessagePanel=new JPanel();
@@ -54,25 +49,25 @@ public class HomeScreen extends JPanel {
         classDirLoginPanel.setLayout(new BorderLayout());
         classDirLoginPanel.add(classDirLogin,BorderLayout.CENTER);
         classDirLoginPanel.setBorder(loginPanelsBorder);
+        this.add(classDirLoginPanel);
         
         //create and add admin login panel
         adminLogin=new JButton("Administrator");
         adminLogin.addActionListener(controller);
         JPanel  adminLoginPanel = new JPanel();
         adminLoginPanel.setLayout(new BorderLayout());
-       // adminLoginPanel.setBackground(Color.CYAN);
         adminLoginPanel.add(adminLogin,BorderLayout.CENTER);
         adminLoginPanel.setBorder(loginPanelsBorder);
-
+        this.add(adminLoginPanel);
         
         //create and add pttDir Panel
         pttDirLogin=new JButton("PTT Director");
         pttDirLogin.addActionListener(controller);
         JPanel  pttDirLoginPanel = new JPanel();
         pttDirLoginPanel.setLayout(new BorderLayout());
-       // pttDirLoginPanel.setBackground(Color.gray);
         pttDirLoginPanel.add(pttDirLogin,BorderLayout.CENTER);
         pttDirLoginPanel.setBorder(loginPanelsBorder);
+        this.add(pttDirLoginPanel);
         
 		
 	}
