@@ -12,6 +12,7 @@ import com.seitptt.model.database.Database;
 import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
+import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.view.View;
@@ -82,6 +83,22 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 		}
 		
+//		if(e.getSource()==view.getRemoveRequirementButton()) {
+//			valueChanged(ListSelectionEvent e){
+//				TeachingRequirement removeReq;
+//				int reqIndex=view.getRequirementsList().getSelectedIndex();
+//				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+//				for(TeachingRequirement selectedReq : listOfRequirements) {
+//					if(selectedReq.getId()-1==reqIndex) {
+//						removeReq=selectedReq;
+//						model.removeTeachingRequirement(removeReq);
+//					}
+//				}
+//				view.updateClassDirScreen();
+//				
+//			}
+//		}
+		
 		
 		
 		
@@ -92,9 +109,18 @@ public class Controller implements ActionListener, ListSelectionListener{
 		// TODO Auto-generated method stub
 		//Class director screen
 		//requirementsListPanel-for updating list to the list panel.
-		boolean adjust=e.getValueIsAdjusting();
-		if(adjust) {
-			
+		if(e.getSource()==view.getRemoveRequirementButton()) {
+
+			TeachingRequirement removeReq;
+			int reqIndex=view.getRequirementsList().getSelectedIndex();
+			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+			for(TeachingRequirement selectedReq : listOfRequirements) {
+				if(selectedReq.getId()-1==reqIndex) {
+					removeReq=selectedReq;
+					model.removeTeachingRequirement(removeReq);
+				}
+			}
+			view.updateClassDirScreen();
 		}
 		
 	}
