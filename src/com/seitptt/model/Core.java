@@ -1,12 +1,11 @@
 package com.seitptt.model;
 
 import com.seitptt.model.database.Database;
+
 import com.seitptt.model.database.PrintToDatabaseVisitor;
-import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
-import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
@@ -46,7 +45,6 @@ public class Core {
 				"Theon Greyjoy");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
-		System.out.println();System.out.println();
 		System.out.println("-------------------\nTEST LIST OF SEMESTERS");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfSemesters listOfSemesters = Database.getSemestersFromDB();
@@ -68,7 +66,8 @@ public class Core {
 			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("1 2 AP49");
+		System.out.println("1 5 AP49\n" + 
+				"2 5 ADS24");
 		System.out.println("-------------------\nEND\n-------------------");
 
 		System.out.println();System.out.println();
@@ -121,7 +120,9 @@ public class Core {
 		System.out.println("1 5 AP49\n" + 
 				"2 5 ADS24\n" + 
 				"3 5 ADS24\n" + 
-				"1 5 AP49");
+				"4 5 ADS24\n" + 
+				"1 5 AP49\n" + 
+				"2 5 ADS24");
 		System.out.println("-------------------\nEND\n-------------------");
 
 	}
