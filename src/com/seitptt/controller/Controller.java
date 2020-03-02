@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 import com.seitptt.model.Core;
 import com.seitptt.model.database.Database;
 import com.seitptt.model.processes.Classes;
+import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.Semester;
 import com.seitptt.view.View;
@@ -63,7 +64,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 		
 		//2.3. add requirements
 		if(e.getSource()==view.getAddRequirementButton()) {
-			String selectedClass=view.getClassSelector().toString();
+			ListOfClasses listOfClasses=model.getListOfClasses();
+			int currClassIndex=view.getClassSelectedIndex();
+			
+			for(Classes currClass:listOfClasses) {
+				if(currClass.get)
+			}
 			int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
 			model.createAndAddTeachingRequirement(numberOfTeachers, selectedClass);
 			view.

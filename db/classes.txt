@@ -2,3 +2,5 @@ code name semester_id
 AP49 Advanced_programming 1
 SE12 Software_engineering 1
 ADS24 Algorithms_and_data_structures 1
+PG88 Programming 2
+DB01 Database 2
