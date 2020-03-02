@@ -69,7 +69,6 @@ public class Database {
 				// get attributes
 				final String type = s.next();
 				final String username = s.next();
-				final String password = s.next();
 				final String firstName = s.next();
 				final String lastName = s.next();
 				
@@ -79,26 +78,22 @@ public class Database {
 				if (type.contains("ptt")) {
 					employee = new PTTDirector(firstName, lastName);
 					employee.setUsername(username);
-					employee.setPassword(password);
 				}
 				
 				if (type.contains("class")) {
 					employee = new ClassDirector(firstName, lastName);
 					employee.setUsername(username);
-					employee.setPassword(password);
 				}
 				
 				if (type.contains("admin")) {
 					employee = new Administrator(firstName, lastName);
 					employee.setUsername(username);
-					employee.setPassword(password);
 				}
 				
 				if (type.contains("teacher")) {
 					final boolean trained = s.nextBoolean();
 					employee = new Teacher(firstName, lastName);
 					employee.setUsername(username);
-					employee.setPassword(password);
 					if(trained) {
 						((Teacher)employee).train();
 					}
