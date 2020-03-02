@@ -1,12 +1,11 @@
 package com.seitptt.model;
 
 import com.seitptt.model.database.Database;
+
 import com.seitptt.model.database.PrintToDatabaseVisitor;
-import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
-import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
