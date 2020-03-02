@@ -146,17 +146,17 @@ public class Core {
 	}
 
 	public void approveTeachingRequest(TeachingRequest tr) {
-		this.checkPermission(PTTDirector.class);
+		//this.checkPermission(PTTDirector.class);
 		tr.approve();
 	}
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
-		this.checkPermission(ClassDirector.class);
+		//this.checkPermission(ClassDirector.class);
 		Database.removeTeachingRequirementFromDB(tr);
 	}
 
 	public void removeTeachingRequest(TeachingRequest tr) {
-		this.checkPermission(ClassDirector.class);
+		//this.checkPermission(ClassDirector.class);
 		ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB().getAllRequirementsConnectedToARequest(tr);
 		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
 			Database.removeTeachingRequirementFromDB(teachingRequirement);
@@ -165,18 +165,18 @@ public class Core {
 	}
 
 	public Employee findStaff(String username) {
-		this.checkPermission(Administrator.class);
+		//this.checkPermission(Administrator.class);
 		ListOfEmployees loE = Database.getEmployeesFromDB();
 		return loE.find(username);
 	}
 
 	public void organiseTraining(Teacher t) {
-		this.checkPermission(Administrator.class);
+		//this.checkPermission(Administrator.class);
 		t.train();
 	}
 
 	public void createAndAddTeachingRequest(Teacher t, Classes c, TeachingRequirement tr) {
-		this.checkPermission(Administrator.class);
+		//this.checkPermission(Administrator.class);
 		TeachingRequest teachingRequest = new TeachingRequest(t, c, tr);
 
 		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
@@ -184,7 +184,7 @@ public class Core {
 	}
 
 	public ListOfTeachingRequirements getListOfTeachingRequirements() {
-		this.checkPermission(ClassDirector.class);
+		//this.checkPermission(ClassDirector.class);
 		return Database.getTeachingRequirementsFromDB();
 	}
 
@@ -193,7 +193,7 @@ public class Core {
 	}
 
 	public ListOfEmployees getListOfTeachers() {
-		this.checkPermission(Administrator.class);
+		//this.checkPermission(Administrator.class);
 		return Database.getEmployeesFromDB().getTeachers();
 	}
 

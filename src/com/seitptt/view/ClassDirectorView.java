@@ -22,6 +22,7 @@ import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.TeachingRequirement;
 
 public class ClassDirectorView extends JPanel {
 	private JTextField enterNumTeachers;
@@ -101,12 +102,12 @@ public class ClassDirectorView extends JPanel {
 		this.add(requirementsListPanel);
 		
 		
-		//ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
-		//ArrayList<String> listRequirements = new ArrayList();
-		//while(listOfRequirements.iterator().hasNext()) {
-			//listRequirements.add(listOfRequirements.iterator().next().toString());
-		//}
-		requirementsList=new JList();
+		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		ArrayList<String> listRequirements = new ArrayList();
+		for(TeachingRequirement i:listOfRequirements) {
+			listRequirements.add(i.toString());
+		}
+		requirementsList=new JList(listRequirements.toArray());
 		requirementsList.addListSelectionListener(controller);
 		requirementsListPanel.add(requirementsList,BorderLayout.CENTER);
 		//create remove button
