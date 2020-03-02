@@ -231,7 +231,7 @@ public class View extends JFrame {
 		Controller controller = new Controller(model);
 		View gui = new View(controller, model);
 		gui.setVisible(true);
-		 gui.createClassDirScreen();
+		// gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
 		//gui.createAdminScreen();
 
