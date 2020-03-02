@@ -60,5 +60,10 @@ public class TeachingRequirement  implements Hostable{
 	public void setClassRef(Classes classRef) {
 		this.classRef = classRef;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNumOfTeachers() + " instructions for " + this.getClassRef();
+	}
 
 }
