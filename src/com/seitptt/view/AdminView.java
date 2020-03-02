@@ -15,6 +15,7 @@ import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
 import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
+import com.seitptt.model.processes.TeachingRequirement;
 
 public class AdminView extends JPanel {
 	//class attributes
@@ -42,12 +43,12 @@ public class AdminView extends JPanel {
 		String[] trainingStatus= {"Trained","Untrained"};
 		trainingFilter=new JComboBox(trainingStatus);
 		filterPanel.add(trainingFilter);
-		//ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
-		//ArrayList<String> listRequirements = new ArrayList();
-		//while(listOfRequirements.iterator().hasNext()) {
-			//listRequirements.add(listOfRequirements.iterator().next().toString());
-		//}
-		requirementFilter= new JComboBox();
+		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		ArrayList<String> listRequirements = new ArrayList();
+		for(TeachingRequirement i:listOfRequirements) {
+			listRequirements.add(i.toString());
+		}
+		requirementFilter= new JComboBox(listRequirements.toArray());
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
 		
