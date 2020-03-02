@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
+import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
 
 public class AdminView extends JPanel {
@@ -21,6 +23,8 @@ public class AdminView extends JPanel {
     protected JComboBox trainingFilter;
     protected JComboBox requirementFilter;
     protected JList teacherList;
+    protected JButton addTeachers;
+    protected JButton trainTeachers;
 	
 	
 	
@@ -45,6 +49,26 @@ public class AdminView extends JPanel {
 		}
 		requirementFilter= new JComboBox(listRequirements.toArray());
 		filterPanel.add(requirementFilter);
+		this.add(filterPanel, BorderLayout.NORTH);
+		
+		//create and add teacher list display
+		ListOfEmployees listOfTeachers = model.getListOfTeachers();
+		ArrayList<String> teacherArrayList = new ArrayList();
+		while(listOfTeachers.iterator().hasNext()) {
+			teacherArrayList.add(listOfTeachers.iterator().next().toString());
+		}
+		teacherList=new JList(teacherArrayList.toArray());
+		this.add(teacherList,BorderLayout.CENTER);
+		
+		//create and add action Buttons
+		JPanel buttonPanel=new JPanel();
+		addTeachers=new JButton("Add Teachers");
+		trainTeachers=new JButton("Train Teachers");
+		buttonPanel.add(addTeachers);
+		buttonPanel.add(trainTeachers);
+		this.add(buttonPanel, BorderLayout.SOUTH);
+		
+		
 		
 		
 

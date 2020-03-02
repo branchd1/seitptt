@@ -70,13 +70,13 @@ public class View extends JFrame {
 	/**
 	 * return admin login Button 
 	 */
-	private JButton adminLogin() {
+	public JButton adminLogin() {
 		return homeScreen.adminLogin;
 	}
 	/**
 	 * return PTT Dir Login Button 
 	 */
-	private JButton pttDirLogin() {
+	public JButton pttDirLogin() {
 		return homeScreen.pttDirLogin;
 	}
      
