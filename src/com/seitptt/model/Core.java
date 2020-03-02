@@ -208,6 +208,10 @@ public class Core {
 	public void setCurrentUser(Employee currentUser) {
 		this.currentUser = currentUser;
 	}
+	
+	public ListOfClasses getListOfClasses() {
+		return Database.getClassesFromDB();
+	}
 
 
 }

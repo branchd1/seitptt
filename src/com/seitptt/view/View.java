@@ -28,21 +28,22 @@ import com.seitptt.model.Core;
 public class View extends JFrame {
 
 	// panels for each screen
+
 	private HomeScreen homeScreen;
 	private ClassDirectorView classDirectorScreen;
 	private PTTDirectorView pttDirectorScreen;
 
 	// view unit
 	final int UNIT = 30;
-	
-	
+
 	private Controller controller;
 	private Core model;
 
 	/**
 	 * view constructor sets the model and controller and creates homescreen view
 	 */
-	public View(Controller controller) {
+	public View(Controller controller, Core model) {
+		this.model = model;
 		this.controller = controller;
 		// set JFrame attributes
 		this.setLocation(20, 20);
@@ -58,37 +59,41 @@ public class View extends JFrame {
 	 * creates home screen
 	 */
 	private void createHomeScreen() {
-		homeScreen = new HomeScreen(controller,UNIT);
+		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
 	}
+
 	/**
 	 * return class Dir Login Button
 	 */
 	public JButton classDirLogin() {
 		return homeScreen.classDirLogin;
 	}
+
 	/**
-	 * return admin login Button 
+	 * return admin login Button
 	 */
 	public JButton adminLogin() {
 		return homeScreen.adminLogin;
 	}
+
 	/**
-	 * return PTT Dir Login Button 
+	 * return PTT Dir Login Button
 	 */
 	public JButton pttDirLogin() {
 		return homeScreen.pttDirLogin;
 	}
-     
+
 	/**
 	 * creates class director screen
 	 */
+
 	public void createClassDirScreen() {
 		// remove homePanel
 		this.remove(homeScreen);
 
 		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller,model, UNIT);
+		classDirectorScreen = new ClassDirectorView(controller,model,UNIT);
 		this.add(classDirectorScreen);
 
 		// update screen
@@ -99,55 +104,55 @@ public class View extends JFrame {
 	/**
 	 * updates class director screen
 	 */
-	public void updateClassDirScreen() {
-		 classDirectorScreen.updateClassDirScreen();
-		 this.revalidate();
-		 this.repaint();
-		 
-	}
-    
+	/*
+	 * public void updateClassDirScreen() {
+	 * classDirectorScreen.updateClassDirScreen(); this.revalidate();
+	 * this.repaint();
+	 * 
+	 * }
+	 */
+
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
-	public String getNumTeachers() {
-
-		return classDirectorScreen.getNumTeachers();
-	}
-	/**
-	 *Add Requirement Button Access
-	 */
-
-	public JButton getAddRequirementButton() {
-		return classDirectorScreen.addRequirementButton;
-	}
-	/**
-	 * Remove Requirement Button Access
-	 */
-
-	public JButton getRemoveRequirementButton() {
-		return classDirectorScreen.removeRequirementButton;
-	}
-	/**
-	 * Class Selector Access
-	 */
-
-	public JComboBox getClassSelector() {
-		return classDirectorScreen.classSelector;
-	}
-	/**
-	 * Semester Selector Access
-	 */
-
-	public JComboBox getSemesterSelector() {
-		return classDirectorScreen.classSelector;
-	}
-	/**
-	 *Requirements List Access
-	 */
-	public JList getRequirementsList() {
-		return classDirectorScreen.requirementsList;
-	}
-
+	/*
+	 * public String getNumTeachers() {
+	 * 
+	 * return classDirectorScreen.getNumTeachers(); }
+	 *//**
+		 * Add Requirement Button Access
+		 */
+	/*
+	 * 
+	 * public JButton getAddRequirementButton() { return
+	 * classDirectorScreen.addRequirementButton; }
+	 *//**
+		 * Remove Requirement Button Access
+		 */
+	/*
+	 * 
+	 * public JButton getRemoveRequirementButton() { return
+	 * classDirectorScreen.removeRequirementButton; }
+	 *//**
+		 * Class Selector Access
+		 */
+	/*
+	 * 
+	 * public JComboBox getClassSelector() { return
+	 * classDirectorScreen.classSelector; }
+	 *//**
+		 * Semester Selector Access
+		 */
+	/*
+	 * 
+	 * public JComboBox getSemesterSelector() { return
+	 * classDirectorScreen.semesterSelector; }
+	 *//**
+		 * Requirements List Access
+		 *//*
+			 * public JList getRequirementsList() { return
+			 * classDirectorScreen.requirementsList; }
+			 */
 
 	/**
 	 * creates admin screen
@@ -156,9 +161,9 @@ public class View extends JFrame {
 		// remove homePanel
 		this.remove(homeScreen);
 		// create and add admin screen
-		
 
-		// create and add teacher display list
+		AdminView adminScreen = new AdminView(controller, model, UNIT);
+		this.add(adminScreen);
 
 		// update screen
 		this.revalidate();
@@ -178,10 +183,10 @@ public class View extends JFrame {
 	public void createPTTDirScreen() {
 		// remove homePanel
 		this.remove(homeScreen);
-		
-		//create and add PTTDirView
-		
-		pttDirectorScreen= new PTTDirectorView(controller,UNIT);
+
+		// create and add PTTDirView
+
+		pttDirectorScreen = new PTTDirectorView(controller, model, UNIT);
 		this.add(pttDirectorScreen);
 
 		// update screen
@@ -200,12 +205,11 @@ public class View extends JFrame {
 	public static void main(String[] args) {
 		Core model = new Core();
 		Controller controller = new Controller(model);
-		View gui = new View(controller);
+		View gui = new View(controller, model);
 		gui.setVisible(true);
-		// gui.noAccess();
-		// code to test the different screens
-		gui.createClassDirScreen();
+		 gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
+		//gui.createAdminScreen();
 
 	}
 
