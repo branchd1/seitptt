@@ -46,7 +46,6 @@ public class Core {
 				"Theon Greyjoy");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
-		System.out.println();System.out.println();
 		System.out.println("-------------------\nTEST LIST OF SEMESTERS");
 		System.out.println("-------------------\nASSERT\n-------------------");
 		ListOfSemesters listOfSemesters = Database.getSemestersFromDB();
@@ -68,7 +67,8 @@ public class Core {
 			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("1 2 AP49");
+		System.out.println("1 5 AP49\n" + 
+				"2 5 ADS24");
 		System.out.println("-------------------\nEND\n-------------------");
 
 		System.out.println();System.out.println();
