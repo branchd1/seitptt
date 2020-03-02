@@ -115,39 +115,39 @@ public class View extends JFrame {
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
-	/*
-	 * public String getNumTeachers() {
-	 * 
-	 * return classDirectorScreen.getNumTeachers(); }
-	 *//**
+	
+	  public String getNumTeachers() {
+	  
+	  return classDirectorScreen.getNumTeachers(); }
+	 /**
 		 * Add Requirement Button Access
 		 */
-	/*
-	 * 
-	 * public JButton getAddRequirementButton() { return
-	 * classDirectorScreen.addRequirementButton; }
-	 *//**
+	
+	  
+	  public JButton getAddRequirementButton() { return
+	  classDirectorScreen.addRequirementButton; }
+	 /**
 		 * Remove Requirement Button Access
 		 */
-	/*
-	 * 
-	 * public JButton getRemoveRequirementButton() { return
-	 * classDirectorScreen.removeRequirementButton; }
-	 *//**
+	
+	  
+	  public JButton getRemoveRequirementButton() { return
+	  classDirectorScreen.removeRequirementButton; }
+	 /**
 		 * Class Selector Access
 		 */
-	/*
-	 * 
-	 * public JComboBox getClassSelector() { return
-	 * classDirectorScreen.classSelector; }
-	 *//**
+	
+	  
+	  public JComboBox getClassSelector() { return
+	  classDirectorScreen.classSelector; }
+	 /**
 		 * Semester Selector Access
 		 */
-	/*
-	 * 
-	 * public JComboBox getSemesterSelector() { return
-	 * classDirectorScreen.semesterSelector; }
-	 *//**
+	
+	  
+	  public JComboBox getSemesterSelector() { return
+	  classDirectorScreen.semesterSelector; }
+	 /**
 		 * Requirements List Access
 		 *//*
 			 * public JList getRequirementsList() { return

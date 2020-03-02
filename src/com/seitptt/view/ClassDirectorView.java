@@ -66,7 +66,9 @@ public class ClassDirectorView extends JPanel {
 		JPanel selectClassPanel=new JPanel();
 		addRequirementPanel.add(selectClassPanel);
 		JLabel selectClassLabel=new JLabel("Select a class");
+	
 		ListOfClasses classesList=model.getListOfClasses();
+		
 		ArrayList<String> selectorClasses=new ArrayList();
 		for(Classes i:classesList) {
 			selectorClasses.add(i.toString());
@@ -116,6 +118,13 @@ public class ClassDirectorView extends JPanel {
 		
 		
 	
+	}
+	/**
+	 * returns numbers of teachers from class director screen 
+	 */
+	public String getNumTeachers() {
+		
+		return enterNumTeachers.getText();
 	}
 	
 	
