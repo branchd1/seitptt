@@ -141,18 +141,30 @@ public class View extends JFrame {
 	  public JComboBox getClassSelector() { return
 	  classDirectorScreen.classSelector; }
 	 /**
+		 * Semester Selected Index
+		 */
+	
+	  
+	  public int getSemesterSelectedIndex() { return
+	  classDirectorScreen.semesterSelector.getSelectedIndex(); }
+	  /**
 		 * Semester Selector Access
 		 */
 	
 	  
-	  public int getSemesterSelector() { return
-	  classDirectorScreen.semesterSelector.getSelectedIndex(); }
+	  public JComboBox getSemesterSelector() { return
+	  classDirectorScreen.semesterSelector; }
+	  
+	  
+	  public void enableClassList() {
+		  classDirectorScreen.enableClassList();
+	  }
 	 /**
 		 * Requirements List Access
-		 *//*
-			 * public JList getRequirementsList() { return
-			 * classDirectorScreen.requirementsList; }
-			 */
+		 */
+			  public JList getRequirementsList() { return
+			  classDirectorScreen.requirementsList; }
+			 
 
 	/**
 	 * creates admin screen

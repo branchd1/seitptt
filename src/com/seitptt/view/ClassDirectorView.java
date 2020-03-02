@@ -66,16 +66,10 @@ public class ClassDirectorView extends JPanel {
 		JPanel selectClassPanel=new JPanel();
 		addRequirementPanel.add(selectClassPanel);
 		JLabel selectClassLabel=new JLabel("Select a class");
-	
-		ListOfClasses classesList=model.getListOfClasses();
+	    
 		
-		ArrayList<String> selectorClasses=new ArrayList();
-		for(Classes i:classesList) {
-			selectorClasses.add(i.toString());
-		}
-		classSelector= new JComboBox(selectorClasses.toArray());
 		classSelector.addActionListener(controller);
-		
+		classSelector.setEnabled(false);
 		selectClassPanel.add(selectClassLabel);
 		selectClassPanel.add(classSelector);
 		
@@ -87,6 +81,8 @@ public class ClassDirectorView extends JPanel {
 		//will be replaced by model call
 		 enterNumTeachers= new JTextField();
 		enterNumTeachers.setColumns(5);
+		enterNumTeachers.setEnabled(false);
+		
 		enterNumTeachersPanel.add(enterNumTeachersLabel);
 		enterNumTeachersPanel.add(enterNumTeachers);
 		
@@ -95,6 +91,7 @@ public class ClassDirectorView extends JPanel {
 		addRequirementPanel.add(addRequirementButtonPanel);
 	
 		addRequirementButton= new JButton("Add");
+		addRequirementButton.setEnabled(false);
 		addRequirementButton.addActionListener(controller);
 		addRequirementButtonPanel.add(addRequirementButton);
 		
@@ -127,6 +124,18 @@ public class ClassDirectorView extends JPanel {
 		return enterNumTeachers.getText();
 	}
 	
-	
+	public void enableClassList() {
+ListOfClasses classesList=model.getListOfClasses().filterBySemester(controller.getChosenSemester());
+		
+		ArrayList<String> selectorClasses=new ArrayList();
+		for(Classes i:classesList) {
+			selectorClasses.add(i.toString());
+		}
+		classSelector= new JComboBox(selectorClasses.toArray());
+		classSelector.setEnabled(true);
+		enterNumTeachers.setEnabled(true);
+		addRequirementButton.setEnabled(true);
+		
+	}
 	
 }
