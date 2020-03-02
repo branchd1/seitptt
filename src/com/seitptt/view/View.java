@@ -104,13 +104,14 @@ public class View extends JFrame {
 	/**
 	 * updates class director screen
 	 */
-	/*
-	 * public void updateClassDirScreen() {
-	 * classDirectorScreen.updateClassDirScreen(); this.revalidate();
-	 * this.repaint();
-	 * 
-	 * }
-	 */
+	
+	  public void updateClassDirScreen() {
+	  classDirectorScreen.update();
+	  this.revalidate();
+	  this.repaint();
+	  
+	  }
+	 
 
 	/**
 	 * returns numbers of tutors from class director screen

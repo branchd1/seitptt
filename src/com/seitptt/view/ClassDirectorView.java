@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class ClassDirectorView extends JPanel {
 	protected JComboBox semesterSelector;
 	protected JButton removeRequirementButton;
 	protected JButton addRequirementButton;
+	private DefaultListModel listModel;
 	private Controller controller;
 	private Core model;
 	
@@ -102,11 +104,15 @@ public class ClassDirectorView extends JPanel {
 		
 		
 		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+
+		listModel=new DefaultListModel();
 		ArrayList<String> listRequirements = new ArrayList();
 		for(TeachingRequirement i:listOfRequirements) {
 			listRequirements.add(i.toString());
+			listModel.addElement(i.toString());
+			
 		}
-		requirementsList=new JList(listRequirements.toArray());
+		requirementsList=new JList(listModel);
 		requirementsList.addListSelectionListener(controller);
 		requirementsListPanel.add(requirementsList,BorderLayout.CENTER);
 		//create remove button
@@ -126,15 +132,28 @@ public class ClassDirectorView extends JPanel {
 	
 	public void enableClassList() {
 ListOfClasses classesList=model.getListOfClasses().filterBySemester(controller.getChosenSemester());
-		
-		ArrayList<String> selectorClasses=new ArrayList();
+		classSelector.removeAllItems();
+	
 		for(Classes i:classesList) {
+			ArrayList<String> selectorClasses=new ArrayList();
 			selectorClasses.add(i.toString());
+			classSelector.addItem(i.toString());
 		}
-		classSelector= new JComboBox(selectorClasses.toArray());
+	
 		classSelector.setEnabled(true);
 		enterNumTeachers.setEnabled(true);
 		addRequirementButton.setEnabled(true);
+		
+	}
+	
+	public void update() {
+	     listModel.removeAllElements();
+		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		ArrayList<String> listRequirements = new ArrayList();
+		for(TeachingRequirement i:listOfRequirements) {
+			listRequirements.add(i.toString());
+			listModel.addElement(i.toString());
+		}
 		
 	}
 	
