@@ -67,7 +67,7 @@ public class ClassDirectorView extends JPanel {
 		addRequirementPanel.add(selectClassPanel);
 		JLabel selectClassLabel=new JLabel("Select a class");
 	    
-		
+		classSelector=new JComboBox();
 		classSelector.addActionListener(controller);
 		classSelector.setEnabled(false);
 		selectClassPanel.add(selectClassLabel);

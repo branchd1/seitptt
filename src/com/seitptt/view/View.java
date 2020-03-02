@@ -140,6 +140,14 @@ public class View extends JFrame {
 	  
 	  public JComboBox getClassSelector() { return
 	  classDirectorScreen.classSelector; }
+	  
+		 /**
+			 * Class Selected Index
+			 */
+		
+	  public int getClassSelectedIndex() { return
+			  classDirectorScreen.classSelector.getSelectedIndex(); }
+	  
 	 /**
 		 * Semester Selected Index
 		 */
