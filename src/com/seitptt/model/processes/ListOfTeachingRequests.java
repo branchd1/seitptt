@@ -8,11 +8,6 @@ public class ListOfTeachingRequests implements Iterable<TeachingRequest> {
 	
 	ArrayList<TeachingRequest> loTR = new ArrayList<TeachingRequest>();
 	
-	public int getID() {
-		return loTR.get(loTR.size()-1).getId();
-	}
-	
-	
 	public Iterator<TeachingRequest> iterator() {
 		return this.loTR.iterator();
 	}
