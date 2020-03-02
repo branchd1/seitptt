@@ -62,25 +62,21 @@ public class Controller implements ActionListener, ListSelectionListener{
 			view.enableClassList();
 		}
 		
-		//2.3. add requirements
+		//2.2. add requirements
 		if(e.getSource()==view.getAddRequirementButton()) {
-			Classes chosenClass;
-			ListOfClasses listOfClasses=model.getListOfClasses();
-			ListOfClasses classesForSemester;
+			Classes chosenClass = null;
+			ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
 			int currClassIndex=view.getClassSelectedIndex();
 			
-//			for(Classes currClass:listOfClasses) {
-//				if(currClass.getSemester().equals(chosenSemester)) {
-//					
-//					classesForSemester.add(currClass);
-//				}
-//			}
-//			for(Classes i:classesForSemester) {
-//				if(i.)
-//			}
-//			int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
-//			model.createAndAddTeachingRequirement(numberOfTeachers, selectedClass);
-//			view.
+			for(Classes currClass:listOfClasses) {
+				if(currClass==listOfClasses.find(currClassIndex)) {
+					chosenClass=currClass;
+
+					int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
+					model.createAndAddTeachingRequirement(numberOfTeachers, chosenClass);
+
+				}
+			}
 		}
 		
 		
