@@ -6,6 +6,11 @@ import java.util.Iterator;
 
 import com.seitptt.interfaces.Findable;
 
+/**
+ * heterogenous list of employees.
+ * @author arnoldumakhihe 2445734U
+ *
+ */
 public class ListOfEmployees implements Iterable<Employee>,Findable<Employee> {
 	private final ArrayList<Employee> listOfEmployees = new ArrayList<Employee>();
 	
