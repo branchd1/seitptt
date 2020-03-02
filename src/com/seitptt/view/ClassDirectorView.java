@@ -130,7 +130,7 @@ public class ClassDirectorView extends JPanel {
 		return enterNumTeachers.getText();
 	}
 	
-	public void enableClassList() {
+	protected void enableClassList() {
 ListOfClasses classesList=model.getListOfClasses().filterBySemester(controller.getChosenSemester());
 		classSelector.removeAllItems();
 	
@@ -146,7 +146,7 @@ ListOfClasses classesList=model.getListOfClasses().filterBySemester(controller.g
 		
 	}
 	
-	public void update() {
+	protected void update() {
 	     listModel.removeAllElements();
 		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
 		ArrayList<String> listRequirements = new ArrayList();
