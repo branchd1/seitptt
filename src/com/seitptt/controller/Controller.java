@@ -13,6 +13,7 @@ import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
 import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.view.View;
 
 public class Controller implements ActionListener, ListSelectionListener{
@@ -72,11 +73,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 			
 			for(Classes currClass:listOfClasses) {
 				if(currClass.getCode().equals(classCode)) {//listOfClasses.find(currClassIndex)
-					chosenClass=currClass;
-					System.out.print(chosenClass);
-					
+					chosenClass=currClass;					
 					int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
-					model.createAndAddTeachingRequirement(numberOfTeachers, chosenClass);
+					TeachingRequirement addReq = new TeachingRequirement(numberOfTeachers, chosenClass);
+
 					view.updateClassDirScreen();
 				}
 			}
