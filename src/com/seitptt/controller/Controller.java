@@ -66,15 +66,18 @@ public class Controller implements ActionListener, ListSelectionListener{
 		if(e.getSource()==view.getAddRequirementButton()) {
 			Classes chosenClass = null;
 			ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
-			int currClassIndex=view.getClassSelectedIndex();
+			String currClassString=(String)view.getClassSelector().getSelectedItem();
+			String[] splitCurrClass=currClassString.split(" ");
+			String classCode=splitCurrClass[0];
 			
 			for(Classes currClass:listOfClasses) {
-				if(currClass==listOfClasses.find(currClassIndex)) {
+				if(currClass.getCode().equals(classCode)) {//listOfClasses.find(currClassIndex)
 					chosenClass=currClass;
-
+					System.out.print(chosenClass);
+					
 					int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
 					model.createAndAddTeachingRequirement(numberOfTeachers, chosenClass);
-
+					view.updateClassDirScreen();
 				}
 			}
 		}
