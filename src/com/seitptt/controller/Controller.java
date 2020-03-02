@@ -69,12 +69,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 			ListOfClasses classesForSemester;
 			int currClassIndex=view.getClassSelectedIndex();
 			
-			for(Classes currClass:listOfClasses) {
-				if(currClass.getSemester().equals(chosenSemester)) {
-					
-					classesForSemester.add(currClass);
-				}
-			}
+//			for(Classes currClass:listOfClasses) {
+//				if(currClass.getSemester().equals(chosenSemester)) {
+//					
+//					classesForSemester.add(currClass);
+//				}
+//			}
 //			for(Classes i:classesForSemester) {
 //				if(i.)
 //			}

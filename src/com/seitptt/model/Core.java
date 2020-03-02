@@ -80,7 +80,9 @@ public class Core {
 		System.out.println("-------------------\nEQUALS\n-------------------");
 		System.out.println("AP49 Advanced programming\n" + 
 				"SE12 Software engineering\n" + 
-				"ADS24 Algorithms and data structures");
+				"ADS24 Algorithms and data structures" + 
+				"PG88 Programming 2" +
+				"DB01 Database 2");
 		System.out.println("-------------------\nEND\n-------------------");
 		System.out.println();System.out.println();
 		System.out.println("-------------------\nTEST LIST OF REQUESTS");
