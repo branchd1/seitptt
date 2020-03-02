@@ -34,5 +34,15 @@ public class ListOfClasses implements Findable<Classes>, Iterable<Classes> {
 	public Iterator<Classes> iterator() {
 		return this.loc.iterator();
 	}
+	
+	public ListOfClasses filterBySemester(Semester semester) {
+		ListOfClasses newListOfClasses = new ListOfClasses();
+		for(Classes classes : loc) {
+			if(classes.getSemester().equals(semester)) {
+				newListOfClasses.add(classes);
+			}
+		}
+		return newListOfClasses;
+	}
 
 }

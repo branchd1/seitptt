@@ -60,4 +60,9 @@ public class Semester implements Hostable {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return this.getNumber() + " " + this.getYear();
+	}
+	
 }
