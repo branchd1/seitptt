@@ -26,15 +26,13 @@ public class ListOfSemesters implements Iterable<Semester>,Findable<Semester>{
 		throw new RuntimeException("Error: Please search for Semesters using an ID");
 	}
 
-	
-	
-	public void add(Semester sm) {
-		loS.add(sm);
-	}
-
 	@Override
 	public Iterator<Semester> iterator() {
 		return loS.iterator();
+	}
+	
+	public void add(Semester sm) {
+		loS.add(sm);
 	}
 	
 }

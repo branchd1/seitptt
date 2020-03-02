@@ -23,9 +23,9 @@ public class ListOfEmployees implements Iterable<Employee>,Findable<Employee> {
 		return this.listOfEmployees.iterator();
 	}
 	
-	public Employee find(String name) {
+	public Employee find(String username) {
 		for(Employee employee : listOfEmployees) {
-			if (employee.getFirstName().contentEquals(name) || employee.getLastName().contentEquals(name)) {
+			if (employee.getUsername().contentEquals(username)) {
 				return employee;
 			}
 		}

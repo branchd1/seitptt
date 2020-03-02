@@ -2,8 +2,8 @@ package com.seitptt.model.processes;
 
 import com.seitptt.interfaces.Hostable;
 import com.seitptt.model.database.Database;
+import com.seitptt.model.database.PrintToDatabaseVisitor;
 import com.seitptt.model.personnel.Teacher;
-import com.seitptt.visitors.PrintToDatabaseVisitor;
 
 public class TeachingRequest  implements Hostable{
 	

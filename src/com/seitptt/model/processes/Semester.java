@@ -1,7 +1,7 @@
 package com.seitptt.model.processes;
 
 import com.seitptt.interfaces.Hostable;
-import com.seitptt.visitors.PrintToDatabaseVisitor;
+import com.seitptt.model.database.PrintToDatabaseVisitor;
 
 public class Semester implements Hostable {
 	private int id;
@@ -58,6 +58,11 @@ public class Semester implements Hostable {
 	public void accept(PrintToDatabaseVisitor visitor) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNumber() + " " + this.getYear();
 	}
 	
 }
