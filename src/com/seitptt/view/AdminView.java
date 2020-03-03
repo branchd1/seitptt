@@ -70,6 +70,7 @@ public class AdminView extends JPanel {
 		}
 		
 		requirementFilter = new JComboBox(listRequirements.toArray());
+		requirementFilter.addActionListener(controller);
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
 		listModel = new DefaultListModel();
@@ -103,6 +104,7 @@ public class AdminView extends JPanel {
 		//ListOfEmployees listOfTeachers = model.getListOfTeachers();
 		//if(controller.==1)
 		//ListOfEmployees listOfTeachers = model.getListOfTeachers().getTrainedTeachers();
+		//trainTeachers.setEnabled(false);
 		//if(controller.==2)
 		ListOfEmployees listOfTeachers = model.getListOfTeachers().getUntrainedTeachers();	
 		for (Employee i : listOfTeachers) {
@@ -113,6 +115,13 @@ public class AdminView extends JPanel {
 	}
 	
 	protected void update() {
+		listModel.removeAllElements();
+		trainingFilter.setSelectedIndex(0);
+		ListOfEmployees listOfTeachers = model.getListOfTeachers();
+		for (Employee i : listOfTeachers) {
+
+			listModel.addElement(i.toString());
+		}
 		
 	}
 
