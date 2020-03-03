@@ -22,6 +22,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private Core model;
 	private View view;
 	private Semester chosenSemester;
+	private Boolean isRemove=false;
+	private int removeReqID;
 	
 	/**
 	 * @param Core model
@@ -83,7 +85,19 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 		}
 		
-//		if(e.getSource()==view.getRemoveRequirementButton()) {
+		if(e.getSource()==view.getRemoveRequirementButton()) {
+//			isRemove=true;
+			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+			System.out.print(removeReqID);
+			for(TeachingRequirement selectedReq : listOfRequirements) {
+				if(selectedReq.getId()==removeReqID) {
+					model.removeTeachingRequirement(selectedReq);
+					System.out.println("actionlistener: "+selectedReq);
+				}
+			}
+			view.updateClassDirScreen();
+
+		}
 //			valueChanged(ListSelectionEvent e){
 //				TeachingRequirement removeReq;
 //				int reqIndex=view.getRequirementsList().getSelectedIndex();
@@ -104,25 +118,36 @@ public class Controller implements ActionListener, ListSelectionListener{
 		
 	}
 
+	/**
+	 * For addListSelectionListener.
+	 * selects list*/
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
-		//Class director screen
-		//requirementsListPanel-for updating list to the list panel.
-		if(e.getSource()==view.getRemoveRequirementButton()) {
+//		while(isRemove) {
 
-			TeachingRequirement removeReq;
+		if(e.getSource()==view.getRequirementsList()) {
+			int removeReqIndex;
 			int reqIndex=view.getRequirementsList().getSelectedIndex();
 			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-			for(TeachingRequirement selectedReq : listOfRequirements) {
-				if(selectedReq.getId()-1==reqIndex) {
-					removeReq=selectedReq;
-					model.removeTeachingRequirement(removeReq);
+			int j=0;
+			for(TeachingRequirement i : listOfRequirements) {
+				if(j==reqIndex) {
+					removeReqID=i.getId();
+					System.out.println(removeReqID);
 				}
+				j++;
+				System.out.println("j: "+j);
+//				if(i.toString().contains(view.getRequirementsList().))
+//				if(i.getId()-1==reqIndex) {
+//					removeReqIndex=i.getId();
+//					model.removeTeachingRequirement(removeReq);
+//					System.out.print("valuechanged: "+removeReqIndex);
+//				}
 			}
-			view.updateClassDirScreen();
 		}
-		
+//		view.updateClassDirScreen();
+
 	}
 	
 
