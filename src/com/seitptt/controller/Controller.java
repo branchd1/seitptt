@@ -107,11 +107,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//3.1. (JComboBox) filter list of teachers
 		if(e.getSource()==view.getTrainingSelector()) {
 			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+			view.trainingUpdate();
 		}
 		
 		//3.2. (JComboBox) choose class requirements
-		if(e.getSource()==view.getRequirementFilter()) {
-			int chosenReqIndex=view.getRequirementFilter().getIndex();
+		if(e.getSource()==view.getRequirementSelector()) {
+			int chosenReqIndex=view.getRequirementSelectedIndex();
 			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 			int j=0;
 			for(TeachingRequirement i:teachingReqirementList) {
