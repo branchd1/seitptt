@@ -19,7 +19,6 @@ public class ClassDirectorController implements ActionListener, ListSelectionLis
 	
 	private Core model;
 	private View view;
-	private Controller mainController;
 	
 	protected Semester chosenSemester;
 	private int removeReqID;
@@ -29,6 +28,7 @@ public class ClassDirectorController implements ActionListener, ListSelectionLis
 		this.view=view;
 	}
 
+	
 	public void actionPerformed(ActionEvent e) {
 		//2. ClassDirectorView
 		//2.1. selecting semester

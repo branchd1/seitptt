@@ -21,7 +21,7 @@ public class AdministratorController implements ActionListener, ListSelectionLis
 	private View view;
 	
 	protected int selectedFilterIndexForAdmin;
-	private ArrayList<String> selectedUserNameOfTeachers;
+	private String selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
 	
 	public AdministratorController(Core model, View view) {
@@ -29,24 +29,6 @@ public class AdministratorController implements ActionListener, ListSelectionLis
 		this.view=view;
 	}
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		ListOfEmployees listOfTeachers=model.getListOfTeachers();
-		String selectedTeacherInString=view.getTeacherList().getSelectedValue().toString();
-		String[] selectedTeacherName=selectedTeacherInString.split(" ");
-		String firstName=selectedTeacherName[0];
-		String lastName=selectedTeacherName[1];
-					
-		for(Employee i : listOfTeachers) {
-			if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-				selectedUserNameOfTeachers.add(i.getUsername());
-				
-				//creates teaching request associated with a teacher, class, requirement
-//				model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-			}
-		}
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -60,7 +42,9 @@ public class AdministratorController implements ActionListener, ListSelectionLis
 		}
 
 		//3.2. (JComboBox) choose class requirements
-		else if(e.getSource()==view.getRequirementSelector()) {
+		if(e.getSource()==view.getRequirementSelector()) {
+			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+
 			int chosenReqIndex=view.getRequirementSelectedIndex();
 			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 			int j=0;
@@ -74,21 +58,61 @@ public class AdministratorController implements ActionListener, ListSelectionLis
 		}
 
 		//3.4. add teachers
-		else if(e.getSource()==view.adminAddTeachersButton()) {
+		if(e.getSource()==view.adminAddTeachersButton()) {
+			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+
+			int chosenReqIndex=view.getRequirementSelectedIndex();
+			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
+			int j=0;
+			for(TeachingRequirement i:teachingReqirementList) {
+				if(j==chosenReqIndex) {
+					addTeachersInReq=i;
+					//i.getNumOfTeachers()--;
+				}
+				j++;
+			}
+			
+			ListOfEmployees listOfTeachers=model.getListOfTeachers();
+			String selectedTeacherInString=view.getTeacherList().getSelectedValue().toString();
+			String[] selectedTeacherName=selectedTeacherInString.split(" ");
+			String firstName=selectedTeacherName[0];
+			String lastName=selectedTeacherName[1];
+						
+			for(Employee i : listOfTeachers) {
+				if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+					selectedUserNameOfTeachers=i.getUsername();	
+				}
+			}
 			//add selected teachers can
 			//sub number of teachers from current teaching requirement
-			ListOfEmployees listOfTeachers=model.getListOfTeachers();
-			for(int j=0;j<selectedUserNameOfTeachers.size();j++) {
+//			ListOfEmployees listOfTeachers=model.getListOfTeachers();
+			
 				for(Employee i : listOfTeachers) {
-					if(i.getUsername().equals(selectedUserNameOfTeachers.get(j)) ) {
+					if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
 						//creates teaching request associated with a teacher, class, requirement
 						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
 						view.updateAdminScreen();
 					}
 				}
-			}
+			
 		}
 		//3.5. train teachers
+		
+	}
+	
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		ListOfEmployees listOfTeachers=model.getListOfTeachers();
+		String selectedTeacherInString=view.getTeacherList().getSelectedValue().toString();
+		String[] selectedTeacherName=selectedTeacherInString.split(" ");
+		String firstName=selectedTeacherName[0];
+		String lastName=selectedTeacherName[1];
+					
+		for(Employee i : listOfTeachers) {
+			if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+				selectedUserNameOfTeachers=i.getUsername();	
+			}
+		}
 		
 	}
 	
