@@ -1,6 +1,7 @@
 package com.seitptt.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -40,7 +41,7 @@ public class View extends JFrame {
 
 	private Controller controller;
 	private Core model;
-	private JButton backButton;
+	private JButton logoutButton;
 	private JPanel innerPanel;
 	
 
@@ -57,7 +58,13 @@ public class View extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(1, 1));
 		createHomeScreen();
-
+		
+		//create back button inner panel for use in non home screen pages
+		innerPanel= new JPanel();
+		innerPanel.setLayout(new BorderLayout());
+		logoutButton=new JButton("LOGOUT");
+		innerPanel.add(logoutButton,BorderLayout.SOUTH);
+		
 	}
 
 	/**
@@ -96,10 +103,14 @@ public class View extends JFrame {
 	public void createClassDirScreen() {
 		// remove homePanel
 		this.remove(homeScreen);
-
+		
+	
+		
+	
 		// create class Director Screen
 		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
-		this.add(classDirectorScreen);
+		this.add(innerPanel);
+		innerPanel.add(classDirectorScreen,BorderLayout.CENTER);
 
 		// update screen
 		this.revalidate();
@@ -198,7 +209,9 @@ public class View extends JFrame {
 		// create and add admin screen
 
 		adminScreen = new AdminView(controller, model, UNIT);
-		this.add(adminScreen);
+		this.add(innerPanel);
+		innerPanel.add(adminScreen,BorderLayout.CENTER);
+		
 
 		// update screen
 		this.revalidate();
@@ -288,7 +301,9 @@ public class View extends JFrame {
 		// create and add PTTDirView
 
 		pttDirectorScreen = new PTTDirectorView(controller, model, UNIT);
-		this.add(pttDirectorScreen);
+		this.add(innerPanel);
+		innerPanel.add(pttDirectorScreen,BorderLayout.CENTER);
+		
 
 		// update screen
 		this.revalidate();
@@ -343,9 +358,9 @@ public class View extends JFrame {
 		Controller controller = new Controller(model);
 		View gui = new View(controller, model);
 		gui.setVisible(true);
-		 gui.createClassDirScreen();
-		// gui.createPTTDirScreen();
-		// gui.createAdminScreen();
+		 //gui.createClassDirScreen();
+		 gui.createPTTDirScreen();
+	//gui.createAdminScreen();
 
 	}
 
