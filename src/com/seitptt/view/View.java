@@ -94,7 +94,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 
 		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller,model,UNIT);
+		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
 		this.add(classDirectorScreen);
 
 		// update screen
@@ -105,80 +105,85 @@ public class View extends JFrame {
 	/**
 	 * updates class director screen
 	 */
-	
-	  public void updateClassDirScreen() {
-	  classDirectorScreen.update();
-	  this.revalidate();
-	  this.repaint();
-	  
-	  }
-	 
+
+	public void updateClassDirScreen() {
+		classDirectorScreen.update();
+		this.revalidate();
+		this.repaint();
+
+	}
 
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
-	
-	  public String getNumTeachers() {
-	  
-	  return classDirectorScreen.getNumTeachers(); }
-	 /**
-		 * Add Requirement Button Access
-		 */
-	
-	  
-	  public JButton getAddRequirementButton() { return
-	  classDirectorScreen.addRequirementButton; }
-	 /**
-		 * Remove Requirement Button Access
-		 */
-	
-	  
-	  public JButton getRemoveRequirementButton() { return
-	  classDirectorScreen.removeRequirementButton; }
-	 /**
-		 * Class Selector Access
-		 */
-	
-	  
-	  public JComboBox getClassSelector() { return
-	  classDirectorScreen.classSelector; }
-	  
-		 /**
-			 * Class Selected Index
-			 */
-		
-	  public int getClassSelectedIndex() { return
-			  classDirectorScreen.classSelector.getSelectedIndex(); }
-	  
-	 /**
-		 * Semester Selected Index
-		 */
-	
-	  
-	  public int getSemesterSelectedIndex() { return
-	  classDirectorScreen.semesterSelector.getSelectedIndex(); }
-	  /**
-		 * Semester Selector Access
-		 */
-	
-	  
-	  public JComboBox getSemesterSelector() { return
-	  classDirectorScreen.semesterSelector; }
-	  
-	  
-	  public void enableClassList() {
-		  classDirectorScreen.enableClassList();
-		  
+
+	public String getNumTeachers() {
+
+		return classDirectorScreen.getNumTeachers();
+	}
+
+	/**
+	 * Add Requirement Button Access
+	 */
+
+	public JButton getAddRequirementButton() {
+		return classDirectorScreen.addRequirementButton;
+	}
+
+	/**
+	 * Remove Requirement Button Access
+	 */
+
+	public JButton getRemoveRequirementButton() {
+		return classDirectorScreen.removeRequirementButton;
+	}
+
+	/**
+	 * Class Selector Access
+	 */
+
+	public JComboBox getClassSelector() {
+		return classDirectorScreen.classSelector;
+	}
+
+	/**
+	 * Class Selected Index
+	 */
+
+	public int getClassSelectedIndex() {
+		return classDirectorScreen.classSelector.getSelectedIndex();
+	}
+
+	/**
+	 * Semester Selected Index
+	 */
+
+	public int getSemesterSelectedIndex() {
+		return classDirectorScreen.semesterSelector.getSelectedIndex();
+	}
+
+	/**
+	 * Semester Selector Access
+	 */
+
+	public JComboBox getSemesterSelector() {
+		return classDirectorScreen.semesterSelector;
+	}
+
+	public void enableClassList() {
+		classDirectorScreen.enableClassList();
+
 		// update screen
-			this.revalidate();
-			this.repaint();
-	  }
-	 /**
-		 * Requirements List Access
-		 */
-			  public JList getRequirementsList() { return
-			  classDirectorScreen.requirementsList; }
-			 
+		this.revalidate();
+		this.repaint();
+	}
+
+	/**
+	 * Requirements List Access
+	 */
+	public JList getRequirementsList() {
+		return classDirectorScreen.requirementsList;
+	}
 
 	/**
 	 * creates admin screen
@@ -188,7 +193,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 		// create and add admin screen
 
-	adminScreen = new AdminView(controller, model, UNIT);
+		adminScreen = new AdminView(controller, model, UNIT);
 		this.add(adminScreen);
 
 		// update screen
@@ -202,19 +207,41 @@ public class View extends JFrame {
 	public void updateAdminScreen() {
 
 	}
+
 	/**
 	 * returns the add Teachers Button
 	 */
 	public JButton adminAddTeachersButton() {
 		return adminScreen.addTeachers;
 	}
+
 	/**
 	 * returns the train Teachers Button
 	 */
 	public JButton adminTrainTeachersButton() {
 		return adminScreen.trainTeachers;
 	}
-
+	
+	/**
+	 *  Training JComboBox Access
+	 */
+	public JComboBox getTrainingSelector() {
+		return adminScreen.trainingFilter;
+	}
+	
+	/**
+	 * Requirement JComboBox Access
+	 */
+	public JComboBox getRequirementSelector() {
+		return adminScreen.requirementFilter;
+	}
+	
+	/**
+	 * Requirements List Access
+	 */
+	public JList getTeacherList() {
+		return adminScreen.teacherList;
+	}
 	/**
 	 * creates PTT director screen
 	 */
@@ -247,7 +274,7 @@ public class View extends JFrame {
 		gui.setVisible(true);
 		// gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
-		//gui.createAdminScreen();
+		// gui.createAdminScreen();
 
 	}
 
