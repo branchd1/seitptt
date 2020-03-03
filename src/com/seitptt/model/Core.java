@@ -142,10 +142,7 @@ public class Core {
 	public void createAndAddTeachingRequirement(int numberOfTeachersNeeded, Classes classObj) {
 		this.checkPermission(ClassDirector.class);
 
-		TeachingRequirement tr = new TeachingRequirement(numberOfTeachersNeeded, classObj);
-
-		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
-		tr.accept(visitor);
+		new TeachingRequirement(numberOfTeachersNeeded, classObj);
 	}
 
 	public void approveTeachingRequest(TeachingRequest tr) {
@@ -180,10 +177,7 @@ public class Core {
 
 	public void createAndAddTeachingRequest(Teacher t, Classes c, TeachingRequirement tr) {
 		//this.checkPermission(Administrator.class);
-		TeachingRequest teachingRequest = new TeachingRequest(t, c, tr);
-
-		PrintToDatabaseVisitor visitor = new PrintToDatabaseVisitor();
-		teachingRequest.accept(visitor);
+		new TeachingRequest(t, c, tr);
 	}
 
 	public ListOfTeachingRequirements getListOfTeachingRequirements() {
