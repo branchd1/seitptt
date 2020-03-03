@@ -22,7 +22,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private Core model;
 	private View view;
 	private Semester chosenSemester;
-	private int removeReqID;
+	private int removeReqID, selectedFilterIndexForAdmin;
 	
 	/**
 	 * @param Core model
@@ -38,6 +38,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 	
 	public Semester getChosenSemester() {
 		return chosenSemester;
+	}
+
+	public int getSelectedFilterIndexForAdmin() {
+		return selectedFilterIndexForAdmin;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -98,6 +102,26 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}	
 		
 		//3. Administrator Screen
+		TeachingRequirement addTeachersInReq;
+		
+		//3.1. (JComboBox) filter list of teachers
+		if(e.getSource()==view.getTrainingSelector()) {
+			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+		}
+		
+		//3.2. (JComboBox) choose class requirements
+		if(e.getSource()==view.getRequirementFilter()) {
+			int chosenReqIndex=view.getRequirementFilter().getIndex();
+			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
+			int j=0;
+			for(TeachingRequirement i:teachingReqirementList) {
+				if(j==chosenReqIndex) {
+					addTeachersInReq=i;
+//					i.getNumOfTeachers()--;
+				}
+				j++;
+			}
+		}
 		//3.1. add teachers
 		//3.2. train teachers
 		//4. PTT Director Screen
