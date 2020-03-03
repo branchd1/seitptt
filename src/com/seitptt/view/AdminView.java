@@ -56,8 +56,9 @@ public class AdminView extends JPanel {
 		// create and add training filter
 		JPanel filterPanel = new JPanel();
 		filterPanel.setLayout(new GridLayout(1, 2));
-		String[] trainingStatus = { "Trained", "Untrained" };
+		String[] trainingStatus = { "All","Trained", "Untrained" };
 		trainingFilter = new JComboBox(trainingStatus);
+		trainingFilter.addActionListener(controller);
 		filterPanel.add(trainingFilter);
 		
 		//create and add list of teaching requirements filter
@@ -94,6 +95,10 @@ public class AdminView extends JPanel {
 		buttonPanel.add(trainTeachers);
 		this.add(buttonPanel, BorderLayout.SOUTH);
 
+	}
+	
+	protected void update() {
+		
 	}
 
 }
