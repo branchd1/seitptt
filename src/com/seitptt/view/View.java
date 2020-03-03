@@ -41,7 +41,7 @@ public class View extends JFrame {
 
 	private Controller controller;
 	private Core model;
-	private JButton logoutButton;
+	public JButton logoutButton;
 	private JPanel innerPanel;
 	
 
