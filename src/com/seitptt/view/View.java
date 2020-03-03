@@ -69,32 +69,15 @@ public class View extends JFrame {
 		innerPanel.add(logoutButton,BorderLayout.SOUTH);
 		
 	}
+	
+	
 
 	/**
 	 * creates home screen
 	 */
-	private void createHomeScreen() {
+	public void createHomeScreen() {
 		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
-	}
-	
-	
-	/**
-	 * creates class director screen
-	 */
-
-	public void createClassDirScreen() {
-		// remove homePanel
-		this.remove(homeScreen);
-		
-		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
-		this.add(innerPanel);
-		innerPanel.add(classDirectorScreen,BorderLayout.CENTER);
-
-		// update screen
-		this.revalidate();
-		this.repaint();
 	}
 	
 	
