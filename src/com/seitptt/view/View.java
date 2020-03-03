@@ -32,6 +32,7 @@ public class View extends JFrame {
 	private HomeScreen homeScreen;
 	private ClassDirectorView classDirectorScreen;
 	private PTTDirectorView pttDirectorScreen;
+	private AdminView adminScreen;
 
 	// view unit
 	final int UNIT = 30;
@@ -187,7 +188,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 		// create and add admin screen
 
-		AdminView adminScreen = new AdminView(controller, model, UNIT);
+	adminScreen = new AdminView(controller, model, UNIT);
 		this.add(adminScreen);
 
 		// update screen
@@ -200,6 +201,18 @@ public class View extends JFrame {
 	 */
 	public void updateAdminScreen() {
 
+	}
+	/**
+	 * returns the add Teachers Button
+	 */
+	public JButton adminAddTeachersButton() {
+		return adminScreen.addTeachers;
+	}
+	/**
+	 * returns the train Teachers Button
+	 */
+	public JButton adminTrainTeachersButton() {
+		return adminScreen.trainTeachers;
 	}
 
 	/**

@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -13,6 +14,7 @@ import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
+import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.TeachingRequirement;
@@ -26,6 +28,7 @@ public class AdminView extends JPanel {
     protected JList teacherList;
     protected JButton addTeachers;
     protected JButton trainTeachers;
+    private DefaultListModel listModel;
 	
 	
 	
@@ -51,20 +54,24 @@ public class AdminView extends JPanel {
 		requirementFilter= new JComboBox(listRequirements.toArray());
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
-		
+		listModel=new DefaultListModel();
 		//create and add teacher list display
-		//ListOfEmployees listOfTeachers = model.getListOfTeachers();
-		//ArrayList<String> teacherArrayList = new ArrayList();
-		//while(listOfTeachers.iterator().hasNext()) {
-			//teacherArrayList.add(listOfTeachers.iterator().next().toString());
-		//}
-		teacherList=new JList();
+		ListOfEmployees listOfTeachers = model.getListOfTeachers();
+		ArrayList<String> teacherArrayList = new ArrayList();
+		for(Employee i :listOfTeachers) {
+			teacherArrayList.add(i.toString());
+
+			listModel.addElement(i.toString());
+		}
+		teacherList=new JList(listModel);
 		this.add(teacherList,BorderLayout.CENTER);
 		
 		//create and add action Buttons
 		JPanel buttonPanel=new JPanel();
 		addTeachers=new JButton("Add Teachers");
+		addTeachers.addActionListener(controller);
 		trainTeachers=new JButton("Train Teachers");
+		trainTeachers.addActionListener(controller);
 		buttonPanel.add(addTeachers);
 		buttonPanel.add(trainTeachers);
 		this.add(buttonPanel, BorderLayout.SOUTH);
