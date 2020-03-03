@@ -73,6 +73,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 		if(e.getSource()==view.logoutButton) {
 			view.createHomeScreen();
 		}
+		
 		else if(currUser=="ClassDirector") {
 			//classDirController=new ClassDirectorController(model, view);
 //			this.classDirController.actionPerformed(e);
@@ -153,7 +154,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 				for(TeachingRequirement i:teachingReqirementList) {
 					if(j==chosenReqIndex) {
 						addTeachersInReq=i;
-						//i.getNumOfTeachers()--;
 					}
 					j++;
 				}
