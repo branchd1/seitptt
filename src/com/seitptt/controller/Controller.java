@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.seitptt.model.Core;
 import com.seitptt.model.database.Database;
+import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
 import com.seitptt.model.personnel.Teacher;
@@ -31,6 +32,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private int removeReqID, selectedFilterIndexForAdmin;
 	private ArrayList<String> selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
+	private ClassDirectorController classDirController;
+	private AdministratorController adminController;
+	private PTTDirectorController pttController;
+	private String currUser;
 
 	/**
 	 * @param Core model
@@ -64,19 +69,28 @@ public class Controller implements ActionListener, ListSelectionListener{
 	 * actionPerformed called from view (actionListener)
 	 * */
 	public void actionPerformed(ActionEvent e) {
-		//while(true) {
 		//1. login to each type of user
 		if(e.getSource()==view.classDirLogin()) {
+			currUser="ClassDirector";
+			model.setCurrentUser(currUser);
 			view.createClassDirScreen();
-		}else if(e.getSource()==view.adminLogin()) {
+		}
+		
+		else if(e.getSource()==view.adminLogin()) {
+			currUser="Administrator";
+			model.setCurrentUser(currUser);
 			view.createAdminScreen();
-		}else if(e.getSource()==view.pttDirLogin()) {
+		}
+		
+		else if(e.getSource()==view.pttDirLogin()) {
+			currUser="PTTDirector";
+			model.setCurrentUser(currUser);
 			view.createPTTDirScreen();
 		}
 
 		//2. ClassDirectorView
 		//2.1. selecting semester
-		if(e.getSource()==view.getSemesterSelector()) {
+		else if(e.getSource()==view.getSemesterSelector()) {
 			ListOfSemesters listOfSemesters=model.getListOfSemesters();
 			int currSemesterIndex=view.getSemesterSelectedIndex();
 
@@ -90,7 +104,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 
 		//2.2. add requirements
-		if(e.getSource()==view.getAddRequirementButton()) {
+		else if(e.getSource()==view.getAddRequirementButton()) {
 			Classes chosenClass = null;
 			ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
 			String currClassString=(String)view.getClassSelector().getSelectedItem();
@@ -101,15 +115,16 @@ public class Controller implements ActionListener, ListSelectionListener{
 				if(currClass.getCode().equals(classCode)) {//listOfClasses.find(currClassIndex)
 					chosenClass=currClass;					
 					int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
-					TeachingRequirement addReq = new TeachingRequirement(numberOfTeachers, chosenClass);
-
+					model.createAndAddTeachingRequirement(numberOfTeachers, chosenClass);
+//					TeachingRequirement addReq = new TeachingRequirement(numberOfTeachers, chosenClass);
+					
 					view.updateClassDirScreen();
 				}
 			}
 		}
 
 		//2.4. remove requirements
-		if(e.getSource()==view.getRemoveRequirementButton()) {
+		else if(e.getSource()==view.getRemoveRequirementButton()) {
 			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 			for(TeachingRequirement selectedReq : listOfRequirements) {
 				if(selectedReq.getId()==removeReqID) {
@@ -119,55 +134,55 @@ public class Controller implements ActionListener, ListSelectionListener{
 			view.updateClassDirScreen();
 		}	
 
-		//3. Administrator Screen
+//		//3. Administrator Screen
+//		
+//
+//		//3.1. (JComboBox) filter list of teachers
+//		else if(e.getSource()==view.getTrainingSelector()) {
+//			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+//			view.trainingUpdate();
+//		}
+//
+//		//3.2. (JComboBox) choose class requirements
+//		else if(e.getSource()==view.getRequirementSelector()) {
+//			int chosenReqIndex=view.getRequirementSelectedIndex();
+//			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
+//			int j=0;
+//			for(TeachingRequirement i:teachingReqirementList) {
+//				if(j==chosenReqIndex) {
+//					addTeachersInReq=i;
+//					//i.getNumOfTeachers()--;
+//				}
+//				j++;
+//			}
+//		}
+//
+//		//3.4. add teachers
+//		else if(e.getSource()==view.adminAddTeachersButton()) {
+//			//add selected teachers can
+//			//sub number of teachers from current teaching requirement
+//			ListOfEmployees listOfTeachers=model.getListOfTeachers();
+//			for(int j=0;j<selectedUserNameOfTeachers.size();j++) {
+//				for(Employee i : listOfTeachers) {
+//					if(i.getUsername().equals(selectedUserNameOfTeachers.get(j)) ) {
+//						//creates teaching request associated with a teacher, class, requirement
+//						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+//						view.updateAdminScreen();
+//					}
+//				}
+//			}
+//		}
+//		//3.5. train teachers
+//
+//
+//		//4. PTT Director Screen
+//		//4.1. filter requirements (All, Pending)
+//		else if(e.getSource()==view.pttDirRequirementsFilter()) {
+//			String filter=view.pttDirRequirementsFilter().toString();
+//			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+//
+//		}
 		
-
-		//3.1. (JComboBox) filter list of teachers
-		if(e.getSource()==view.getTrainingSelector()) {
-			selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-			view.trainingUpdate();
-		}
-
-		//3.2. (JComboBox) choose class requirements
-		if(e.getSource()==view.getRequirementSelector()) {
-			int chosenReqIndex=view.getRequirementSelectedIndex();
-			ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
-			int j=0;
-			for(TeachingRequirement i:teachingReqirementList) {
-				if(j==chosenReqIndex) {
-					addTeachersInReq=i;
-					//i.getNumOfTeachers()--;
-				}
-				j++;
-			}
-		}
-
-		//3.4. add teachers
-		if(e.getSource()==view.adminAddTeachersButton()) {
-			//add selected teachers can
-			//sub number of teachers from current teaching requirement
-			ListOfEmployees listOfTeachers=model.getListOfTeachers();
-			for(int j=0;j<selectedUserNameOfTeachers.size();j++) {
-				for(Employee i : listOfTeachers) {
-					if(i.getUsername().equals(selectedUserNameOfTeachers.get(j)) ) {
-						//creates teaching request associated with a teacher, class, requirement
-						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-						view.updateAdminScreen();
-					}
-				}
-			}
-		}
-		//3.5. train teachers
-
-
-		//4. PTT Director Screen
-		//4.1. filter requirements (All, Pending)
-		if(e.getSource()==view.pttDirRequirementsFilter()) {
-			String filter=view.pttDirRequirementsFilter().toString();
-			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-
-		}
-		//}
 	}
 
 	/**
