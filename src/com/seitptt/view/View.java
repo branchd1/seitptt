@@ -206,7 +206,22 @@ public class View extends JFrame {
 	 * updates admin screen
 	 */
 	public void updateAdminScreen() {
-
+         adminScreen.update();
+         
+     	// update screen
+ 		this.revalidate();
+ 		this.repaint();
+	}
+	/**
+	 * updates according to admin training filter selection
+	 */
+	public void trainingUpdate() {
+		adminScreen.trainingUpdate();
+		
+		// update screen
+		this.revalidate();
+		this.repaint();
+		
 	}
 
 	/**
