@@ -40,6 +40,9 @@ public class View extends JFrame {
 
 	private Controller controller;
 	private Core model;
+	private JButton backButton;
+	private JPanel innerPanel;
+	
 
 	/**
 	 * view constructor sets the model and controller and creates homescreen view
@@ -340,7 +343,7 @@ public class View extends JFrame {
 		Controller controller = new Controller(model);
 		View gui = new View(controller, model);
 		gui.setVisible(true);
-		// gui.createClassDirScreen();
+		 gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
 		// gui.createAdminScreen();
 
