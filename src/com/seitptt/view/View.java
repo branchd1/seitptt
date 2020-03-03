@@ -21,6 +21,7 @@ import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
+import com.seitptt.model.personnel.PTTDirector;
 
 /**
  * View - creates the GUI view for the teacher admin application
@@ -32,6 +33,7 @@ public class View extends JFrame {
 	private HomeScreen homeScreen;
 	private ClassDirectorView classDirectorScreen;
 	private PTTDirectorView pttDirectorScreen;
+	private AdminView adminScreen;
 
 	// view unit
 	final int UNIT = 30;
@@ -93,7 +95,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 
 		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller,model,UNIT);
+		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
 		this.add(classDirectorScreen);
 
 		// update screen
@@ -104,80 +106,85 @@ public class View extends JFrame {
 	/**
 	 * updates class director screen
 	 */
-	
-	  public void updateClassDirScreen() {
-	  classDirectorScreen.update();
-	  this.revalidate();
-	  this.repaint();
-	  
-	  }
-	 
+
+	public void updateClassDirScreen() {
+		classDirectorScreen.update();
+		this.revalidate();
+		this.repaint();
+
+	}
 
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
-	
-	  public String getNumTeachers() {
-	  
-	  return classDirectorScreen.getNumTeachers(); }
-	 /**
-		 * Add Requirement Button Access
-		 */
-	
-	  
-	  public JButton getAddRequirementButton() { return
-	  classDirectorScreen.addRequirementButton; }
-	 /**
-		 * Remove Requirement Button Access
-		 */
-	
-	  
-	  public JButton getRemoveRequirementButton() { return
-	  classDirectorScreen.removeRequirementButton; }
-	 /**
-		 * Class Selector Access
-		 */
-	
-	  
-	  public JComboBox getClassSelector() { return
-	  classDirectorScreen.classSelector; }
-	  
-		 /**
-			 * Class Selected Index
-			 */
-		
-	  public int getClassSelectedIndex() { return
-			  classDirectorScreen.classSelector.getSelectedIndex(); }
-	  
-	 /**
-		 * Semester Selected Index
-		 */
-	
-	  
-	  public int getSemesterSelectedIndex() { return
-	  classDirectorScreen.semesterSelector.getSelectedIndex(); }
-	  /**
-		 * Semester Selector Access
-		 */
-	
-	  
-	  public JComboBox getSemesterSelector() { return
-	  classDirectorScreen.semesterSelector; }
-	  
-	  
-	  public void enableClassList() {
-		  classDirectorScreen.enableClassList();
-		  
+
+	public String getNumTeachers() {
+
+		return classDirectorScreen.getNumTeachers();
+	}
+
+	/**
+	 * Add Requirement Button Access
+	 */
+
+	public JButton getAddRequirementButton() {
+		return classDirectorScreen.addRequirementButton;
+	}
+
+	/**
+	 * Remove Requirement Button Access
+	 */
+
+	public JButton getRemoveRequirementButton() {
+		return classDirectorScreen.removeRequirementButton;
+	}
+
+	/**
+	 * Class Selector Access
+	 */
+
+	public JComboBox getClassSelector() {
+		return classDirectorScreen.classSelector;
+	}
+
+	/**
+	 * Class Selected Index
+	 */
+
+	public int getClassSelectedIndex() {
+		return classDirectorScreen.classSelector.getSelectedIndex();
+	}
+
+	/**
+	 * Semester Selected Index
+	 */
+
+	public int getSemesterSelectedIndex() {
+		return classDirectorScreen.semesterSelector.getSelectedIndex();
+	}
+
+	/**
+	 * Semester Selector Access
+	 */
+
+	public JComboBox getSemesterSelector() {
+		return classDirectorScreen.semesterSelector;
+	}
+
+	public void enableClassList() {
+		classDirectorScreen.enableClassList();
+
 		// update screen
-			this.revalidate();
-			this.repaint();
-	  }
-	 /**
-		 * Requirements List Access
-		 */
-			  public JList getRequirementsList() { return
-			  classDirectorScreen.requirementsList; }
-			 
+		this.revalidate();
+		this.repaint();
+	}
+
+	/**
+	 * Requirements List Access
+	 */
+	public JList getRequirementsList() {
+		return classDirectorScreen.requirementsList;
+	}
 
 	/**
 	 * creates admin screen
@@ -187,7 +194,7 @@ public class View extends JFrame {
 		this.remove(homeScreen);
 		// create and add admin screen
 
-		AdminView adminScreen = new AdminView(controller, model, UNIT);
+		adminScreen = new AdminView(controller, model, UNIT);
 		this.add(adminScreen);
 
 		// update screen
@@ -202,6 +209,53 @@ public class View extends JFrame {
 
 	}
 
+	/**
+	 * returns the add Teachers Button
+	 */
+	public JButton adminAddTeachersButton() {
+		return adminScreen.addTeachers;
+	}
+
+	/**
+	 * returns the train Teachers Button
+	 */
+	public JButton adminTrainTeachersButton() {
+		return adminScreen.trainTeachers;
+	}
+	
+	/**
+	 *  Training JComboBox Access
+	 */
+	public JComboBox getTrainingSelector() {
+		return adminScreen.trainingFilter;
+	}
+	/**
+	 * Training Selected Index
+	 */
+
+	public int getTrainingSelectedIndex() {
+		return adminScreen.trainingFilter.getSelectedIndex();
+	}
+	/**
+	 * Requirements Selected Index
+	 */
+
+	public int getRequirementSelectedIndex() {
+		return adminScreen.requirementFilter.getSelectedIndex();
+	}
+	/**
+	 * Requirement JComboBox Access
+	 */
+	public JComboBox getRequirementSelector() {
+		return adminScreen.requirementFilter;
+	}
+	
+	/**
+	 * Requirements List Access
+	 */
+	public JList getTeacherList() {
+		return adminScreen.teacherList;
+	}
 	/**
 	 * creates PTT director screen
 	 */
@@ -218,6 +272,38 @@ public class View extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
+	
+	/**
+	 * returns approve request button
+	 */
+	public JButton approveRequestButton() {
+		return pttDirectorScreen.approveButton;
+	}
+	/**
+	 * returns deny request button
+	 */
+	public JButton denyRequestButton() {
+		return pttDirectorScreen.denyButton;
+	}
+	
+	/**
+	 * returns pttDir Requirements Display
+	 */
+	public JList pttDirRequirementsDisplay() {
+		return pttDirectorScreen.requirementsDisplay;
+	}
+	/**
+	 * returns pttdir requirements filter 
+	 */
+	public JComboBox pttDirRequirementsFilter() {
+		return pttDirectorScreen.filterRequirements;
+	}
+	/**
+	 * returns pttdir requirements filter index
+	 */
+	public int pttDirRequirementsFilterIndex() {
+		return pttDirectorScreen.filterRequirements.getSelectedIndex();
+	}
 
 	/**
 	 * updates PTT director screen
@@ -225,6 +311,8 @@ public class View extends JFrame {
 	public void updatePTTDirScreen() {
 
 	}
+	
+	
 
 	// test main will remove
 	public static void main(String[] args) {
@@ -234,7 +322,7 @@ public class View extends JFrame {
 		gui.setVisible(true);
 		// gui.createClassDirScreen();
 		// gui.createPTTDirScreen();
-		//gui.createAdminScreen();
+		// gui.createAdminScreen();
 
 	}
 
