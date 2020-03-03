@@ -104,6 +104,8 @@ public class AdminView extends JPanel {
 		ListOfEmployees listOfTeachers=null;
 		if(controller.getSelectedFilterIndexForAdmin()==0){
 			listOfTeachers = model.getListOfTeachers();
+			trainTeachers.setEnabled(true);
+
 		}
 		if(controller.getSelectedFilterIndexForAdmin()==1) {
 	        listOfTeachers = model.getListOfTeachers().getTrainedTeachers();
@@ -113,6 +115,8 @@ public class AdminView extends JPanel {
 
 		if(controller.getSelectedFilterIndexForAdmin()==2) {
 			   listOfTeachers = model.getListOfTeachers().getUntrainedTeachers();	
+				trainTeachers.setEnabled(true);
+
 		}
 	
 		for (Employee i : listOfTeachers) {
