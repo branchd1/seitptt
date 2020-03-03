@@ -71,7 +71,7 @@ public class View extends JFrame {
 	/**
 	 * creates home screen
 	 */
-	private void createHomeScreen() {
+	public void createHomeScreen() {
 		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
 		
