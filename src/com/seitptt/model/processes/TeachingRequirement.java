@@ -63,7 +63,7 @@ public class TeachingRequirement  implements Hostable{
 	
 	@Override
 	public String toString() {
-		return this.getNumOfTeachers() + " instructions for " + this.getClassRef();
+		return this.getNumOfTeachers() + " teachers required " + this.getClassRef();
 	}
 
 }
