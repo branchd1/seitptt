@@ -34,4 +34,14 @@ public class Teacher extends Employee{
 	public boolean isTrained() {
 		return this.trained;
 	}
+	
+	/**
+	 * toString method
+	 * @return first name and last name of teacher
+	 */
+	public String toString() {
+		return (this.getFirstName() + " "+ this.getLastName());
+	}
+	
+	
 }

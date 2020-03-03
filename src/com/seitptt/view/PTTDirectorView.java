@@ -29,10 +29,15 @@ public class PTTDirectorView extends JPanel {
 	protected JButton denyButton;
 	private Controller controller;
 	private Core model;
+	
+	
 
-	public PTTDirectorView(Controller controller,Core model, int UNIT) {
-		this.model=model;
-        this.controller=controller;
+	/**
+	 * View constructor creates the specialized PTT Director JPanel
+	 */
+	public PTTDirectorView(Controller controller, Core model, int UNIT) {
+		this.model = model;
+		this.controller = controller;
 		this.setLayout(new BorderLayout());
 		Border pttDirBorder = BorderFactory.createEmptyBorder(2 * UNIT, 2 * UNIT, 3 * UNIT, 2 * UNIT);
 		this.setBorder(pttDirBorder);
@@ -48,15 +53,15 @@ public class PTTDirectorView extends JPanel {
 		// will be replaced by model call
 		String[] reqStatusOptions = { "All", "Pending" };
 		filterRequirements = new JComboBox(reqStatusOptions);
-		 filterRequirements.addActionListener(controller);
+		filterRequirements.addActionListener(controller);
 		headerPanel.add(filterRequirements);
 
 		// create and add display of requirements list
-        listModel=new DefaultListModel();
-        ListOfTeachingRequirements teachingRequirementsList = new ListOfTeachingRequirements();
-        for(TeachingRequirement i : teachingRequirementsList) {
-        	listModel.addElement(i.toString());
-        }
+		listModel = new DefaultListModel();
+		ListOfTeachingRequirements teachingRequirementsList = new ListOfTeachingRequirements();
+		for (TeachingRequirement i : teachingRequirementsList) {
+			listModel.addElement(i.toString());
+		}
 		requirementsDisplay = new JList(listModel);
 		this.add(requirementsDisplay, BorderLayout.CENTER);
 

@@ -222,13 +222,14 @@ public class View extends JFrame {
 	public JButton adminTrainTeachersButton() {
 		return adminScreen.trainTeachers;
 	}
-	
+
 	/**
-	 *  Training JComboBox Access
+	 * Training JComboBox Access
 	 */
 	public JComboBox getTrainingSelector() {
 		return adminScreen.trainingFilter;
 	}
+
 	/**
 	 * Training Selected Index
 	 */
@@ -236,6 +237,7 @@ public class View extends JFrame {
 	public int getTrainingSelectedIndex() {
 		return adminScreen.trainingFilter.getSelectedIndex();
 	}
+
 	/**
 	 * Requirements Selected Index
 	 */
@@ -243,19 +245,21 @@ public class View extends JFrame {
 	public int getRequirementSelectedIndex() {
 		return adminScreen.requirementFilter.getSelectedIndex();
 	}
+
 	/**
 	 * Requirement JComboBox Access
 	 */
 	public JComboBox getRequirementSelector() {
 		return adminScreen.requirementFilter;
 	}
-	
+
 	/**
 	 * Requirements List Access
 	 */
 	public JList getTeacherList() {
 		return adminScreen.teacherList;
 	}
+
 	/**
 	 * creates PTT director screen
 	 */
@@ -272,32 +276,35 @@ public class View extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
-	
+
 	/**
 	 * returns approve request button
 	 */
 	public JButton approveRequestButton() {
 		return pttDirectorScreen.approveButton;
 	}
+
 	/**
 	 * returns deny request button
 	 */
 	public JButton denyRequestButton() {
 		return pttDirectorScreen.denyButton;
 	}
-	
+
 	/**
 	 * returns pttDir Requirements Display
 	 */
 	public JList pttDirRequirementsDisplay() {
 		return pttDirectorScreen.requirementsDisplay;
 	}
+
 	/**
-	 * returns pttdir requirements filter 
+	 * returns pttdir requirements filter
 	 */
 	public JComboBox pttDirRequirementsFilter() {
 		return pttDirectorScreen.filterRequirements;
 	}
+
 	/**
 	 * returns pttdir requirements filter index
 	 */
@@ -311,8 +318,6 @@ public class View extends JFrame {
 	public void updatePTTDirScreen() {
 
 	}
-	
-	
 
 	// test main will remove
 	public static void main(String[] args) {

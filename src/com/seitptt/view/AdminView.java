@@ -20,65 +20,79 @@ import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.TeachingRequirement;
 
 public class AdminView extends JPanel {
-	//class attributes
+	
+	
+	// class attributes
 	private Controller controller;
 	private Core model;
-    protected JComboBox trainingFilter;
-    protected JComboBox requirementFilter;
-    protected JList teacherList;
-    protected JButton addTeachers;
-    protected JButton trainTeachers;
-    private DefaultListModel listModel;
 	
+	protected JComboBox trainingFilter;
+	protected JComboBox requirementFilter;
 	
+	protected JList teacherList;
+	private DefaultListModel listModel;
 	
+	protected JButton addTeachers;
+	protected JButton trainTeachers;
 	
-	public AdminView(Controller controller,Core model, int UNIT) {
-		this.model=model;
-		this.controller=controller;
+
+	
+
+	/**
+	 * View constructor creates the specialized Admin JPanel
+	 */
+	public AdminView(Controller controller, Core model, int UNIT) {
+		//set the model and controller
+		this.model = model;
+		this.controller = controller;
 		this.setLayout(new BorderLayout());
+		
+		
+		//create and set panel border
 		Border adminBorder = BorderFactory.createEmptyBorder(2 * UNIT, 2 * UNIT, 3 * UNIT, 2 * UNIT);
 		this.setBorder(adminBorder);
-		//create and add filters
+		
+		
+		// create and add training filter
 		JPanel filterPanel = new JPanel();
-		filterPanel.setLayout(new GridLayout(1,2));
-	
-		String[] trainingStatus= {"Trained","Untrained"};
-		trainingFilter=new JComboBox(trainingStatus);
+		filterPanel.setLayout(new GridLayout(1, 2));
+		String[] trainingStatus = { "Trained", "Untrained" };
+		trainingFilter = new JComboBox(trainingStatus);
 		filterPanel.add(trainingFilter);
+		
+		//create and add list of teaching requirements filter
 		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
 		ArrayList<String> listRequirements = new ArrayList();
-		for(TeachingRequirement i:listOfRequirements) {
+		
+		for (TeachingRequirement i : listOfRequirements) {
 			listRequirements.add(i.toString());
 		}
-		requirementFilter= new JComboBox(listRequirements.toArray());
+		
+		requirementFilter = new JComboBox(listRequirements.toArray());
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
-		listModel=new DefaultListModel();
-		//create and add teacher list display
+		listModel = new DefaultListModel();
+		
+		
+		// create and add teacher list display
 		ListOfEmployees listOfTeachers = model.getListOfTeachers();
-		ArrayList<String> teacherArrayList = new ArrayList();
-		for(Employee i :listOfTeachers) {
-			teacherArrayList.add(i.toString());
+		for (Employee i : listOfTeachers) {
 
 			listModel.addElement(i.toString());
 		}
-		teacherList=new JList(listModel);
-		this.add(teacherList,BorderLayout.CENTER);
-		
-		//create and add action Buttons
-		JPanel buttonPanel=new JPanel();
-		addTeachers=new JButton("Add Teachers");
+		teacherList = new JList(listModel);
+		this.add(teacherList, BorderLayout.CENTER);
+
+		// create and add action Buttons
+		JPanel buttonPanel = new JPanel();
+		addTeachers = new JButton("Add Teachers");
 		addTeachers.addActionListener(controller);
-		trainTeachers=new JButton("Train Teachers");
+		trainTeachers = new JButton("Train Teachers");
 		trainTeachers.addActionListener(controller);
+		
 		buttonPanel.add(addTeachers);
 		buttonPanel.add(trainTeachers);
 		this.add(buttonPanel, BorderLayout.SOUTH);
-		
-		
-		
-		
 
 	}
 
