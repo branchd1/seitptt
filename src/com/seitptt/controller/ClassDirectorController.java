@@ -42,13 +42,11 @@ public class ClassDirectorController implements ActionListener, ListSelectionLis
 				}
 			}
 			view.enableClassList();
-			System.out.println(chosenSemester.getNumber()+"\n"+ chosenSemester.getYear());
-
 		}
 
 		//2.2. add requirements
-		else if(e.getSource()==view.getAddRequirementButton()) {
-			System.out.println(chosenSemester.getNumber()+"\n"+ chosenSemester.getYear());
+		if(e.getSource()==view.getAddRequirementButton()) {
+			System.out.println(chosenSemester.toString());
 			
 			ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
 			String currClassString=(String)view.getClassSelector().getSelectedItem();
@@ -68,7 +66,7 @@ public class ClassDirectorController implements ActionListener, ListSelectionLis
 		}
 
 		//2.4. remove requirements
-		else if(e.getSource()==view.getRemoveRequirementButton()) {
+		if(e.getSource()==view.getRemoveRequirementButton()) {
 			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 			for(TeachingRequirement selectedReq : listOfRequirements) {
 				if(selectedReq.getId()==removeReqID) {
