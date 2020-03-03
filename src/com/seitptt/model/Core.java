@@ -3,9 +3,11 @@ package com.seitptt.model;
 import com.seitptt.model.database.Database;
 
 import com.seitptt.model.database.PrintToDatabaseVisitor;
+import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
 import com.seitptt.model.personnel.ListOfEmployees;
+import com.seitptt.model.personnel.PTTDirector;
 import com.seitptt.model.personnel.Teacher;
 import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
@@ -106,7 +108,7 @@ public class Core {
 		TeachingRequirement testReq = new TeachingRequirement(5, new Classes("ADS24", "Algo_ds", new Semester(1, 2, 2020)));
 		TeachingRequirement testReq2 = new TeachingRequirement(5, new Classes("ADS24", "Algo_ds", new Semester(1, 2, 2020)));
 		Core core = new Core();
-		core.setCurrentUser(new ClassDirector("John", "Grisham"));
+		core.setCurrentUser("classdirector");
 		ListOfTeachingRequirements listOfTeachingRequirements2 = Database.getTeachingRequirementsFromDB();
 
 		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements2) {
@@ -210,8 +212,16 @@ public class Core {
 		return currentUser;
 	}
 
-	public void setCurrentUser(Employee currentUser) {
-		this.currentUser = currentUser;
+	public void setCurrentUser(String currentUserType) {
+		if(currentUserType.equalsIgnoreCase("classdirector")) {
+			this.currentUser = new ClassDirector("current", "user");
+		}
+		if(currentUserType.equalsIgnoreCase("pttdirector")) {
+			this.currentUser = new PTTDirector("current", "user");
+		}
+		if(currentUserType.equalsIgnoreCase("administrator")) {
+			this.currentUser = new Administrator("current", "user");
+		}
 	}
 
 	public ListOfClasses getListOfClasses() {
