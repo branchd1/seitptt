@@ -193,12 +193,14 @@ public class Controller implements ActionListener, ListSelectionListener{
 					for(Employee i : listOfTeachers) {
 						if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
 							//creates teaching request associated with a teacher, class, requirement
-							System.out.println("4. "+((Teacher)i).getFirstName()+"\t"+addTeachersInReq.getClassRef().getName());
+							System.out.println("4. "+((Teacher)i).getFirstName()+"\t"+addTeachersInReq.getClassRef().getName()+"\t"+addTeachersInReq.getNumOfTeachers());
 
-							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
 							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
 							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+							System.out.println("5. "+addTeachersInReq.getNumOfTeachers());
 							
+							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+
 							view.updateAdminScreen();
 						}
 					}
