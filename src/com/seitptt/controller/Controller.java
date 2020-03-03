@@ -70,7 +70,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 	
 	private void createOtherController(String currUser, ActionEvent e) {
-		if(currUser=="ClassDirector") {
+		if(e.getSource()==view.logoutButton) {
+			view.createHomeScreen();
+		}
+		else if(currUser=="ClassDirector") {
 			//classDirController=new ClassDirectorController(model, view);
 //			this.classDirController.actionPerformed(e);
 			if(e.getSource()==view.getSemesterSelector()) {
