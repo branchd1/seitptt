@@ -21,6 +21,7 @@ import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
+import com.seitptt.model.personnel.PTTDirector;
 
 /**
  * View - creates the GUI view for the teacher admin application
@@ -228,7 +229,20 @@ public class View extends JFrame {
 	public JComboBox getTrainingSelector() {
 		return adminScreen.trainingFilter;
 	}
-	
+	/**
+	 * Training Selected Index
+	 */
+
+	public int getTrainingSelectedIndex() {
+		return adminScreen.trainingFilter.getSelectedIndex();
+	}
+	/**
+	 * Requirements Selected Index
+	 */
+
+	public int getRequirementSelectedIndex() {
+		return adminScreen.requirementFilter.getSelectedIndex();
+	}
 	/**
 	 * Requirement JComboBox Access
 	 */
@@ -258,6 +272,38 @@ public class View extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
+	
+	/**
+	 * returns approve request button
+	 */
+	public JButton approveRequestButton() {
+		return pttDirectorScreen.approveButton;
+	}
+	/**
+	 * returns deny request button
+	 */
+	public JButton denyRequestButton() {
+		return pttDirectorScreen.denyButton;
+	}
+	
+	/**
+	 * returns pttDir Requirements Display
+	 */
+	public JList pttDirRequirementsDisplay() {
+		return pttDirectorScreen.requirementsDisplay;
+	}
+	/**
+	 * returns pttdir requirements filter 
+	 */
+	public JComboBox pttDirRequirementsFilter() {
+		return pttDirectorScreen.filterRequirements;
+	}
+	/**
+	 * returns pttdir requirements filter index
+	 */
+	public int pttDirRequirementsFilterIndex() {
+		return pttDirectorScreen.filterRequirements.getSelectedIndex();
+	}
 
 	/**
 	 * updates PTT director screen
@@ -265,6 +311,8 @@ public class View extends JFrame {
 	public void updatePTTDirScreen() {
 
 	}
+	
+	
 
 	// test main will remove
 	public static void main(String[] args) {

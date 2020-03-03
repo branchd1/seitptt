@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -15,12 +16,15 @@ import javax.swing.border.Border;
 
 import com.seitptt.controller.Controller;
 import com.seitptt.model.Core;
+import com.seitptt.model.processes.ListOfTeachingRequirements;
+import com.seitptt.model.processes.TeachingRequirement;
 
 public class PTTDirectorView extends JPanel {
 
 	// class attributes
 	protected JComboBox filterRequirements;
 	protected JList requirementsDisplay;
+	private DefaultListModel listModel;
 	protected JButton approveButton;
 	protected JButton denyButton;
 	private Controller controller;
@@ -44,13 +48,16 @@ public class PTTDirectorView extends JPanel {
 		// will be replaced by model call
 		String[] reqStatusOptions = { "All", "Pending" };
 		filterRequirements = new JComboBox(reqStatusOptions);
-		// filterRequirements.addActionListener(controller);
+		 filterRequirements.addActionListener(controller);
 		headerPanel.add(filterRequirements);
 
 		// create and add display of requirements list
-		// will be replaced by model call
-		String[] testReqs = { "Request1", "Request2", "Request3" };
-		requirementsDisplay = new JList(testReqs);
+        listModel=new DefaultListModel();
+        ListOfTeachingRequirements teachingRequirementsList = new ListOfTeachingRequirements();
+        for(TeachingRequirement i : teachingRequirementsList) {
+        	listModel.addElement(i.toString());
+        }
+		requirementsDisplay = new JList(listModel);
 		this.add(requirementsDisplay, BorderLayout.CENTER);
 
 		// create and add action buttons
