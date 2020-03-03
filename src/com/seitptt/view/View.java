@@ -63,6 +63,7 @@ public class View extends JFrame {
 		innerPanel= new JPanel();
 		innerPanel.setLayout(new BorderLayout());
 		logoutButton=new JButton("LOGOUT");
+		logoutButton.addActionListener(controller);
 		innerPanel.add(logoutButton,BorderLayout.SOUTH);
 		
 	}
