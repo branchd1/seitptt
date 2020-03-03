@@ -83,6 +83,7 @@ public class AdminView extends JPanel {
 			listModel.addElement(i.toString());
 		}
 		teacherList = new JList(listModel);
+		teacherList.addListSelectionListener(controller);
 		this.add(teacherList, BorderLayout.CENTER);
 
 		// create and add action Buttons
