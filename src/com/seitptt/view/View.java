@@ -38,9 +38,12 @@ public class View extends JFrame {
 
 	// view unit
 	final int UNIT = 30;
-
+	
+    //controller and model
 	private Controller controller;
 	private Core model;
+	
+	//logout button and innerpanel for non homescreen pages
 	private JButton logoutButton;
 	private JPanel innerPanel;
 	
@@ -74,6 +77,27 @@ public class View extends JFrame {
 		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
 	}
+	
+	
+	/**
+	 * creates class director screen
+	 */
+
+	public void createClassDirScreen() {
+		// remove homePanel
+		this.remove(homeScreen);
+		
+		// create class Director Screen
+		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
+		this.add(innerPanel);
+		innerPanel.add(classDirectorScreen,BorderLayout.CENTER);
+
+		// update screen
+		this.revalidate();
+		this.repaint();
+	}
+	
+	
 
 	/**
 	 * return class Dir Login Button
@@ -96,26 +120,7 @@ public class View extends JFrame {
 		return homeScreen.pttDirLogin;
 	}
 
-	/**
-	 * creates class director screen
-	 */
 
-	public void createClassDirScreen() {
-		// remove homePanel
-		this.remove(homeScreen);
-		
-	
-		
-	
-		// create class Director Screen
-		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
-		this.add(innerPanel);
-		innerPanel.add(classDirectorScreen,BorderLayout.CENTER);
-
-		// update screen
-		this.revalidate();
-		this.repaint();
-	}
 
 	/**
 	 * updates class director screen
@@ -359,7 +364,7 @@ public class View extends JFrame {
 		View gui = new View(controller, model);
 		gui.setVisible(true);
 		 //gui.createClassDirScreen();
-		 gui.createPTTDirScreen();
+		 //gui.createPTTDirScreen();
 	//gui.createAdminScreen();
 
 	}
