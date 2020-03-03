@@ -74,6 +74,10 @@ public class View extends JFrame {
 	private void createHomeScreen() {
 		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
+		
+		//update screen when used after logout
+		this.revalidate();
+		this.repaint();
 	}
 
 	/**
