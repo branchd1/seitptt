@@ -117,10 +117,13 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//2.3. find id of remove requirements 
 		//selects from list and find requested list's id in removeReqID
 		if(currUser=="ClassDirector") {
+			classDirController=new ClassDirectorController(model, view);
 			classDirController.valueChanged(e);
 		}else if(currUser=="Administrator") {
+			adminController=new AdministratorController(model, view);
 			adminController.valueChanged(e);
 		}else if(currUser=="PTTDirector") {
+			pttController=new PTTDirectorController(model, view);
 			pttController.valueChanged(e);
 		}
 	}
