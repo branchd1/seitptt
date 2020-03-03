@@ -2,6 +2,7 @@ package com.seitptt.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
@@ -9,11 +10,16 @@ import javax.swing.event.ListSelectionListener;
 
 import com.seitptt.model.Core;
 import com.seitptt.model.database.Database;
+import com.seitptt.model.personnel.Employee;
+import com.seitptt.model.personnel.ListOfEmployees;
+import com.seitptt.model.personnel.Teacher;
 import com.seitptt.model.processes.Classes;
 import com.seitptt.model.processes.ListOfClasses;
 import com.seitptt.model.processes.ListOfSemesters;
+import com.seitptt.model.processes.ListOfTeachingRequests;
 import com.seitptt.model.processes.ListOfTeachingRequirements;
 import com.seitptt.model.processes.Semester;
+import com.seitptt.model.processes.TeachingRequest;
 import com.seitptt.model.processes.TeachingRequirement;
 import com.seitptt.view.View;
 
@@ -23,6 +29,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private View view;
 	private Semester chosenSemester;
 	private int removeReqID, selectedFilterIndexForAdmin;
+	private ArrayList<String> selectedUserNameOfTeachers;
+	private TeachingRequirement addTeachersInReq;
 
 	/**
 	 * @param Core model
@@ -103,18 +111,16 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//2.4. remove requirements
 		if(e.getSource()==view.getRemoveRequirementButton()) {
 			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-			System.out.print(removeReqID);
 			for(TeachingRequirement selectedReq : listOfRequirements) {
 				if(selectedReq.getId()==removeReqID) {
 					model.removeTeachingRequirement(selectedReq);
-					System.out.println("actionlistener: "+selectedReq);
 				}
 			}
 			view.updateClassDirScreen();
 		}	
 
 		//3. Administrator Screen
-		TeachingRequirement addTeachersInReq;
+		
 
 		//3.1. (JComboBox) filter list of teachers
 		if(e.getSource()==view.getTrainingSelector()) {
@@ -136,13 +142,22 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 		}
 
-		//3.3. add teachers
+		//3.4. add teachers
 		if(e.getSource()==view.adminAddTeachersButton()) {
 			//add selected teachers can
 			//sub number of teachers from current teaching requirement
-			
+			ListOfEmployees listOfTeachers=model.getListOfTeachers();
+			for(int j=0;j<selectedUserNameOfTeachers.size();j++) {
+				for(Employee i : listOfTeachers) {
+					if(i.getUsername().equals(selectedUserNameOfTeachers.get(j)) ) {
+						//creates teaching request associated with a teacher, class, requirement
+						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+						view.updateAdminScreen();
+					}
+				}
+			}
 		}
-		//3.4. train teachers
+		//3.5. train teachers
 
 
 		//4. PTT Director Screen
@@ -171,10 +186,27 @@ public class Controller implements ActionListener, ListSelectionListener{
 			for(TeachingRequirement i : listOfRequirements) {
 				if(j==reqIndex) {
 					removeReqID=i.getId();
-					System.out.println(removeReqID);
 				}
 				j++;
-				System.out.println("j: "+j);
+			}
+		}
+		
+		//3.3. find last name of selected teachers
+		if(e.getSource()==view.getTeacherList()) {
+			
+			ListOfEmployees listOfTeachers=model.getListOfTeachers();
+			String selectedTeacherInString=view.getTeacherList().getSelectedValue().toString();
+			String[] selectedTeacherName=selectedTeacherInString.split(" ");
+			String firstName=selectedTeacherName[0];
+			String lastName=selectedTeacherName[1];
+						
+			for(Employee i : listOfTeachers) {
+				if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+					selectedUserNameOfTeachers.add(i.getUsername());
+					
+					//creates teaching request associated with a teacher, class, requirement
+//					model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+				}
 			}
 		}
 	}
