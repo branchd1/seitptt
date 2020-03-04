@@ -1,1 +1,6 @@
-type username first_name last_name trainedptt_director john_snow John Snow administrator cersei_lannister Cersei Lannisterclass_director ramsey_bolton Ramsey Boltonteacher aria_stark Aria Stark trueteacher theon_greyjoy Theon Greyjoy false
+type username first_name last_name trained
+ptt_director john_snow John Snow 
+administrator cersei_lannister Cersei Lannister
+class_director ramsey_bolton Ramsey Bolton
+teacher aria_stark Aria Stark true
+teacher theon_greyjoy Theon Greyjoy false

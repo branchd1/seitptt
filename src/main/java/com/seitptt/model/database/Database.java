@@ -524,14 +524,13 @@ public class Database {
 			int fileId = s.nextInt();
 			
 			int trId = teachingRequest.getId();
-			
+
+			newDbString += "\n";
 			// except for the line where id is the same with the TeachingRequest id to be updated
 			if (!(fileId==trId)){
-				newDbString += "\n";
 				newDbString += fileId;
 				newDbString += s.nextLine();
 			} else{
-				newDbString += "\n";
 				newDbString += fileId + " ";
 				newDbString += s.next() + " ";
 				newDbString += s.next() + " ";
@@ -586,14 +585,13 @@ public class Database {
 			int fileId = s.nextInt();
 			
 			int trId = teachingRequirement.getId();
-			
+
+			newDbString += "\n";
 			// except the line where the id is the same with the teaching requirement id to be updated
 			if (!(fileId==trId)){
-				newDbString += "\n";
 				newDbString += fileId;
 				newDbString += s.nextLine();
 			} else {
-				newDbString += "\n";
 				newDbString += fileId + " ";
 				int newNumber = s.nextInt() - 1;
 				newDbString += (newNumber) + " ";
@@ -644,6 +642,7 @@ public class Database {
 		
 		// loop through the lines and update teacher
 		while(s.hasNextLine()) {
+			newDbString += "\n";
 			String teacherString = s.nextLine();
 			String[] teacherStringArr = teacherString.split(" ");
 			if (teacherStringArr[0].equalsIgnoreCase("teacher") && teacherStringArr[1].equalsIgnoreCase(teacher.getUsername())) {
