@@ -110,4 +110,16 @@ public class PTTDirectorView extends JPanel {
 		}
 		
 	}
+	
+	protected void isRequirementsDisplaySelected() {
+		if(requirementsDisplay.isSelectionEmpty()) {
+              approveButton.setEnabled(false);
+              denyButton.setEnabled(false);
+		}
+		if(!requirementsDisplay.isSelectionEmpty()) {
+            approveButton.setEnabled(true);
+            denyButton.setEnabled(true);
+		}
+	}
+
 }

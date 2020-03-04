@@ -367,7 +367,11 @@ public class View extends JFrame {
 	public void updatePTTDirScreen() {
           pttDirectorScreen.update();
 	}
-
+    
+	
+	public void isPttDirDisplaySelected() {
+		pttDirectorScreen.isRequirementsDisplaySelected();
+	}
 	// test main will remove
 	public static void main(String[] args) {
 		Core model = new Core();
