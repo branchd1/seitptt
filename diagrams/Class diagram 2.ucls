@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="main.java.Main" project="seitptt" file="/seitptt/src/main/java/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1362" y="2256"/>    
+    <position height="-1" width="-1" x="1246" y="1456"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="main.java.com.seitptt.controller.Controller" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2610" y="230"/>    
+    <position height="-1" width="-1" x="1406" y="234"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <interface id="3" language="java" name="main.java.com.seitptt.interfaces.Findable" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/interfaces/Findable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="580" y="1710"/>    
+    <position height="-1" width="-1" x="372" y="1698"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </interface>  
   <interface id="4" language="java" name="main.java.com.seitptt.interfaces.Hostable" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/interfaces/Hostable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="590" y="1870"/>    
+    <position height="-1" width="-1" x="354" y="1850"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </interface>  
   <class id="5" language="java" name="main.java.com.seitptt.model.Core" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/Core.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3200" y="3290"/>    
+    <position height="-1" width="-1" x="2424" y="2286"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="main.java.com.seitptt.model.database.Database" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/database/Database.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="700" y="2890"/>    
+    <position height="-1" width="-1" x="516" y="2474"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="main.java.com.seitptt.model.database.DatabaseCache" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/database/DatabaseCache.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="650" y="2490"/>    
+    <position height="-1" width="-1" x="526" y="2098"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
   <class id="8" language="java" name="main.java.com.seitptt.model.database.PrintToDatabaseVisitor" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/database/PrintToDatabaseVisitor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="700" y="3240"/>    
+    <position height="-1" width="-1" x="884" y="2784"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +76,7 @@
   </class>  
   <class id="9" language="java" name="main.java.com.seitptt.model.personnel.Administrator" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/Administrator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2050" y="3180"/>    
+    <position height="-1" width="-1" x="2118" y="2752"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +85,7 @@
   </class>  
   <class id="10" language="java" name="main.java.com.seitptt.model.personnel.ClassDirector" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/ClassDirector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1600" y="3030"/>    
+    <position height="-1" width="-1" x="1668" y="2602"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +94,7 @@
   </class>  
   <class id="11" language="java" name="main.java.com.seitptt.model.personnel.Employee" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/Employee.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1930" y="2980"/>    
+    <position height="-1" width="-1" x="1998" y="2552"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,7 +103,7 @@
   </class>  
   <class id="12" language="java" name="main.java.com.seitptt.model.personnel.ListOfEmployees" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/ListOfEmployees.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1660" y="3320"/>    
+    <position height="-1" width="-1" x="1728" y="2892"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -112,7 +112,7 @@
   </class>  
   <class id="13" language="java" name="main.java.com.seitptt.model.personnel.PTTDirector" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/PTTDirector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2240" y="3030"/>    
+    <position height="-1" width="-1" x="2308" y="2602"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -121,7 +121,7 @@
   </class>  
   <class id="14" language="java" name="main.java.com.seitptt.model.personnel.Teacher" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/personnel/Teacher.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1200" y="3180"/>    
+    <position height="-1" width="-1" x="1268" y="2752"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -130,7 +130,7 @@
   </class>  
   <class id="15" language="java" name="main.java.com.seitptt.model.processes.Classes" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/Classes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3190" y="1220"/>    
+    <position height="-1" width="-1" x="2034" y="848"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -139,7 +139,7 @@
   </class>  
   <class id="16" language="java" name="main.java.com.seitptt.model.processes.ListOfClasses" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/ListOfClasses.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3630" y="970"/>    
+    <position height="-1" width="-1" x="1762" y="626"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -148,7 +148,7 @@
   </class>  
   <class id="17" language="java" name="main.java.com.seitptt.model.processes.ListOfSemesters" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/ListOfSemesters.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3180" y="750"/>    
+    <position height="-1" width="-1" x="2556" y="658"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -158,7 +158,7 @@
   <class id="18" language="java" name="main.java.com.seitptt.model.processes.ListOfTeachingRequests" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/ListOfTeachingRequests.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3720" y="1480"/>    
+    <position height="-1" width="-1" x="2364" y="1076"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -168,7 +168,7 @@
   <class id="19" language="java" name="main.java.com.seitptt.model.processes.ListOfTeachingRequirements" 
     project="seitptt" file="/seitptt/src/main/java/com/seitptt/model/processes/ListOfTeachingRequirements.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3200" y="2480"/>    
+    <position height="-1" width="-1" x="2892" y="1984"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -177,7 +177,7 @@
   </class>  
   <class id="20" language="java" name="main.java.com.seitptt.model.processes.Semester" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/Semester.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3640" y="460"/>    
+    <position height="-1" width="-1" x="2120" y="272"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -186,7 +186,7 @@
   </class>  
   <class id="21" language="java" name="main.java.com.seitptt.model.processes.TeachingRequest" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/TeachingRequest.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3190" y="1780"/>    
+    <position height="-1" width="-1" x="1778" y="1196"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -196,7 +196,7 @@
   <class id="22" language="java" name="main.java.com.seitptt.model.processes.TeachingRequirement" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/model/processes/TeachingRequirement.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3680" y="2160"/>    
+    <position height="-1" width="-1" x="2880" y="1592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -205,7 +205,7 @@
   </class>  
   <class id="23" language="java" name="main.java.com.seitptt.view.AdminView" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/view/AdminView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="660" y="210"/>    
+    <position height="-1" width="-1" x="548" y="410"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -214,7 +214,7 @@
   </class>  
   <class id="24" language="java" name="main.java.com.seitptt.view.ClassDirectorView" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/view/ClassDirectorView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="960" y="210"/>    
+    <position height="-1" width="-1" x="812" y="202"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -223,7 +223,7 @@
   </class>  
   <class id="25" language="java" name="main.java.com.seitptt.view.HomeScreen" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/view/HomeScreen.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="390" y="410"/>    
+    <position height="-1" width="-1" x="310" y="402"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -232,7 +232,7 @@
   </class>  
   <class id="26" language="java" name="main.java.com.seitptt.view.PTTDirectorView" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/view/PTTDirectorView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1470" y="400"/>    
+    <position height="-1" width="-1" x="790" y="1320"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -241,7 +241,7 @@
   </class>  
   <class id="27" language="java" name="main.java.com.seitptt.view.View" project="seitptt" 
     file="/seitptt/src/main/java/com/seitptt/view/View.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="940" y="940"/>    
+    <position height="-1" width="-1" x="400" y="956"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
