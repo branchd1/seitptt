@@ -16,7 +16,11 @@ import javax.swing.border.Border;
 
 import main.java.com.seitptt.controller.Controller;
 import main.java.com.seitptt.model.Core;
+import main.java.com.seitptt.model.personnel.Employee;
+import main.java.com.seitptt.model.personnel.ListOfEmployees;
+import main.java.com.seitptt.model.processes.ListOfTeachingRequests;
 import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
+import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 
 public class PTTDirectorView extends JPanel {
@@ -58,11 +62,12 @@ public class PTTDirectorView extends JPanel {
 
 		// create and add display of requirements list
 		listModel = new DefaultListModel();
-		ListOfTeachingRequirements teachingRequirementsList = new ListOfTeachingRequirements();
-		for (TeachingRequirement i : teachingRequirementsList) {
+		ListOfTeachingRequests teachingRequestList = null;
+		for (TeachingRequest i : teachingRequestList) {
 			listModel.addElement(i.toString());
 		}
 		requirementsDisplay = new JList(listModel);
+		requirementsDisplay.addListSelectionListener(controller);
 		this.add(requirementsDisplay, BorderLayout.CENTER);
 
 		// create and add action buttons
@@ -75,5 +80,27 @@ public class PTTDirectorView extends JPanel {
 		denyButton.addActionListener(controller);
 		buttonsPanel.add(approveButton);
 		buttonsPanel.add(denyButton);
+	}
+	
+	protected void update() {
+		listModel.removeAllElements();
+		ListOfTeachingRequests teachingRequestList =null;
+		if(controller.getFilterRequirementsIndex()==0){
+			
+
+		}
+		if(controller.getFilterRequirementsIndex()==1) {
+	        
+		}
+		
+
+		if(controller.getFilterRequirementsIndex()==2) {
+			   
+		}
+	
+		for (TeachingRequest i : teachingRequestList) {
+			listModel.addElement(i.toString());
+		}
+		
 	}
 }
