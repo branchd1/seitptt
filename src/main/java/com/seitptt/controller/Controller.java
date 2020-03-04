@@ -232,7 +232,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 			
 			//4.2. approve button OR deny button
-			if(e.getSource()==view.approveRequestButton() || e.getSource()==view.denyRequestButton()) {
+			if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
 				String[] selectedRequest=s.split("requested for ");
 				String[] teacherName=selectedRequest[0].split(" ");
@@ -246,19 +246,36 @@ public class Controller implements ActionListener, ListSelectionListener{
 					if(trequest.getTeacher().getFirstName().equals(firstName) &&
 							trequest.getTeacher().getLastName().equals(lastName) &&
 							trequest.getClassRef().getName().equals(className)) {
-						if(e.getSource()==view.approveRequestButton()) {
-							model.approveTeachingRequest(trequest);
-						}else {
-							model.denyTeachingRequest(trequest);
-						}
+						model.approveTeachingRequest(trequest);
+						System.out.println("approve button clicked: "+trequest.isApproved());
+						
 						view.updatePTTDirScreen();
 					}
 				}
 			}
+			
 			//4.3. deny button
-//			if(e.getSource()==view.denyRequestButton()) {
+			if(e.getSource()==view.denyRequestButton()) {
+				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
+				String[] selectedRequest=s.split("requested for ");
+				String[] teacherName=selectedRequest[0].split(" ");
+				firstName=teacherName[0];
+				lastName=teacherName[1];
+				String className=selectedRequest[1];
 				
-//			}
+				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+				
+				for(TeachingRequest trequest : listOfRequests) {
+					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+							trequest.getTeacher().getLastName().equals(lastName) &&
+							trequest.getClassRef().getName().equals(className)) {
+						model.denyTeachingRequest(trequest);
+						System.out.println("denied button clicked: "+trequest.isApproved());
+						
+						view.updatePTTDirScreen();
+					}
+				}	
+			}
 		}
 	}
 	
