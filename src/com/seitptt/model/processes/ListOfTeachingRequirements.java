@@ -22,7 +22,6 @@ public class ListOfTeachingRequirements implements Findable<TeachingRequirement>
 		return null;
 	}
 	
-	
 	public void add(TeachingRequirement tr) {
 		loR.add(tr);
 	}

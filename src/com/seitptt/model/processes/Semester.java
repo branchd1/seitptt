@@ -1,9 +1,6 @@
 package com.seitptt.model.processes;
 
-import com.seitptt.interfaces.Hostable;
-import com.seitptt.model.database.PrintToDatabaseVisitor;
-
-public class Semester implements Hostable {
+public class Semester {
 	private int id;
 	private int number;
 	private int year;
@@ -29,6 +26,14 @@ public class Semester implements Hostable {
 	public void setYear(int year) {
 		this.year = year;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	@Override
 	public boolean equals(Object o) {
@@ -44,20 +49,6 @@ public class Semester implements Hostable {
 		}
 		
 		return false;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@Override
-	public void accept(PrintToDatabaseVisitor visitor) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

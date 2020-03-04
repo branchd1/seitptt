@@ -93,7 +93,8 @@ public class Core {
 			System.out.println(teachingRequest.getId() + " " + 
 					teachingRequest.getTeacher().getFirstName() + " " + 
 					teachingRequest.getClassRef().getCode() + " " + 
-					teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
+					teachingRequest.getTeachingRequirement().getId() + " " + 
+					teachingRequest.isApproved());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
 		System.out.println("1 Aria AP49 1 false\n" + 

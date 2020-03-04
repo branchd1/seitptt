@@ -1,13 +1,8 @@
 id teacher_username class_code teaching_requirement_id approval
-1 aria_stark AP49 1 false
-2 theon_greyjoy SE12 1 false
 3 aria_stark SE12 4 false
-4 aria_stark AP49 7 false
 5 aria_stark AP49 6 false
 6 aria_stark SE12 4 false
 7 aria_stark SE12 4 false
-8 aria_stark DB01 7 false
-9 aria_stark DB01 7 false
 10 aria_stark ADS24 8 false
 11 aria_stark PG88 10 false
 12 aria_stark ADS24 8 false
