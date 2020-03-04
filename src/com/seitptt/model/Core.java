@@ -116,17 +116,27 @@ public class Core {
 		}
 		core.removeTeachingRequirement(testReq);
 		core.removeTeachingRequirement(testReq2);
+		System.out.println("-------------------\nRESET TO NORMAL\n-------------------");
 		listOfTeachingRequirements2 = Database.getTeachingRequirementsFromDB();
 		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements2) {
 			System.out.println(teachingRequirement.getId() + " " + teachingRequirement.getNumOfTeachers() + " " + teachingRequirement.getClassRef().getCode());
 		}
 		System.out.println("-------------------\nEQUALS\n-------------------");
-		System.out.println("1 5 AP49\n" + 
-				"2 5 ADS24\n" + 
-				"3 5 ADS24\n" + 
-				"4 5 ADS24\n" + 
-				"1 5 AP49\n" + 
-				"2 5 ADS24");
+		System.out.println("4 3 SE12\n" + 
+				"6 3 AP49\n" + 
+				"8 1 ADS24\n" + 
+				"9 1 SE12\n" + 
+				"10 5 ADS24\n" + 
+				"11 5 ADS24\n" + 
+				"12 5 ADS24\n" + 
+				"-------------------\n" + 
+				"RESET TO NORMAL\n" + 
+				"-------------------\n" + 
+				"4 3 SE12\n" + 
+				"6 3 AP49\n" + 
+				"8 1 ADS24\n" + 
+				"9 1 SE12\n" + 
+				"10 5 ADS24");
 		System.out.println("-------------------\nEND\n-------------------");
 
 	}
@@ -158,12 +168,6 @@ public class Core {
 		//this.checkPermission(ClassDirector.class);
 		Database.removeTeachingRequestFromDB(tr);
 	}
-
-//	public Employee findStaff(String username) {
-//		//this.checkPermission(Administrator.class);
-//		ListOfEmployees loE = Database.getEmployeesFromDB();
-//		return loE.find(username);
-//	}
 
 	public void organiseTraining(Teacher t) {
 		//this.checkPermission(Administrator.class);
