@@ -24,3 +24,8 @@ id teacher_username class_code teaching_requirement_id approval
 23 aria_stark SE12 9 false
 24 aria_stark SE12 9 false
 25 aria_stark AP49 5 false
+2 aria_stark AP49 4 false
+3 aria_stark AP49 4 false
+4 aria_stark AP49 4 false
+5 aria_stark AP49 4 false
+6 theon_greyjoy AP49 4 false
