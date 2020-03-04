@@ -1,6 +1,1 @@
-id teacher_username class_code teaching_requirement_id approval
-3 aria_stark SE12 4 false
-5 aria_stark AP49 6 false
-6 aria_stark SE12 4 false
-7 aria_stark SE12 4 false
-14 theon_greyjoy AP49 6 false
+id teacher_username class_code teaching_requirement_id approval aria_stark SE12 4 false aria_stark SE12 4 false aria_stark SE12 4 false theon_greyjoy AP49 6 false
