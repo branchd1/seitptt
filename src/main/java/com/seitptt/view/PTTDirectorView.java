@@ -116,7 +116,7 @@ public class PTTDirectorView extends JPanel {
               approveButton.setEnabled(false);
               denyButton.setEnabled(false);
 		}
-		if(!requirementsDisplay.isSelectionEmpty()) {
+		if(!requirementsDisplay.isSelectionEmpty() && controller.getFilterRequirementsIndex()!=2) {
             approveButton.setEnabled(true);
             denyButton.setEnabled(true);
 		}
