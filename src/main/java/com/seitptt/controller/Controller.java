@@ -2,26 +2,19 @@ package main.java.com.seitptt.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import main.java.com.seitptt.model.Core;
-import main.java.com.seitptt.model.database.Database;
-import main.java.com.seitptt.model.personnel.ClassDirector;
 import main.java.com.seitptt.model.personnel.Employee;
 import main.java.com.seitptt.model.personnel.ListOfEmployees;
 import main.java.com.seitptt.model.personnel.Teacher;
 import main.java.com.seitptt.model.processes.Classes;
 import main.java.com.seitptt.model.processes.ListOfClasses;
 import main.java.com.seitptt.model.processes.ListOfSemesters;
-import main.java.com.seitptt.model.processes.ListOfTeachingRequests;
 import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.Semester;
-import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 import main.java.com.seitptt.view.View;
 
@@ -32,11 +25,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 	
 	private Semester chosenSemester;
 	private int removeReqID, selectedFilterIndexForAdmin;
-//	private String selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
 	private String currUser;
-	private int changedNumberOfTeachers, trainingStatusIndex;
-	private String selectedTeacher, firstName, lastName;
+	private int changedNumberOfTeachers, filterRequirementsIndex;
+	private String firstName, lastName;
 	private String[] selectedTeacherName;
 	
 	/**
@@ -73,6 +65,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 	public int getChangedNumberOfTeachers() {
 		return changedNumberOfTeachers;
 	}
+	
+	
+
+	public int getFilterRequirementsIndex() {
+		return filterRequirementsIndex;
+	}
 
 	/**
 	 * value changed when view calls addListSelectionListener.
@@ -92,7 +90,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 				j++;
 			}
-		}else if(currUser=="Administrator") {					
+		}
+		//3.3. when teacher selected, call button enabling method
+		else if(currUser=="Administrator") {					
 				if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
 					view.isTeacherListSelected();
 				}
@@ -100,10 +100,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 					view.isTeacherListSelected();
 					return;
 				}
-				if(trainingStatusIndex==2) {//untrained
-					
-				}
-		}else if(currUser=="PTTDirector") {
+		}
+		//4.1
+		else if(currUser=="PTTDirector") {
 
 		}
 	}
@@ -114,6 +113,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			view.createHomeScreen();
 		}
 		
+		//2. Class Director Screen
 		else if(currUser=="ClassDirector") {
 			if(e.getSource()==view.getSemesterSelector()) {
 				ListOfSemesters listOfSemesters=model.getListOfSemesters();
@@ -154,13 +154,13 @@ public class Controller implements ActionListener, ListSelectionListener{
 				view.updateClassDirScreen();
 			}
 		}
+		
+		//3. Administrator Screen
 		else if(currUser=="Administrator") {
-			//3. Administrator Screen
 			//3.1. (JComboBox) filter list of teachers
 			if(e.getSource()==view.getTrainingSelector()) {
-				trainingStatusIndex=view.getTrainingSelector().getSelectedIndex();
 				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-				view.updateAdminScreen();;
+				view.updateAdminScreen();
 			}
 
 			//3.2. (JComboBox) choose class requirements
@@ -197,7 +197,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
 
 						view.updateAdminScreen();
-//						view.trainingUpdate();
 					}
 				}				
 			}
@@ -217,7 +216,19 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 			}
 		}
+		
+		//4. PTT Director Screen
 		else if (currUser=="PTTDirector"){
+			//4.1. (JComboBox<String>)filterRequirements
+			if(e.getSource()==view.pttDirRequirementsFilter()) {
+				filterRequirementsIndex=view.pttDirRequirementsFilterIndex();
+				view.updatePTTDirScreen();
+			}
+			
+			//4.2. approve button
+			
+			//4.3. deny button
+			
 		}
 	}
 	
