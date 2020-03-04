@@ -472,9 +472,9 @@ public class Database {
 			// except for the line where id is the same with the TeachingRequest id to be deleted
 			if (!(fileId==trId)){
 				newDbString += s.nextLine();
+			} else{
+				s.nextLine();
 			}
-			
-			s.nextLine();
 		}
 		
 		// close scanner
