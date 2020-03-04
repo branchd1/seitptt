@@ -13,8 +13,13 @@ id teacher_username class_code teaching_requirement_id approval
 12 aria_stark ADS24 8 false
 13 aria_stark SE12 9 false
 14 theon_greyjoy AP49 6 false
-15 aria_stark DB01 7 false
-16 theon_greyjoy SE12 4 false
-17 aria_stark ADS24 8 false
+15 aria_stark SE12 9 false
+16 aria_stark SE12 9 false
+17 aria_stark SE12 9 false
 18 aria_stark SE12 9 false
 19 aria_stark SE12 9 false
+20 aria_stark SE12 9 false
+21 aria_stark SE12 9 false
+22 aria_stark SE12 9 false
+23 aria_stark SE12 9 false
+24 aria_stark SE12 9 false
