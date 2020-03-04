@@ -224,7 +224,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 //									teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
 //						}
 						
-						view.updateAdminScreen();
+						view.trainingUpdate();
 					}
 				}				
 			}

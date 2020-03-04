@@ -99,7 +99,7 @@ public class AdminView extends JPanel {
 
 	}
 	
-	protected void trainingUpdate() {
+	protected void update() {
 		listModel.removeAllElements();
 		ListOfEmployees listOfTeachers=null;
 		if(controller.getSelectedFilterIndexForAdmin()==0){
@@ -126,16 +126,7 @@ public class AdminView extends JPanel {
 		
 	}
 	
-	protected void update() {
-		listModel.removeAllElements();
-		trainingFilter.setSelectedIndex(0);
-		ListOfEmployees listOfTeachers = model.getListOfTeachers();
-		for (Employee i : listOfTeachers) {
-			
-			listModel.addElement(i.toString());
-		}
-		
-	}
+	
 	
 	protected void isTeacherListSelected() {
 		if(teacherList.isSelectionEmpty()) {
