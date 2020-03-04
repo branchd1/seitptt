@@ -43,6 +43,7 @@ public class View extends JFrame {
 	private Core model;
 	public JButton logoutButton;
 	private JPanel innerPanel;
+	private boolean hasInnerPanel;
 	
 
 	/**
@@ -72,6 +73,11 @@ public class View extends JFrame {
 	 * creates home screen
 	 */
 	public void createHomeScreen() {
+		if(hasInnerPanel) {
+			this.remove(innerPanel);
+			hasInnerPanel=false;
+		}
+	     
 		homeScreen = new HomeScreen(controller, UNIT);
 		this.add(homeScreen);
 		
@@ -115,6 +121,7 @@ public class View extends JFrame {
 		// create class Director Screen
 		classDirectorScreen = new ClassDirectorView(controller, model, UNIT);
 		this.add(innerPanel);
+		hasInnerPanel=true;
 		innerPanel.add(classDirectorScreen,BorderLayout.CENTER);
 
 		// update screen
@@ -215,6 +222,7 @@ public class View extends JFrame {
 
 		adminScreen = new AdminView(controller, model, UNIT);
 		this.add(innerPanel);
+		hasInnerPanel=true;
 		innerPanel.add(adminScreen,BorderLayout.CENTER);
 		
 
@@ -307,6 +315,7 @@ public class View extends JFrame {
 
 		pttDirectorScreen = new PTTDirectorView(controller, model, UNIT);
 		this.add(innerPanel);
+		hasInnerPanel=true;
 		innerPanel.add(pttDirectorScreen,BorderLayout.CENTER);
 		
 
