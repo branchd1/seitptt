@@ -106,9 +106,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//4.1
 		else if(currUser=="PTTDirector") {
 			if(!e.getValueIsAdjusting() && e.getSource()==view.pttDirRequirementsDisplay()) {
-				view.ispttDirDisplaySelected();
+				view.isPttDirDisplaySelected();
 			}else {
-				view.ispttDirDisplaySelected();
+				view.isPttDirDisplaySelected();
 				return;
 			}
 		}
@@ -231,7 +231,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			//4.2. approve button
 			if(e.getSource()==view.approveRequestButton()) {
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
-				String[] selectedRequest=s.split("-");
+				String[] selectedRequest=s.split("requested for ");
 				String[] teacherName=selectedRequest[0].split(" ");
 				firstName=teacherName[0];
 				lastName=teacherName[1];
@@ -246,8 +246,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 						view.updatePTTDirScreen();
 					}
 				}
-				
-				
 			}
 			//4.3. deny button
 			
