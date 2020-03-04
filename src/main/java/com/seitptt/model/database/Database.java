@@ -623,7 +623,7 @@ public class Database {
 	public static void trainTeacherOnDB(Teacher teacher) {
 		
 		//database file
-		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		final String dbFile = Database.dbDir + "employees.txt";
 		
 		// string to contain contents of the new file
 		String newDbString = "";

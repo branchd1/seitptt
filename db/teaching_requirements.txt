@@ -1,1 +1,3 @@
-id number_of_teachers class_code2 3 ADS243 3 SE123 2 SE124 3 ADS24
+id number_of_teachers class_code
+2 3 ADS24
+3 2 SE12
