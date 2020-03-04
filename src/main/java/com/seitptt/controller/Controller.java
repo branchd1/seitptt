@@ -28,6 +28,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private Semester chosenSemester;
 	private int removeReqID, selectedFilterIndexForAdmin;
 	private TeachingRequirement addTeachersInReq;
+	private Classes findClass;
 	private String currUser;
 	private int changedNumberOfTeachers, filterRequirementsIndex;
 	private String firstName, lastName;
@@ -206,8 +207,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
 							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+							addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
 						
 						view.updateAdminScreen();
 					}
@@ -245,20 +246,41 @@ public class Controller implements ActionListener, ListSelectionListener{
 				String[] teacherName=selectedRequest[0].split(" ");
 				firstName=teacherName[0];
 				lastName=teacherName[1];
-				String className=selectedRequest[1];
+				String selectedClassName=selectedRequest[1];
 				
-				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-				
-				for(TeachingRequest trequest : listOfRequests) {
-					if(trequest.getTeacher().getFirstName().equals(firstName) &&
-							trequest.getTeacher().getLastName().equals(lastName) &&
-							trequest.getClassRef().getName().equals(className)) {
-						model.approveTeachingRequest(trequest);
-						System.out.println("approve button clicked: "+trequest.isApproved());
+				ListOfClasses listOfClasses=model.getListOfClasses();
+				for(Classes loc: listOfClasses) {
+					if(loc.getName().equals(selectedClassName)) {
+						findClass=loc;
 						
-						view.updatePTTDirScreen();
+						ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+						
+						for(TeachingRequest i : listOfRequests) {
+							if(i.getTeacher().getFirstName().equals(firstName) &&
+									i.getTeacher().getLastName().equals(lastName) &&
+									i.getClassRef().getCode().equals(findClass.getCode())) {
+								model.approveTeachingRequest(i);
+								System.out.println("approve button clicked: "+i.isApproved());
+								
+								view.updatePTTDirScreen();
+							}
+						}
 					}
 				}
+				
+//				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+//				
+//				for(TeachingRequest i : listOfRequests) {
+//					if(i.getTeacher().getFirstName().equals(firstName) &&
+//							i.getTeacher().getLastName().equals(lastName) &&
+//							i.getClassRef().getCode().equals(findClass.getCode())) {//i.getClassRef().getName().equals(selectedClassName)
+//						System.out.println(i);
+//						model.approveTeachingRequest((TeachingRequest)i);
+//						System.out.println("approve button clicked: "+i.isApproved());
+//						
+//						view.updatePTTDirScreen();
+//					}
+//				}
 			}
 			
 			//4.3. deny button
