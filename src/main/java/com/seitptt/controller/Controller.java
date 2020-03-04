@@ -13,8 +13,10 @@ import main.java.com.seitptt.model.personnel.Teacher;
 import main.java.com.seitptt.model.processes.Classes;
 import main.java.com.seitptt.model.processes.ListOfClasses;
 import main.java.com.seitptt.model.processes.ListOfSemesters;
+import main.java.com.seitptt.model.processes.ListOfTeachingRequests;
 import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.Semester;
+import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 import main.java.com.seitptt.view.View;
 
@@ -233,8 +235,17 @@ public class Controller implements ActionListener, ListSelectionListener{
 				String[] teacherName=selectedRequest[0].split(" ");
 				firstName=teacherName[0];
 				lastName=teacherName[1];
-				String className=selectedRequest[1].replace(' ', '_');
+				String className=selectedRequest[1];
 				
+				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+				for(TeachingRequest trequest : listOfRequests) {
+					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+							trequest.getTeacher().getLastName().equals(lastName) &&
+							trequest.getClassRef().getName().equals(className)) {
+						model.approveTeachingRequest(trequest);
+						view.updatePTTDirScreen();
+					}
+				}
 				
 				
 			}
