@@ -150,7 +150,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 			//2.4. remove requirements
 			if(e.getSource()==view.getRemoveRequirementButton()) {
 				int reqIndex=view.getRequirementsList().getSelectedIndex();//4
-				System.out.println(reqIndex);
 				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 				int j=0;
 				for(TeachingRequirement i : listOfRequirements) {
@@ -164,10 +163,11 @@ public class Controller implements ActionListener, ListSelectionListener{
 //				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 				for(TeachingRequirement selectedReq : listOfRequirements) {
 					if(selectedReq.getId()==removeReqID) {
+						System.out.println(selectedReq.getId());
 						model.removeTeachingRequirement(selectedReq);
+						view.updateClassDirScreen();
 					}
 				}
-				view.updateClassDirScreen();
 			}
 		}
 		

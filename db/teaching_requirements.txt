@@ -7,3 +7,4 @@ id number_of_teachers class_code
 10 6 PG88
 11 4 DB01
 12 10 ADS24
+13 10 PG88
