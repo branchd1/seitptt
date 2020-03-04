@@ -34,6 +34,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private String selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
 	private String currUser;
+	private int changedNumberOfTeachers;
 	
 //	protected ClassDirectorController classDirController=new ClassDirectorController(model, view);
 //	protected AdministratorController adminController=new AdministratorController(model, view);
@@ -69,10 +70,16 @@ public class Controller implements ActionListener, ListSelectionListener{
 	}
 
 	
+	
+	public int getChangedNumberOfTeachers() {
+		return changedNumberOfTeachers;
+	}
+
 	private void createOtherController(String currUser, ActionEvent e) {
 		if(e.getSource()==view.logoutButton) {
 			view.createHomeScreen();
 		}
+		
 		else if(currUser=="ClassDirector") {
 			//classDirController=new ClassDirectorController(model, view);
 //			this.classDirController.actionPerformed(e);
@@ -153,7 +160,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 				for(TeachingRequirement i:teachingReqirementList) {
 					if(j==chosenReqIndex) {
 						addTeachersInReq=i;
-						//i.getNumOfTeachers()--;
 					}
 					j++;
 				}
@@ -188,14 +194,23 @@ public class Controller implements ActionListener, ListSelectionListener{
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
 				ListOfEmployees listOfTeachers=model.getListOfTeachers();
-				System.out.println("3. button action "+selectedUserNameOfTeachers);
 
 					for(Employee i : listOfTeachers) {
 						if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
 							//creates teaching request associated with a teacher, class, requirement
-							System.out.println("4. "+((Teacher)i).getFirstName()+"\t"+addTeachersInReq.getClassRef().getName());
 							
 							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
+							System.out.println("5. "+changedNumberOfTeachers);
+							
+							//for checking
+							ListOfTeachingRequests lTRequest=Database.getTeachingRequestsFromDB();
+							for(TeachingRequest request : lTRequest) {
+								System.out.println("6. "+request.getId());
+							}
+							
 							view.updateAdminScreen();
 						}
 					}
@@ -283,12 +298,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 				String[] selectedTeacherName=selectedTeacher.split(" ");
 				String firstName=selectedTeacherName[0];
 				String lastName=selectedTeacherName[1];
-				System.out.println("1. "+firstName+"\t"+lastName);
 							
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
 						selectedUserNameOfTeachers=i.getUsername();	
-						System.out.println("2. "+selectedUserNameOfTeachers);
 					}
 				}
 			}
