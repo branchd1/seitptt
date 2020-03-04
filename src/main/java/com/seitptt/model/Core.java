@@ -184,6 +184,11 @@ public class Core {
 		}
 		return Database.getTeachingRequirementsFromDB();
 	}
+	
+	public ListOfTeachingRequests getListOfTeachingRequests() {
+		this.checkPermission(PTTDirector.class);
+		return Database.getTeachingRequestsFromDB();
+	}
 
 	public ListOfSemesters getListOfSemesters() {
 		return Database.getSemestersFromDB();

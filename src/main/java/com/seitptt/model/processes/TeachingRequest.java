@@ -85,5 +85,9 @@ public class TeachingRequest  implements Hostable{
 	public void setTeachingRequirement(TeachingRequirement teachingRequirement) {
 		this.teachingRequirement = teachingRequirement;
 	}
+	
+	public String toString() {
+		return this.getTeacher() + " requested for " + this.getClassRef().getName();
+	}
 
 }
