@@ -162,5 +162,16 @@ public class ClassDirectorView extends JPanel {
 		}
 
 	}
+	
+	protected void isRequirementsListEmpty() {
+		if(requirementsList.isSelectionEmpty()) {
+              removeRequirementButton.setEnabled(false);
+              
+		}
+		if(!requirementsList.isSelectionEmpty()) {
+            removeRequirementButton.setEnabled(true);
+    
+		}
+	}
 
 }

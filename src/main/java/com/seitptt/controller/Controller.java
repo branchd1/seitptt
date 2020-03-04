@@ -13,8 +13,10 @@ import main.java.com.seitptt.model.personnel.Teacher;
 import main.java.com.seitptt.model.processes.Classes;
 import main.java.com.seitptt.model.processes.ListOfClasses;
 import main.java.com.seitptt.model.processes.ListOfSemesters;
+import main.java.com.seitptt.model.processes.ListOfTeachingRequests;
 import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.Semester;
+import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 import main.java.com.seitptt.view.View;
 
@@ -103,7 +105,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 		//4.1
 		else if(currUser=="PTTDirector") {
-
+			if(!e.getValueIsAdjusting() && e.getSource()==view.pttDirRequirementsDisplay()) {
+				view.isPttDirDisplaySelected();
+			}else {
+				view.isPttDirDisplaySelected();
+				return;
+			}
 		}
 	}
 	
@@ -177,14 +184,10 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 
 			//3.4. add teachers
-			if(e.getSource()==view.adminAddTeachersButton()) {
+			if(e.getSource()==view.adminAddTeachersButton() || e.getSource()==view.adminTrainTeachersButton()) {
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
-				int index=view.getTeacherList().getSelectedIndex();
-				System.out.println("Index selected: "+ index);
-				String s=(String)view.getTeacherList().getSelectedValue();
-				System.out.println("Value selected: "+ s);
-				
+				String s=(String)view.getTeacherList().getSelectedValue();				
 				selectedTeacherName=s.split(" ");
 				firstName=selectedTeacherName[0];
 				lastName=selectedTeacherName[1];
@@ -192,29 +195,32 @@ public class Controller implements ActionListener, ListSelectionListener{
 				
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-						int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-
+						if(e.getSource()==view.adminAddTeachersButton()) {
+							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+						}else {
+							model.organiseTraining((Teacher)i);
+						}
 						view.updateAdminScreen();
 					}
 				}				
 			}
 			//3.5. train teachers
-			if(e.getSource()==view.adminTrainTeachersButton()) {
-				String s=(String)view.getTeacherList().getSelectedValue();
-				selectedTeacherName=s.split(" ");
-				firstName=selectedTeacherName[0];
-				lastName=selectedTeacherName[1];
-				
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-				for(Employee i: listOfTeachers) {
-					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
-						model.organiseTraining((Teacher)i);
-						view.updateAdminScreen();
-					}
-				}
-			}
+//			if(e.getSource()==view.adminTrainTeachersButton()) {
+//				String s=(String)view.getTeacherList().getSelectedValue();
+//				selectedTeacherName=s.split(" ");
+//				firstName=selectedTeacherName[0];
+//				lastName=selectedTeacherName[1];
+//				
+//				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+//				for(Employee i: listOfTeachers) {
+//					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
+//						model.organiseTraining((Teacher)i);
+//						view.updateAdminScreen();
+//					}
+//				}
+//			}
 		}
 		
 		//4. PTT Director Screen
@@ -225,10 +231,51 @@ public class Controller implements ActionListener, ListSelectionListener{
 				view.updatePTTDirScreen();
 			}
 			
-			//4.2. approve button
+			//4.2. approve button OR deny button
+			if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
+				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
+				String[] selectedRequest=s.split("requested for ");
+				String[] teacherName=selectedRequest[0].split(" ");
+				firstName=teacherName[0];
+				lastName=teacherName[1];
+				String className=selectedRequest[1];
+				
+				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+				
+				for(TeachingRequest trequest : listOfRequests) {
+					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+							trequest.getTeacher().getLastName().equals(lastName) &&
+							trequest.getClassRef().getName().equals(className)) {
+						model.approveTeachingRequest(trequest);
+						System.out.println("approve button clicked: "+trequest.isApproved());
+						
+						view.updatePTTDirScreen();
+					}
+				}
+			}
 			
 			//4.3. deny button
-			
+			if(e.getSource()==view.denyRequestButton()) {
+				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
+				String[] selectedRequest=s.split("requested for ");
+				String[] teacherName=selectedRequest[0].split(" ");
+				firstName=teacherName[0];
+				lastName=teacherName[1];
+				String className=selectedRequest[1];
+				
+				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+				
+				for(TeachingRequest trequest : listOfRequests) {
+					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+							trequest.getTeacher().getLastName().equals(lastName) &&
+							trequest.getClassRef().getName().equals(className)) {
+						model.denyTeachingRequest(trequest);
+						System.out.println("denied button clicked: "+trequest.isApproved());
+						
+						view.updatePTTDirScreen();
+					}
+				}	
+			}
 		}
 	}
 	

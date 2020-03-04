@@ -155,6 +155,11 @@ public class Core {
 		this.checkPermission(PTTDirector.class);
 		tr.approve();
 	}
+	
+	public void denyTeachingRequest(TeachingRequest tr) {
+		this.checkPermission(PTTDirector.class);
+		tr.deny();
+	}
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
 		this.checkPermission(ClassDirector.class);

@@ -41,6 +41,10 @@ public class TeachingRequest  implements Hostable{
 		this.approval = true;
 		Database.approveTeachingRequestOnDB(this);
 	}
+	
+	public void deny() {
+		this.approval = false;
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {
@@ -88,7 +92,7 @@ public class TeachingRequest  implements Hostable{
 	}
 	
 	public String toString() {
-		return this.getTeacher() + " requested for " + this.getClassRef();
+		return this.getTeacher() + " requested for " + this.getClassRef().getName();
 	}
 
 }
