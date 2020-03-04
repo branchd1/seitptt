@@ -32,17 +32,13 @@ public class Controller implements ActionListener, ListSelectionListener{
 	
 	private Semester chosenSemester;
 	private int removeReqID, selectedFilterIndexForAdmin;
-	private String selectedUserNameOfTeachers;
+//	private String selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
 	private String currUser;
 	private int changedNumberOfTeachers;
 	private String selectedTeacher, firstName, lastName;
 	private String[] selectedTeacherName;
 	
-//	protected ClassDirectorController classDirController=new ClassDirectorController(model, view);
-//	protected AdministratorController adminController=new AdministratorController(model, view);
-//	protected PTTDirectorController pttController=new PTTDirectorController(model, view);
-
 	/**
 	 * @param Core model
 	 * @param View view
@@ -87,8 +83,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//2.3. find id of remove requirements 
 		//selects from list and find requested list's id in removeReqID
 		if(currUser=="ClassDirector") {
-//			classDirController=new ClassDirectorController(model, view);
-//			this.classDirController.valueChanged(e);
 			int reqIndex=view.getRequirementsList().getSelectedIndex();
 			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 			int j=0;
@@ -98,14 +92,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 				j++;
 			}
-		}else if(currUser=="Administrator" && e.getSource()==view.getTeacherList()) {
-//			if(e.getSource()==view.getRequirementsList()) {
-//			adminController=new AdministratorController(model, view);
-//			this.adminController.valueChanged(e);
-//			if(!e.getValueIsAdjusting()) {
-//			if(e.getSource()==view.getTeacherList()) {
-//				ListSelectionListener[] lsl=view.getListeners(ListSelectionListener.class);
-				
+		}else if(currUser=="Administrator" && e.getSource()==view.getTeacherList()) {	
 				System.out.println("Event. isAdjusting is "+e.getValueIsAdjusting()+"; selected indexes: ");
 				
 				if(!e.getValueIsAdjusting()) {
@@ -129,14 +116,11 @@ public class Controller implements ActionListener, ListSelectionListener{
 //					}
 				}
 				else {
+					view.isTeacherListSelected();
 					return;
 				}
-//			}
-//			}
-//			}
 		}else if(currUser=="PTTDirector") {
-//			pttController=new PTTDirectorController(model, view);
-//			this.pttController.valueChanged(e);
+
 		}
 	}
 	
@@ -147,8 +131,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 		
 		else if(currUser=="ClassDirector") {
-			//classDirController=new ClassDirectorController(model, view);
-//			this.classDirController.actionPerformed(e);
 			if(e.getSource()==view.getSemesterSelector()) {
 				ListOfSemesters listOfSemesters=model.getListOfSemesters();
 				int currSemesterIndex=view.getSemesterSelectedIndex();
@@ -163,15 +145,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 			
 			//2.2. add requirements
 			if(e.getSource()==view.getAddRequirementButton()) {
-//				ListOfSemesters listOfSemesters=model.getListOfSemesters();
-//				int currSemesterIndex=view.getSemesterSelectedIndex();
-//
-//				for(Semester currSemester:listOfSemesters) {
-//					if(currSemester.getId()-1==currSemesterIndex) {
-//						chosenSemester=currSemester;
-//					}
-//				}
-				
 				ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
 				String currClassString=(String)view.getClassSelector().getSelectedItem();
 				String[] splitCurrClass=currClassString.split(" ");
@@ -188,15 +161,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 			//2.4. remove requirements
 			if(e.getSource()==view.getRemoveRequirementButton()) {
-//				int reqIndex=view.getRequirementsList().getSelectedIndex();
-//				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-//				int j=0;
-//				for(TeachingRequirement i : listOfRequirements) {
-//					if(j==reqIndex) {
-//						removeReqID=i.getId();
-//					}
-//					j++;
-//				}
 				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
 				for(TeachingRequirement selectedReq : listOfRequirements) {
 					if(selectedReq.getId()==removeReqID) {
@@ -207,8 +171,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 		}
 		else if(currUser=="Administrator") {
-			//			adminController=new AdministratorController(model, view);
-//			this.adminController.actionPerformed(e);
 			//3. Administrator Screen
 			//3.1. (JComboBox) filter list of teachers
 			if(e.getSource()==view.getTrainingSelector()) {
@@ -218,8 +180,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 			//3.2. (JComboBox) choose class requirements
 			if(e.getSource()==view.getRequirementSelector()) {
-//				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-
 				int chosenReqIndex=view.getRequirementSelectedIndex();
 				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 				int j=0;
@@ -233,30 +193,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 			//3.4. add teachers
 			if(e.getSource()==view.adminAddTeachersButton()) {
-//				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-//
-//				int chosenReqIndex=view.getRequirementSelectedIndex();
-//				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
-//				int j=0;
-//				for(TeachingRequirement i:teachingReqirementList) {
-//					if(j==chosenReqIndex) {
-//						addTeachersInReq=i;
-//						//i.getNumOfTeachers()--;
-//					}
-//					j++;
-//				}
-//				
-//				ListOfEmployees listOfTeachers=model.getListOfTeachers();
-//				String selectedTeacherInString=view.getTeacherList().getSelectedValue().toString();
-//				String[] selectedTeacherName=selectedTeacherInString.split(" ");
-//				String firstName=selectedTeacherName[0];
-//				String lastName=selectedTeacherName[1];
-//							
-//				for(Employee i : listOfTeachers) {
-//					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-//						selectedUserNameOfTeachers=i.getUsername();	
-//					}
-//				}
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
 				int index=view.getTeacherList().getSelectedIndex();
@@ -279,47 +215,21 @@ public class Controller implements ActionListener, ListSelectionListener{
 						changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
 						
 						//for checking
-						ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
-						for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-							System.out.println(teachingRequest.getId() + " " + 
-									teachingRequest.getTeacher().getFirstName() + " " + 
-									teachingRequest.getClassRef().getCode() + " " + 
-									teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
-						}
+//						ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
+//						for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+//							System.out.println(teachingRequest.getId() + " " + 
+//									teachingRequest.getTeacher().getFirstName() + " " + 
+//									teachingRequest.getClassRef().getCode() + " " + 
+//									teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
+//						}
 						
 						view.updateAdminScreen();
 					}
-				}
-				
-				
-//					for(Employee i : listOfTeachers) {
-//						if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
-							//creates teaching request associated with a teacher, class, requirement
-							
-//							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-//							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-//							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-//							
-//							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
-//							System.out.println("5. "+changedNumberOfTeachers);
-							
-							
-//							//for checking
-//							ListOfTeachingRequests lTRequest=Database.getTeachingRequestsFromDB();
-//							for(TeachingRequest request : lTRequest) {
-//								System.out.println("6. "+request.getId());
-//							}
-//							
-//							view.updateAdminScreen();
-//						}
-//					}
-				
+				}				
 			}
 			//3.5. train teachers
 		}
 		else if (currUser=="PTTDirector"){
-			//			pttController=new PTTDirectorController(model, view);
-//			this.pttController.actionPerformed(e);
 		}
 	}
 	
@@ -351,19 +261,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 		else {
 			createOtherController(currUser, e);
 		}
-		
-//		else if(currUser=="ClassDirector") {
-////				classDirController=new ClassDirectorController(model, view);
-//				this.classDirController.actionPerformed(e);
-//			}
-//		else if(currUser=="Administrator") {
-////				adminController=new AdministratorController(model, view);
-//				this.adminController.actionPerformed(e);
-//			}
-//		else if (currUser=="PTTDirector"){
-////				pttController=new PTTDirectorController(model, view);
-//				this.pttController.actionPerformed(e);
-//			}
 	}
 
 
