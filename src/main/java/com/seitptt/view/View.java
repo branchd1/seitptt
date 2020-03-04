@@ -246,17 +246,7 @@ public class View extends JFrame {
  		this.revalidate();
  		this.repaint();
 	}
-	/**
-	 * updates according to admin training filter selection
-	 */
-	public void trainingUpdate() {
-		adminScreen.trainingUpdate();
-		
-		// update screen
-		this.revalidate();
-		this.repaint();
-		
-	}
+
 
 	/**
 	 * returns the add Teachers Button

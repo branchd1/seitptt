@@ -160,7 +160,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			if(e.getSource()==view.getTrainingSelector()) {
 				trainingStatusIndex=view.getTrainingSelector().getSelectedIndex();
 				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-				view.trainingUpdate();
+				view.updateAdminScreen();;
 			}
 
 			//3.2. (JComboBox) choose class requirements
@@ -196,14 +196,25 @@ public class Controller implements ActionListener, ListSelectionListener{
 						int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
 						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
 
-//						view.updateAdminScreen();
-						view.trainingUpdate();
+						view.updateAdminScreen();
+//						view.trainingUpdate();
 					}
 				}				
 			}
 			//3.5. train teachers
 			if(e.getSource()==view.adminTrainTeachersButton()) {
+				String s=(String)view.getTeacherList().getSelectedValue();
+				selectedTeacherName=s.split(" ");
+				firstName=selectedTeacherName[0];
+				lastName=selectedTeacherName[1];
 				
+				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+				for(Employee i: listOfTeachers) {
+					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
+						model.organiseTraining((Teacher)i);
+						view.updateAdminScreen();
+					}
+				}
 			}
 		}
 		else if (currUser=="PTTDirector"){
