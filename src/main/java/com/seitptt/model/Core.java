@@ -179,7 +179,11 @@ public class Core {
 	}
 
 	public ListOfTeachingRequirements getListOfTeachingRequirements() {
-		this.checkPermission(ClassDirector.class);
+		try {
+			this.checkPermission(Administrator.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
 		return Database.getTeachingRequirementsFromDB();
 	}
 
