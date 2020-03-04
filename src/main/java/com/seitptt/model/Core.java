@@ -157,8 +157,12 @@ public class Core {
 	}
 	
 	public void denyTeachingRequest(TeachingRequest tr) {
-		this.checkPermission(PTTDirector.class);
-		tr.deny();
+		try {
+			this.checkPermission(PTTDirector.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
+		this.removeTeachingRequest(tr);
 	}
 
 	public void removeTeachingRequirement(TeachingRequirement tr) {
@@ -167,7 +171,11 @@ public class Core {
 	}
 
 	public void removeTeachingRequest(TeachingRequest tr) {
-		this.checkPermission(ClassDirector.class);
+		try {
+			this.checkPermission(PTTDirector.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
 		Database.removeTeachingRequestFromDB(tr);
 	}
 

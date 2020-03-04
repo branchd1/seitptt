@@ -41,10 +41,6 @@ public class TeachingRequest  implements Hostable{
 		this.approval = true;
 		Database.approveTeachingRequestOnDB(this);
 	}
-	
-	public void deny() {
-		this.approval = false;
-	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {
