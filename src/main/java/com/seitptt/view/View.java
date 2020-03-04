@@ -144,7 +144,11 @@ public class View extends JFrame {
 		this.repaint();
 
 	}
-
+       
+	
+	public void isClassDirListSelected() {
+		classDirectorScreen.isRequirementsListEmpty();
+	}
 	/**
 	 * returns numbers of tutors from class director screen
 	 */
@@ -372,6 +376,7 @@ public class View extends JFrame {
 	public void isPttDirDisplaySelected() {
 		pttDirectorScreen.isRequirementsDisplaySelected();
 	}
+	
 	// test main will remove
 	public static void main(String[] args) {
 		Core model = new Core();
