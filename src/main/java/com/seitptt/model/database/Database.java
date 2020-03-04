@@ -471,6 +471,8 @@ public class Database {
 			
 			// except for the line where id is the same with the TeachingRequest id to be deleted
 			if (!(fileId==trId)){
+				newDbString += "\n";
+				newDbString += fileId;
 				newDbString += s.nextLine();
 			} else{
 				s.nextLine();
@@ -493,7 +495,7 @@ public class Database {
 	}
 	
 	/**
-	 * NOT WORKING
+	 * NOT WORKING - UNTESTED
 	 * approve a teaching request on the database
 	 * @param teachingRequest the TeachingRequest object to be updated
 	 */
@@ -524,11 +526,18 @@ public class Database {
 			
 			int trId = teachingRequest.getId();
 			
-			// except for the line where id is the same with the TeachingRequest id to be deleted
+			// except for the line where id is the same with the TeachingRequest id to be updated
 			if (!(fileId==trId)){
+				newDbString += "\n";
+				newDbString += fileId;
 				newDbString += s.nextLine();
 			} else{
-				s.nextLine();
+				newDbString += "\n";
+				newDbString += fileId + " ";
+				newDbString += s.next() + " ";
+				newDbString += s.next() + " ";
+				newDbString += s.nextInt() + " ";
+				newDbString += true;
 			}
 		}
 		
@@ -548,7 +557,7 @@ public class Database {
 	}
 	
 	/**
-	 * NOT WORKING
+	 * NOT WORKING - UNTESTED
 	 * reduce a teaching requirement count for number of teachers needed from the database
 	 * @param teachingRequirement the TeachingRequirement object to be updated
 	 */
@@ -586,13 +595,17 @@ public class Database {
 			
 			int trId = teachingRequirement.getId();
 			
-			// except the line where the id is the same with the teaching requirement id to be deleted
+			// except the line where the id is the same with the teaching requirement id to be updated
 			if (!(fileId==trId)){
 				newDbString += "\n";
 				newDbString += fileId;
 				newDbString += s.nextLine();
 			} else {
-				s.nextLine();
+				newDbString += "\n";
+				newDbString += fileId + " ";
+				int newNumber = s.nextInt() - 1;
+				newDbString += (newNumber) + " ";
+				newDbString += s.next();
 			}
 		}
 		

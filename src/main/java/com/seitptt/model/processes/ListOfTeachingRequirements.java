@@ -35,5 +35,17 @@ public class ListOfTeachingRequirements implements Findable<TeachingRequirement>
 	public Iterator<TeachingRequirement> iterator() {
 		return this.loR.iterator();
 	}
+	
+	public ListOfTeachingRequirements filterByValidation() {
+		ListOfTeachingRequirements listOfTeachingRequirements = new ListOfTeachingRequirements();
+		
+		for(TeachingRequirement teachingRequirement : this.loR) {
+			if(teachingRequirement.getNumOfTeachers()>0) {
+				listOfTeachingRequirements.add(teachingRequirement);
+			}
+		}
+		
+		return listOfTeachingRequirements;
+	}
 
 }
