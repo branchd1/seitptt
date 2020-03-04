@@ -87,7 +87,7 @@ public class TeachingRequest  implements Hostable{
 	}
 	
 	public String toString() {
-		return this.getTeacher() + " requested for " + this.getClassRef();
+		return this.getTeacher() + " requested for " + this.getClassRef().getName();
 	}
 
 }
