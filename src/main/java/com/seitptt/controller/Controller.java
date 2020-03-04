@@ -118,204 +118,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 		
 		//2. Class Director Screen
-		else if(currUser=="ClassDirector") {
-			if(e.getSource()==view.getSemesterSelector()) {
-				ListOfSemesters listOfSemesters=model.getListOfSemesters();
-				int currSemesterIndex=view.getSemesterSelectedIndex();
-
-				for(Semester currSemester:listOfSemesters) {
-					if(currSemester.getId()-1==currSemesterIndex) {
-						chosenSemester=currSemester;
-					}
-				}
-				view.enableClassList();
-			}
-			
-			//2.2. add requirements
-			if(e.getSource()==view.getAddRequirementButton()) {
-				ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
-				String currClassString=(String)view.getClassSelector().getSelectedItem();
-				String[] splitCurrClass=currClassString.split(" ");
-				String classCode=splitCurrClass[0];
-
-				for(Classes currClass:listOfClasses) {
-					if(currClass.getCode().equals(classCode)) {
-						int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
-						model.createAndAddTeachingRequirement(numberOfTeachers, currClass);
-						view.updateClassDirScreen();
-					}
-				}
-			}
-
-			//2.4. remove requirements
-			if(e.getSource()==view.getRemoveRequirementButton()) {
-				int reqIndex=view.getRequirementsList().getSelectedIndex();//4
-				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-				int j=0;
-				for(TeachingRequirement i : listOfRequirements) {
-					if(j==reqIndex) {
-//						removeReqID=i.getId();
-						model.removeTeachingRequirement(i);
-						view.updateClassDirScreen();
-					}
-					j++;
-				}
-				
-//				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-//				for(TeachingRequirement selectedReq : listOfRequirements) {
-//					if(selectedReq.getId()==removeReqID) {
-//						System.out.println(selectedReq.getId());
-//						model.removeTeachingRequirement(selectedReq);
-//						view.updateClassDirScreen();
-//					}
-//				}
-			}
-		}
-		
-		//3. Administrator Screen
-		else if(currUser=="Administrator") {
-			//3.1. (JComboBox) filter list of teachers
-			if(e.getSource()==view.getTrainingSelector()) {
-				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
-				view.updateAdminScreen();
-			}
-
-			//3.2. (JComboBox) choose class requirements
-			if(e.getSource()==view.getRequirementSelector()) {
-				int chosenReqIndex=view.getRequirementSelectedIndex();
-				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
-				int j=0;
-				for(TeachingRequirement i:teachingReqirementList) {
-					if(j==chosenReqIndex) {
-						addTeachersInReq=i;
-					}
-					j++;
-				}
-			}
-
-			//3.4. add teachers
-			if(e.getSource()==view.adminAddTeachersButton()) {// || e.getSource()==view.adminTrainTeachersButton()
-				//add selected teachers can
-				//sub number of teachers from current teaching requirement
-				String s=(String)view.getTeacherList().getSelectedValue();				
-				selectedTeacherName=s.split(" ");
-				firstName=selectedTeacherName[0];
-				lastName=selectedTeacherName[1];
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-				
-				for(Employee i : listOfTeachers) {
-					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-						
-						view.updateAdminScreen();
-					}
-				}				
-			}
-//			3.5. train teachers
-			if(e.getSource()==view.adminTrainTeachersButton()) {
-				String s=(String)view.getTeacherList().getSelectedValue();
-				selectedTeacherName=s.split(" ");
-				firstName=selectedTeacherName[0];
-				lastName=selectedTeacherName[1];
-				
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-				for(Employee i: listOfTeachers) {
-					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
-						model.organiseTraining((Teacher)i);
-						view.updateAdminScreen();
-					}
-				}
-			}
-		}
-		
-		//4. PTT Director Screen
-		else if (currUser=="PTTDirector"){
-			//4.1. (JComboBox<String>)filterRequirements
-			if(e.getSource()==view.pttDirRequirementsFilter()) {
-				filterRequirementsIndex=view.pttDirRequirementsFilterIndex();
-				view.updatePTTDirScreen();
-			}
-			
-			//4.2. approve button OR deny button
-			if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
-				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
-				String[] selectedRequest=s.split("requested for ");
-				String[] teacherName=selectedRequest[0].split(" ");
-				firstName=teacherName[0];
-				lastName=teacherName[1];
-				String className=selectedRequest[1];
-				
-				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-				
-				for(TeachingRequest trequest : listOfRequests) {
-					if(trequest.getTeacher().getFirstName().equals(firstName) &&
-							trequest.getTeacher().getLastName().equals(lastName) &&
-							trequest.getClassRef().getName().equals(className)) {
-						model.approveTeachingRequest(trequest);
-						System.out.println("approve button clicked: "+trequest.isApproved());
-						
-						view.updatePTTDirScreen();
-					}
-				}
-			}
-			
-			//4.3. deny button
-			if(e.getSource()==view.denyRequestButton()) {
-				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
-				String[] selectedRequest=s.split("requested for ");
-				String[] teacherName=selectedRequest[0].split(" ");
-				firstName=teacherName[0];
-				lastName=teacherName[1];
-				String className=selectedRequest[1];
-				
-				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-				
-				for(TeachingRequest trequest : listOfRequests) {
-					if(trequest.getTeacher().getFirstName().equals(firstName) &&
-							trequest.getTeacher().getLastName().equals(lastName) &&
-							trequest.getClassRef().getName().equals(className)) {
-						model.denyTeachingRequest(trequest);
-						System.out.println("denied button clicked: "+trequest.isApproved());
-						
-						view.updatePTTDirScreen();
-					}
-				}	
-			}
-		}
-	}
-	
-	
-	/**
-	 * actionPerformed called from view (actionListener)
-	 * */
-	public void actionPerformed(ActionEvent e) {
-		//1. login to each type of user
-		if(e.getSource()==view.classDirLogin()) {
-			currUser="ClassDirector";
-			model.setCurrentUser(currUser);
-			view.createClassDirScreen();
-		}
-		
-		else if(e.getSource()==view.adminLogin()) {
-			currUser="Administrator";
-			model.setCurrentUser(currUser);
-			view.createAdminScreen();
-		}
-		
-		else if(e.getSource()==view.pttDirLogin()) {
-			currUser="PTTDirector";
-			model.setCurrentUser(currUser);
-			view.createPTTDirScreen();
-		}
-		
-			
-		else if(e.getSource()==view.logoutButton) {
-			view.createHomeScreen();
-		}
-		
-		//2. Class Director Screen
 		else if(currUser.equals("ClassDirector")) {
 			if(e.getSource()==view.getSemesterSelector()) {
 				ListOfSemesters listOfSemesters=model.getListOfSemesters();
@@ -482,9 +284,207 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}	
 			}
 		}
-//		else {
-//			createOtherController(currUser, e);
+	}
+	
+	
+	/**
+	 * actionPerformed called from view (actionListener)
+	 * */
+	public void actionPerformed(ActionEvent e) {
+		//1. login to each type of user
+		if(e.getSource()==view.classDirLogin()) {
+			currUser="ClassDirector";
+			model.setCurrentUser(currUser);
+			view.createClassDirScreen();
+		}
+		
+		else if(e.getSource()==view.adminLogin()) {
+			currUser="Administrator";
+			model.setCurrentUser(currUser);
+			view.createAdminScreen();
+		}
+		
+		else if(e.getSource()==view.pttDirLogin()) {
+			currUser="PTTDirector";
+			model.setCurrentUser(currUser);
+			view.createPTTDirScreen();
+		}
+		
+//			
+//		else if(e.getSource()==view.logoutButton) {
+//			view.createHomeScreen();
 //		}
+//		
+//		//2. Class Director Screen
+//		else if(currUser.equals("ClassDirector")) {
+//			if(e.getSource()==view.getSemesterSelector()) {
+//				ListOfSemesters listOfSemesters=model.getListOfSemesters();
+//				int currSemesterIndex=view.getSemesterSelectedIndex();
+//
+//				for(Semester currSemester:listOfSemesters) {
+//					if(currSemester.getId()-1==currSemesterIndex) {
+//						chosenSemester=currSemester;
+//					}
+//				}
+//				view.enableClassList();
+//			}
+//			
+//			//2.2. add requirements
+//			else if(e.getSource()==view.getAddRequirementButton()) {
+//				ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
+//				String currClassString=(String)view.getClassSelector().getSelectedItem();
+//				String[] splitCurrClass=currClassString.split(" ");
+//				String classCode=splitCurrClass[0];
+//
+//				for(Classes currClass:listOfClasses) {
+//					if(currClass.getCode().equals(classCode)) {
+//						int numberOfTeachers=Integer.parseInt(view.getNumTeachers());
+//						model.createAndAddTeachingRequirement(numberOfTeachers, currClass);
+//						view.updateClassDirScreen();
+//					}
+//				}
+//			}
+//
+//			//2.4. remove requirements
+//			else if(e.getSource()==view.getRemoveRequirementButton()) {
+//				int reqIndex=view.getRequirementsList().getSelectedIndex();//4
+//				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+//				int j=0;
+//				for(TeachingRequirement i : listOfRequirements) {
+//					if(j==reqIndex) {
+////						removeReqID=i.getId();
+//						model.removeTeachingRequirement(i);
+//						view.updateClassDirScreen();
+//					}
+//					j++;
+//				}
+//				
+////				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+////				for(TeachingRequirement selectedReq : listOfRequirements) {
+////					if(selectedReq.getId()==removeReqID) {
+////						System.out.println(selectedReq.getId());
+////						model.removeTeachingRequirement(selectedReq);
+////						view.updateClassDirScreen();
+////					}
+////				}
+//			}
+//		}
+//		
+//		//3. Administrator Screen
+//		else if(currUser.equals("Administrator")) {
+//			//3.1. (JComboBox) filter list of teachers
+//			if(e.getSource()==view.getTrainingSelector()) {
+//				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
+//				view.updateAdminScreen();
+//			}
+//
+//			//3.2. (JComboBox) choose class requirements
+//			else if(e.getSource()==view.getRequirementSelector()) {
+//				int chosenReqIndex=view.getRequirementSelectedIndex();
+//				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
+//				int j=0;
+//				for(TeachingRequirement i:teachingReqirementList) {
+//					if(j==chosenReqIndex) {
+//						addTeachersInReq=i;
+//					}
+//					j++;
+//				}
+//			}
+//
+//			//3.4. add teachers
+//			else if(e.getSource()==view.adminAddTeachersButton()) {// || e.getSource()==view.adminTrainTeachersButton()
+//				//add selected teachers can
+//				//sub number of teachers from current teaching requirement
+//				String s=(String)view.getTeacherList().getSelectedValue();				
+//				selectedTeacherName=s.split(" ");
+//				firstName=selectedTeacherName[0];
+//				lastName=selectedTeacherName[1];
+//				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+//				
+//				for(Employee i : listOfTeachers) {
+//					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+//							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+//							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+//							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+//						
+//						view.updateAdminScreen();
+//					}
+//				}				
+//			}
+////			3.5. train teachers
+//			else if(e.getSource()==view.adminTrainTeachersButton()) {
+//				String s=(String)view.getTeacherList().getSelectedValue();
+//				selectedTeacherName=s.split(" ");
+//				firstName=selectedTeacherName[0];
+//				lastName=selectedTeacherName[1];
+//				
+//				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+//				for(Employee i: listOfTeachers) {
+//					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
+//						model.organiseTraining((Teacher)i);
+//						view.updateAdminScreen();
+//					}
+//				}
+//			}
+//		}
+//		
+//		//4. PTT Director Screen
+//		else if (currUser.equals("PTTDirector")){
+//			//4.1. (JComboBox<String>)filterRequirements
+//			if(e.getSource()==view.pttDirRequirementsFilter()) {
+//				filterRequirementsIndex=view.pttDirRequirementsFilterIndex();
+//				view.updatePTTDirScreen();
+//			}
+//			
+//			//4.2. approve button OR deny button
+//			else if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
+//				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
+//				String[] selectedRequest=s.split("requested for ");
+//				String[] teacherName=selectedRequest[0].split(" ");
+//				firstName=teacherName[0];
+//				lastName=teacherName[1];
+//				String className=selectedRequest[1];
+//				
+//				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+//				
+//				for(TeachingRequest trequest : listOfRequests) {
+//					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+//							trequest.getTeacher().getLastName().equals(lastName) &&
+//							trequest.getClassRef().getName().equals(className)) {
+//						model.approveTeachingRequest(trequest);
+//						System.out.println("approve button clicked: "+trequest.isApproved());
+//						
+//						view.updatePTTDirScreen();
+//					}
+//				}
+//			}
+//			
+//			//4.3. deny button
+//			else if(e.getSource()==view.denyRequestButton()) {
+//				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
+//				String[] selectedRequest=s.split("requested for ");
+//				String[] teacherName=selectedRequest[0].split(" ");
+//				firstName=teacherName[0];
+//				lastName=teacherName[1];
+//				String className=selectedRequest[1];
+//				
+//				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+//				
+//				for(TeachingRequest trequest : listOfRequests) {
+//					if(trequest.getTeacher().getFirstName().equals(firstName) &&
+//							trequest.getTeacher().getLastName().equals(lastName) &&
+//							trequest.getClassRef().getName().equals(className)) {
+//						model.denyTeachingRequest(trequest);
+//						System.out.println("denied button clicked: "+trequest.isApproved());
+//						
+//						view.updatePTTDirScreen();
+//					}
+//				}	
+//			}
+//		}
+		else {
+			createOtherController(currUser, e);
+		}
 	}
 
 
