@@ -39,6 +39,7 @@ public class TeachingRequest  implements Hostable{
 	
 	public void approve() {
 		this.approval = true;
+		Database.approveTeachingRequestOnDB(this);
 	}
 
 	@Override

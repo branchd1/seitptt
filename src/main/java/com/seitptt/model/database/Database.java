@@ -491,6 +491,190 @@ public class Database {
 		}
 		
 	}
+	
+	/**
+	 * NOT WORKING
+	 * approve a teaching request on the database
+	 * @param teachingRequest the TeachingRequest object to be updated
+	 */
+	public static void approveTeachingRequestOnDB(TeachingRequest teachingRequest) {
+		// database file
+		final String dbFile = Database.dbDir + "teaching_requests.txt";
+		
+		// string to contain content of new file
+		String newDbString = "";
+		
+		// init file reader and scanner
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		// add file line to new file
+		newDbString += s.nextLine();
+		
+		// loop through the file and add the lines to new file
+		while(s.hasNextLine()) {
+			int fileId = s.nextInt();
+			
+			int trId = teachingRequest.getId();
+			
+			// except for the line where id is the same with the TeachingRequest id to be deleted
+			if (!(fileId==trId)){
+				newDbString += s.nextLine();
+			} else{
+				s.nextLine();
+			}
+		}
+		
+		// close scanner
+		s.close();
+		
+		// overwrite old file with new file and close filewriter
+		try {
+			FileWriter fw = null;
+			fw = new FileWriter(dbFile);
+			fw.write(newDbString);
+			fw.close();
+		} catch(IOException e) {
+			
+		}
+		
+	}
+	
+	/**
+	 * NOT WORKING
+	 * reduce a teaching requirement count for number of teachers needed from the database
+	 * @param teachingRequirement the TeachingRequirement object to be updated
+	 */
+	public static void reduceTeachingRequirementCountOnDB(TeachingRequirement teachingRequirement) {
+		
+		// first delete all teaching requests with foreign key to this requirement i.e CASCADE
+		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
+		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+			Database.removeTeachingRequestFromDB(teachingRequest);
+		}
+		
+		//database file
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		
+		// string to contain contents of the new file
+		String newDbString = "";
+		
+		// initialize file reader and scanner
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		// add first line to new file
+		newDbString += s.nextLine();
+		
+		// loop through the lines and add them to new file
+		while(s.hasNextLine()) {
+			int fileId = s.nextInt();
+			
+			int trId = teachingRequirement.getId();
+			
+			// except the line where the id is the same with the teaching requirement id to be deleted
+			if (!(fileId==trId)){
+				newDbString += "\n";
+				newDbString += fileId;
+				newDbString += s.nextLine();
+			} else {
+				s.nextLine();
+			}
+		}
+		
+		// close scanner
+		s.close();
+		
+		// overwrite old file with new file and close file writer
+		try {
+			FileWriter fw = null;
+			fw = new FileWriter(dbFile);
+			fw.write(newDbString);
+			fw.close();
+		} catch(IOException e) {
+			
+		}
+		
+	}
+	
+	/**
+	 * NOT WORKING
+	 * train a teacher on the database
+	 * @param teacher the teacher object to be updated
+	 */
+	public static void trainTeacherOnDB(Teacher teacher) {
+		
+		// first delete all teaching requests with foreign key to this requirement i.e CASCADE
+		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
+		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+			Database.removeTeachingRequestFromDB(teachingRequest);
+		}
+		
+		//database file
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		
+		// string to contain contents of the new file
+		String newDbString = "";
+		
+		// initialize file reader and scanner
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		// add first line to new file
+		newDbString += s.nextLine();
+		
+		// loop through the lines and add them to new file
+		while(s.hasNextLine()) {
+			int fileId = s.nextInt();
+			
+			int trId = teachingRequirement.getId();
+			
+			// except the line where the id is the same with the teaching requirement id to be deleted
+			if (!(fileId==trId)){
+				newDbString += "\n";
+				newDbString += fileId;
+				newDbString += s.nextLine();
+			} else {
+				s.nextLine();
+			}
+		}
+		
+		// close scanner
+		s.close();
+		
+		// overwrite old file with new file and close file writer
+		try {
+			FileWriter fw = null;
+			fw = new FileWriter(dbFile);
+			fw.write(newDbString);
+			fw.close();
+		} catch(IOException e) {
+			
+		}
+		
+	}
+	
 	/**
 	 * get the last id used in the database
 	 * @param o generic object that determines the database of objects we want to search
