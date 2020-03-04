@@ -154,20 +154,21 @@ public class Controller implements ActionListener, ListSelectionListener{
 				int j=0;
 				for(TeachingRequirement i : listOfRequirements) {
 					if(j==reqIndex) {
-						removeReqID=i.getId();
-						break;
+//						removeReqID=i.getId();
+						model.removeTeachingRequirement(i);
+						view.updateClassDirScreen();
 					}
 					j++;
 				}
 				
 //				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-				for(TeachingRequirement selectedReq : listOfRequirements) {
-					if(selectedReq.getId()==removeReqID) {
-						System.out.println(selectedReq.getId());
-						model.removeTeachingRequirement(selectedReq);
-						view.updateClassDirScreen();
-					}
-				}
+//				for(TeachingRequirement selectedReq : listOfRequirements) {
+//					if(selectedReq.getId()==removeReqID) {
+//						System.out.println(selectedReq.getId());
+//						model.removeTeachingRequirement(selectedReq);
+//						view.updateClassDirScreen();
+//					}
+//				}
 			}
 		}
 		
