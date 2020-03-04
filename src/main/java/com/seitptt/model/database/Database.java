@@ -495,7 +495,6 @@ public class Database {
 	}
 	
 	/**
-	 * NOT WORKING - UNTESTED
 	 * approve a teaching request on the database
 	 * @param teachingRequest the TeachingRequest object to be updated
 	 */
@@ -557,17 +556,10 @@ public class Database {
 	}
 	
 	/**
-	 * NOT WORKING - UNTESTED
 	 * reduce a teaching requirement count for number of teachers needed from the database
 	 * @param teachingRequirement the TeachingRequirement object to be updated
 	 */
 	public static void reduceTeachingRequirementCountOnDB(TeachingRequirement teachingRequirement) {
-		
-		// first delete all teaching requests with foreign key to this requirement i.e CASCADE
-		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
-		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-			Database.removeTeachingRequestFromDB(teachingRequest);
-		}
 		
 		//database file
 		final String dbFile = Database.dbDir + "teaching_requirements.txt";
@@ -625,17 +617,10 @@ public class Database {
 	}
 	
 	/**
-	 * NOT WORKING
 	 * train a teacher on the database
 	 * @param teacher the teacher object to be updated
 	 */
 	public static void trainTeacherOnDB(Teacher teacher) {
-		
-		// first delete all teaching requests with foreign key to this requirement i.e CASCADE
-		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
-		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-			Database.removeTeachingRequestFromDB(teachingRequest);
-		}
 		
 		//database file
 		final String dbFile = Database.dbDir + "teaching_requirements.txt";
@@ -657,19 +642,16 @@ public class Database {
 		// add first line to new file
 		newDbString += s.nextLine();
 		
-		// loop through the lines and add them to new file
+		// loop through the lines and update teacher
 		while(s.hasNextLine()) {
-			int fileId = s.nextInt();
-			
-			int trId = teachingRequirement.getId();
-			
-			// except the line where the id is the same with the teaching requirement id to be deleted
-			if (!(fileId==trId)){
-				newDbString += "\n";
-				newDbString += fileId;
-				newDbString += s.nextLine();
+			String teacherString = s.nextLine();
+			String[] teacherStringArr = teacherString.split(" ");
+			if (teacherStringArr[0].equalsIgnoreCase("teacher") && teacherStringArr[1].equalsIgnoreCase(teacher.getUsername())) {
+				teacherStringArr[4] = "true";
+				teacherString = String.join(" ", teacherStringArr);
+				newDbString += teacherString;
 			} else {
-				s.nextLine();
+				newDbString += teacherString;
 			}
 		}
 		
