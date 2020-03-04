@@ -21,11 +21,9 @@ public class Core {
 	private Semester currentSemester;
 	private Employee currentUser;
 
-
 	public Core() {
 		Database.LoadCaches();
 	}
-
 
 	public static void main(String[] args) {
 		Database.LoadCaches();
