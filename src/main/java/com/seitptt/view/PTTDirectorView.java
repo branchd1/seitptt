@@ -62,7 +62,7 @@ public class PTTDirectorView extends JPanel {
 
 		// create and add display of requirements list
 		listModel = new DefaultListModel();
-		ListOfTeachingRequests teachingRequestList = null;
+		ListOfTeachingRequests teachingRequestList = model.getListOfTeachingRequests();
 		for (TeachingRequest i : teachingRequestList) {
 			listModel.addElement(i.toString());
 		}
@@ -86,16 +86,23 @@ public class PTTDirectorView extends JPanel {
 		listModel.removeAllElements();
 		ListOfTeachingRequests teachingRequestList =null;
 		if(controller.getFilterRequirementsIndex()==0){
-			
+	       teachingRequestList = model.getListOfTeachingRequests();
+	       approveButton.setEnabled(true);
+	       denyButton.setEnabled(true);
 
 		}
 		if(controller.getFilterRequirementsIndex()==1) {
-	        
+		       teachingRequestList = model.getListOfTeachingRequests().filterByApproval(true);
+		       approveButton.setEnabled(false);
+		       denyButton.setEnabled(true);
 		}
 		
 
 		if(controller.getFilterRequirementsIndex()==2) {
-			   
+		       teachingRequestList = model.getListOfTeachingRequests().filterByApproval(false);
+		       approveButton.setEnabled(true);
+		       denyButton.setEnabled(false);
+
 		}
 	
 		for (TeachingRequest i : teachingRequestList) {

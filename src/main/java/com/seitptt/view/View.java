@@ -365,7 +365,7 @@ public class View extends JFrame {
 	 * updates PTT director screen
 	 */
 	public void updatePTTDirScreen() {
-
+          pttDirectorScreen.update();
 	}
 
 	// test main will remove
