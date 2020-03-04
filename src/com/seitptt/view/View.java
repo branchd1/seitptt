@@ -308,6 +308,13 @@ public class View extends JFrame {
 	public JList getTeacherList() {
 		return adminScreen.teacherList;
 	}
+	
+	/**
+	 * Disables add button if teacher list is empty
+	 */
+	public void isTeacherListSelected() {
+	 adminScreen.isTeacherListSelected();
+	}
 
 	/**
 	 * creates PTT director screen

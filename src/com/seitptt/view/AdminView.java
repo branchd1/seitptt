@@ -136,5 +136,14 @@ public class AdminView extends JPanel {
 		}
 		
 	}
+	
+	protected void isTeacherListSelected() {
+		if(teacherList.isSelectionEmpty()) {
+			addTeachers.setEnabled(false);
+		}
+		if(!teacherList.isSelectionEmpty()) {
+			addTeachers.setEnabled(true);
+		}
+	}
 
 }
