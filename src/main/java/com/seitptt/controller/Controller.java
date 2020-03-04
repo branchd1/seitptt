@@ -35,7 +35,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 //	private String selectedUserNameOfTeachers;
 	private TeachingRequirement addTeachersInReq;
 	private String currUser;
-	private int changedNumberOfTeachers;
+	private int changedNumberOfTeachers, trainingStatusIndex;
 	private String selectedTeacher, firstName, lastName;
 	private String[] selectedTeacherName;
 	
@@ -92,33 +92,16 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 				j++;
 			}
-		}else if(currUser=="Administrator") {	
-				System.out.println("Event. isAdjusting is "+e.getValueIsAdjusting()+"; selected indexes: ");
-				
+		}else if(currUser=="Administrator") {					
 				if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
 					view.isTeacherListSelected();
-//					ListOfEmployees listOfTeachers=model.getListOfTeachers();
-//
-//					JList list=(JList)e.getSource();
-//					int selections[]=list.getSelectedIndices();
-//					selectedTeacher=(String) list.getSelectedValue();
-//					System.out.println("after casting list.getSelectedValue(), (String)list.getSelectedValue: "+(String) list.getSelectedValue());
-//
-//					System.out.println("before selectedTeacher.split, selectedTeacher:  "+selectedTeacher);
-//					
-//					selectedTeacherName=selectedTeacher.split(" ");
-//					firstName=selectedTeacherName[0];
-//					lastName=selectedTeacherName[1];
-//								
-//					for(Employee i : listOfTeachers) {
-//						if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-//							selectedUserNameOfTeachers=i.getUsername();	
-//						}
-//					}
 				}
 				else {
 					view.isTeacherListSelected();
 					return;
+				}
+				if(trainingStatusIndex==2) {//untrained
+					
 				}
 		}else if(currUser=="PTTDirector") {
 
@@ -175,6 +158,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			//3. Administrator Screen
 			//3.1. (JComboBox) filter list of teachers
 			if(e.getSource()==view.getTrainingSelector()) {
+				trainingStatusIndex=view.getTrainingSelector().getSelectedIndex();
 				selectedFilterIndexForAdmin=view.getTrainingSelectedIndex();
 				view.trainingUpdate();
 			}
@@ -208,27 +192,19 @@ public class Controller implements ActionListener, ListSelectionListener{
 				
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-//						selectedUserNameOfTeachers=i.getUsername();	
 						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
 						int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
 						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-						
-						changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
-						
-						//for checking
-//						ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
-//						for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-//							System.out.println(teachingRequest.getId() + " " + 
-//									teachingRequest.getTeacher().getFirstName() + " " + 
-//									teachingRequest.getClassRef().getCode() + " " + 
-//									teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
-//						}
-						
-						view.updateAdminScreen();
+
+//						view.updateAdminScreen();
+						view.trainingUpdate();
 					}
 				}				
 			}
 			//3.5. train teachers
+			if(e.getSource()==view.adminTrainTeachersButton()) {
+				
+			}
 		}
 		else if (currUser=="PTTDirector"){
 		}

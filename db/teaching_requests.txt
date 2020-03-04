@@ -5,3 +5,5 @@ id teacher_username class_code teaching_requirement_id approval
 4 aria_stark SE12 4 false
 5 aria_stark SE12 4 false
 6 aria_stark SE12 4 false
+7 aria_stark SE12 4 false
+8 aria_stark SE12 4 false
