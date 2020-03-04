@@ -40,6 +40,10 @@ public class TeachingRequest  implements Hostable{
 	public void approve() {
 		this.approval = true;
 	}
+	
+	public void deny() {
+		this.approval = false;
+	}
 
 	@Override
 	public void accept(PrintToDatabaseVisitor visitor) {

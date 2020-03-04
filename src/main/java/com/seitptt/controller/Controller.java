@@ -106,9 +106,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//4.1
 		else if(currUser=="PTTDirector") {
 			if(!e.getValueIsAdjusting() && e.getSource()==view.pttDirRequirementsDisplay()) {
-				view.isRequestListSelected();
+				view.ispttDirDisplaySelected();
 			}else {
-				view.isRequestListSelected();
+				view.ispttDirDisplaySelected();
 				return;
 			}
 		}
