@@ -33,18 +33,6 @@ public class ListOfTeachingRequirements implements Findable<TeachingRequirement>
 	public TeachingRequirement find(String identifier) {
 		throw new RuntimeException("Error: Please search for TeachingRequirement using an ID");
 	}
-	
-	public ListOfTeachingRequirements getAllRequirementsConnectedToARequest(TeachingRequest request) {
-		ListOfTeachingRequirements listOfTeachingRequirements = new ListOfTeachingRequirements();
-		int desiredId = request.getTeachingRequirement().getId();
-		for(TeachingRequirement teachingRequirement : this.loR) {
-			if(desiredId==teachingRequirement.getId()) {
-				listOfTeachingRequirements.add(teachingRequirement);
-			}
-		}
-		return listOfTeachingRequirements;
-	}
-
 
 	@Override
 	public Iterator<TeachingRequirement> iterator() {

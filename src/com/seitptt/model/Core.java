@@ -141,7 +141,6 @@ public class Core {
 
 	public void createAndAddTeachingRequirement(int numberOfTeachersNeeded, Classes classObj) {
 		this.checkPermission(ClassDirector.class);
-
 		new TeachingRequirement(numberOfTeachersNeeded, classObj);
 	}
 
@@ -157,10 +156,6 @@ public class Core {
 
 	public void removeTeachingRequest(TeachingRequest tr) {
 		//this.checkPermission(ClassDirector.class);
-		ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB().getAllRequirementsConnectedToARequest(tr);
-		for(TeachingRequirement teachingRequirement : listOfTeachingRequirements) {
-			Database.removeTeachingRequirementFromDB(teachingRequirement);
-		}
 		Database.removeTeachingRequestFromDB(tr);
 	}
 

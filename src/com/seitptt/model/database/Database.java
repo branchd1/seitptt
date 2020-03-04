@@ -429,6 +429,11 @@ public class Database {
 			
 		}
 		
+		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterRequestsConnectedToARequirement(teachingRequirement);
+		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+			Database.removeTeachingRequestFromDB(teachingRequest);
+		}
+		
 	}
 	
 	/**
