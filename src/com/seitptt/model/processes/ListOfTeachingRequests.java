@@ -16,7 +16,7 @@ public class ListOfTeachingRequests implements Iterable<TeachingRequest> {
 		this.loTR.add(teachingRequest);
 	}
 	
-	public ListOfTeachingRequests filterRequestsConnectedToARequirement(TeachingRequirement requirement) {
+	public ListOfTeachingRequests filterByTeachingRequirement(TeachingRequirement requirement) {
 		ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
 		int desiredId = requirement.getId();
 		for(TeachingRequest teachingRequest : this.loTR) {
@@ -25,6 +25,20 @@ public class ListOfTeachingRequests implements Iterable<TeachingRequest> {
 				listOfTeachingRequests.add(teachingRequest);
 			}
 		}
+		return listOfTeachingRequests;
+	}
+	
+	public ListOfTeachingRequests filterByApproval(boolean approved) {
+		ListOfTeachingRequests listOfTeachingRequests = new ListOfTeachingRequests();
+		
+		for(TeachingRequest teachingRequest : this.loTR) {
+			if ((approved == true) && (teachingRequest.isApproved() == true)) {
+				listOfTeachingRequests.add(teachingRequest);
+			} else if ((approved == false) && (teachingRequest.isApproved() == false)) {
+				listOfTeachingRequests.add(teachingRequest);
+			}
+		}
+		
 		return listOfTeachingRequests;
 	}
 }

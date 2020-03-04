@@ -2,7 +2,6 @@ package com.seitptt.model;
 
 import com.seitptt.model.database.Database;
 
-import com.seitptt.model.database.PrintToDatabaseVisitor;
 import com.seitptt.model.personnel.Administrator;
 import com.seitptt.model.personnel.ClassDirector;
 import com.seitptt.model.personnel.Employee;
@@ -159,11 +158,11 @@ public class Core {
 		Database.removeTeachingRequestFromDB(tr);
 	}
 
-	public Employee findStaff(String username) {
-		//this.checkPermission(Administrator.class);
-		ListOfEmployees loE = Database.getEmployeesFromDB();
-		return loE.find(username);
-	}
+//	public Employee findStaff(String username) {
+//		//this.checkPermission(Administrator.class);
+//		ListOfEmployees loE = Database.getEmployeesFromDB();
+//		return loE.find(username);
+//	}
 
 	public void organiseTraining(Teacher t) {
 		//this.checkPermission(Administrator.class);
