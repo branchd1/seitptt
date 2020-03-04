@@ -55,7 +55,7 @@ public class PTTDirectorView extends JPanel {
 		headerPanel.add(pttDirHeader);
 		// create and add filter to list of requirements
 		// will be replaced by model call
-		String[] reqStatusOptions = { "All", "Pending" };
+		String[] reqStatusOptions = { "All", "Approved","Denied" };
 		filterRequirements = new JComboBox(reqStatusOptions);
 		filterRequirements.addActionListener(controller);
 		headerPanel.add(filterRequirements);
@@ -116,7 +116,7 @@ public class PTTDirectorView extends JPanel {
               approveButton.setEnabled(false);
               denyButton.setEnabled(false);
 		}
-		if(!requirementsDisplay.isSelectionEmpty()) {
+		if(!requirementsDisplay.isSelectionEmpty() && controller.getFilterRequirementsIndex()!=2) {
             approveButton.setEnabled(true);
             denyButton.setEnabled(true);
 		}
