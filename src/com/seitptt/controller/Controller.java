@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -35,6 +36,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 	private TeachingRequirement addTeachersInReq;
 	private String currUser;
 	private int changedNumberOfTeachers;
+	private String selectedTeacher, firstName, lastName;
+	private String[] selectedTeacherName;
 	
 //	protected ClassDirectorController classDirController=new ClassDirectorController(model, view);
 //	protected AdministratorController adminController=new AdministratorController(model, view);
@@ -75,6 +78,69 @@ public class Controller implements ActionListener, ListSelectionListener{
 		return changedNumberOfTeachers;
 	}
 
+	/**
+	 * value changed when view calls addListSelectionListener.
+	 * @param ListSelectionEvent e
+	 * */
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		//2.3. find id of remove requirements 
+		//selects from list and find requested list's id in removeReqID
+		if(currUser=="ClassDirector") {
+//			classDirController=new ClassDirectorController(model, view);
+//			this.classDirController.valueChanged(e);
+			int reqIndex=view.getRequirementsList().getSelectedIndex();
+			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+			int j=0;
+			for(TeachingRequirement i : listOfRequirements) {
+				if(j==reqIndex) {
+					removeReqID=i.getId();
+				}
+				j++;
+			}
+		}else if(currUser=="Administrator" && e.getSource()==view.getTeacherList()) {
+//			if(e.getSource()==view.getRequirementsList()) {
+//			adminController=new AdministratorController(model, view);
+//			this.adminController.valueChanged(e);
+//			if(!e.getValueIsAdjusting()) {
+//			if(e.getSource()==view.getTeacherList()) {
+//				ListSelectionListener[] lsl=view.getListeners(ListSelectionListener.class);
+				
+				System.out.println("Event. isAdjusting is "+e.getValueIsAdjusting()+"; selected indexes: ");
+				
+				if(!e.getValueIsAdjusting()) {
+//					ListOfEmployees listOfTeachers=model.getListOfTeachers();
+//
+//					JList list=(JList)e.getSource();
+//					int selections[]=list.getSelectedIndices();
+//					selectedTeacher=(String) list.getSelectedValue();
+//					System.out.println("after casting list.getSelectedValue(), (String)list.getSelectedValue: "+(String) list.getSelectedValue());
+//
+//					System.out.println("before selectedTeacher.split, selectedTeacher:  "+selectedTeacher);
+//					
+//					selectedTeacherName=selectedTeacher.split(" ");
+//					firstName=selectedTeacherName[0];
+//					lastName=selectedTeacherName[1];
+//								
+//					for(Employee i : listOfTeachers) {
+//						if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+//							selectedUserNameOfTeachers=i.getUsername();	
+//						}
+//					}
+				}
+				else {
+					return;
+				}
+//			}
+//			}
+//			}
+		}else if(currUser=="PTTDirector") {
+//			pttController=new PTTDirectorController(model, view);
+//			this.pttController.valueChanged(e);
+		}
+	}
+	
+	
 	private void createOtherController(String currUser, ActionEvent e) {
 		if(e.getSource()==view.logoutButton) {
 			view.createHomeScreen();
@@ -193,27 +259,60 @@ public class Controller implements ActionListener, ListSelectionListener{
 //				}
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();
-
-					for(Employee i : listOfTeachers) {
-						if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
+				int index=view.getTeacherList().getSelectedIndex();
+				System.out.println("Index selected: "+ index);
+				String s=(String)view.getTeacherList().getSelectedValue();
+				System.out.println("Value selected: "+ s);
+				
+				selectedTeacherName=s.split(" ");
+				firstName=selectedTeacherName[0];
+				lastName=selectedTeacherName[1];
+				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+				
+				for(Employee i : listOfTeachers) {
+					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+//						selectedUserNameOfTeachers=i.getUsername();	
+						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+						int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+						
+						changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
+						
+						//for checking
+						ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB();
+						for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+							System.out.println(teachingRequest.getId() + " " + 
+									teachingRequest.getTeacher().getFirstName() + " " + 
+									teachingRequest.getClassRef().getCode() + " " + 
+									teachingRequest.getTeachingRequirement().getId() + " " + teachingRequest.isApproved());
+						}
+						
+						view.updateAdminScreen();
+					}
+				}
+				
+				
+//					for(Employee i : listOfTeachers) {
+//						if(i.getUsername().equals(selectedUserNameOfTeachers) ) {
 							//creates teaching request associated with a teacher, class, requirement
 							
-							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
-							System.out.println("5. "+changedNumberOfTeachers);
+//							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+//							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+//							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+//							
+//							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers();
+//							System.out.println("5. "+changedNumberOfTeachers);
 							
-							//for checking
-							ListOfTeachingRequests lTRequest=Database.getTeachingRequestsFromDB();
-							for(TeachingRequest request : lTRequest) {
-								System.out.println("6. "+request.getId());
-							}
 							
-							view.updateAdminScreen();
-						}
-					}
+//							//for checking
+//							ListOfTeachingRequests lTRequest=Database.getTeachingRequestsFromDB();
+//							for(TeachingRequest request : lTRequest) {
+//								System.out.println("6. "+request.getId());
+//							}
+//							
+//							view.updateAdminScreen();
+//						}
+//					}
 				
 			}
 			//3.5. train teachers
@@ -223,6 +322,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 //			this.pttController.actionPerformed(e);
 		}
 	}
+	
+	
 	/**
 	 * actionPerformed called from view (actionListener)
 	 * */
@@ -265,50 +366,5 @@ public class Controller implements ActionListener, ListSelectionListener{
 //			}
 	}
 
-	/**
-	 * value changed when view calls addListSelectionListener.
-	 * @param ListSelectionEvent e
-	 * */
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		//2.3. find id of remove requirements 
-		//selects from list and find requested list's id in removeReqID
-		if(currUser=="ClassDirector") {
-//			classDirController=new ClassDirectorController(model, view);
-//			this.classDirController.valueChanged(e);
-			int reqIndex=view.getRequirementsList().getSelectedIndex();
-			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-			int j=0;
-			for(TeachingRequirement i : listOfRequirements) {
-				if(j==reqIndex) {
-					removeReqID=i.getId();
-				}
-				j++;
-			}
-		}else if(currUser=="Administrator") {
-//			if(e.getSource()==view.getRequirementsList()) {
-//			adminController=new AdministratorController(model, view);
-//			this.adminController.valueChanged(e);
-			if(!e.getValueIsAdjusting()) {
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();
 
-				JList list=(JList)e.getSource();
-				int selections[]=list.getSelectedIndices();
-				String selectedTeacher=(String) list.getSelectedValue();				
-				String[] selectedTeacherName=selectedTeacher.split(" ");
-				String firstName=selectedTeacherName[0];
-				String lastName=selectedTeacherName[1];
-							
-				for(Employee i : listOfTeachers) {
-					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-						selectedUserNameOfTeachers=i.getUsername();	
-					}
-				}
-			}
-//			}
-		}else if(currUser=="PTTDirector") {
-//			pttController=new PTTDirectorController(model, view);
-//			this.pttController.valueChanged(e);
-		}
-	}
 }
