@@ -75,6 +75,11 @@ public class View extends JFrame {
 	public void createHomeScreen() {
 		if(hasInnerPanel) {
 			this.remove(innerPanel);
+			innerPanel=new JPanel();
+			innerPanel.setLayout(new BorderLayout());
+			logoutButton=new JButton("LOGOUT");
+			logoutButton.addActionListener(controller);
+			innerPanel.add(logoutButton,BorderLayout.SOUTH);
 			hasInnerPanel=false;
 		}
 	     
