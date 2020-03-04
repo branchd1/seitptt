@@ -92,10 +92,11 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 				j++;
 			}
-		}else if(currUser=="Administrator" && e.getSource()==view.getTeacherList()) {	
+		}else if(currUser=="Administrator") {	
 				System.out.println("Event. isAdjusting is "+e.getValueIsAdjusting()+"; selected indexes: ");
 				
-				if(!e.getValueIsAdjusting()) {
+				if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
+					view.isTeacherListSelected();
 //					ListOfEmployees listOfTeachers=model.getListOfTeachers();
 //
 //					JList list=(JList)e.getSource();
