@@ -184,7 +184,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 
 			//3.4. add teachers
-			if(e.getSource()==view.adminAddTeachersButton()) {
+			if(e.getSource()==view.adminAddTeachersButton() || e.getSource()==view.adminTrainTeachersButton()) {
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
 				String s=(String)view.getTeacherList().getSelectedValue();				
@@ -195,29 +195,32 @@ public class Controller implements ActionListener, ListSelectionListener{
 				
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-						int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-						addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-
+						if(e.getSource()==view.adminAddTeachersButton()) {
+							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
+						}else {
+							model.organiseTraining((Teacher)i);
+						}
 						view.updateAdminScreen();
 					}
 				}				
 			}
 			//3.5. train teachers
-			if(e.getSource()==view.adminTrainTeachersButton()) {
-				String s=(String)view.getTeacherList().getSelectedValue();
-				selectedTeacherName=s.split(" ");
-				firstName=selectedTeacherName[0];
-				lastName=selectedTeacherName[1];
-				
-				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-				for(Employee i: listOfTeachers) {
-					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
-						model.organiseTraining((Teacher)i);
-						view.updateAdminScreen();
-					}
-				}
-			}
+//			if(e.getSource()==view.adminTrainTeachersButton()) {
+//				String s=(String)view.getTeacherList().getSelectedValue();
+//				selectedTeacherName=s.split(" ");
+//				firstName=selectedTeacherName[0];
+//				lastName=selectedTeacherName[1];
+//				
+//				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+//				for(Employee i: listOfTeachers) {
+//					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
+//						model.organiseTraining((Teacher)i);
+//						view.updateAdminScreen();
+//					}
+//				}
+//			}
 		}
 		
 		//4. PTT Director Screen
@@ -228,8 +231,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 				view.updatePTTDirScreen();
 			}
 			
-			//4.2. approve button
-			if(e.getSource()==view.approveRequestButton()) {
+			//4.2. approve button OR deny button
+			if(e.getSource()==view.approveRequestButton() || e.getSource()==view.denyRequestButton()) {
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
 				String[] selectedRequest=s.split("requested for ");
 				String[] teacherName=selectedRequest[0].split(" ");
@@ -238,17 +241,24 @@ public class Controller implements ActionListener, ListSelectionListener{
 				String className=selectedRequest[1];
 				
 				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
+				
 				for(TeachingRequest trequest : listOfRequests) {
 					if(trequest.getTeacher().getFirstName().equals(firstName) &&
 							trequest.getTeacher().getLastName().equals(lastName) &&
 							trequest.getClassRef().getName().equals(className)) {
-						model.approveTeachingRequest(trequest);
+						if(e.getSource()==view.approveRequestButton()) {
+							model.approveTeachingRequest(trequest);
+						}else {
+							model.denyTeachingRequest(trequest);
+						}
 						view.updatePTTDirScreen();
 					}
 				}
 			}
 			//4.3. deny button
-			
+//			if(e.getSource()==view.denyRequestButton()) {
+				
+//			}
 		}
 	}
 	
