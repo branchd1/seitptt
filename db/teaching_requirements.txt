@@ -1,8 +1,1 @@
-id number_of_teachers class_code
-4 3 SE12
-5 6 AP49
-6 3 AP49
-8 1 ADS24
-9 1 SE12
-10 6 PG88
-11 4 DB01
+id number_of_teachers class_code4 3 SE125 6 AP496 3 AP498 1 ADS249 1 SE1210 6 PG8811 4 DB01
