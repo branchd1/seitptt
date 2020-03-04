@@ -83,14 +83,11 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//2.3. find id of remove requirements 
 		//selects from list and find requested list's id in removeReqID
 		if(currUser=="ClassDirector") {
-			int reqIndex=view.getRequirementsList().getSelectedIndex();
-			ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-			int j=0;
-			for(TeachingRequirement i : listOfRequirements) {
-				if(j==reqIndex) {
-					removeReqID=i.getId();
-				}
-				j++;
+			if(!e.getValueIsAdjusting() && e.getSource()==view.getRequirementsList()) {
+				view.isClassDirListSelected();
+			}else {
+				view.isClassDirListSelected();
+				return;
 			}
 		}
 		//3.3. when teacher selected, call button enabling method
@@ -152,13 +149,26 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 			//2.4. remove requirements
 			if(e.getSource()==view.getRemoveRequirementButton()) {
+				int reqIndex=view.getRequirementsList().getSelectedIndex();//4
 				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
-				for(TeachingRequirement selectedReq : listOfRequirements) {
-					if(selectedReq.getId()==removeReqID) {
-						model.removeTeachingRequirement(selectedReq);
+				int j=0;
+				for(TeachingRequirement i : listOfRequirements) {
+					if(j==reqIndex) {
+//						removeReqID=i.getId();
+						model.removeTeachingRequirement(i);
+						view.updateClassDirScreen();
 					}
+					j++;
 				}
-				view.updateClassDirScreen();
+				
+//				ListOfTeachingRequirements listOfRequirements=model.getListOfTeachingRequirements();
+//				for(TeachingRequirement selectedReq : listOfRequirements) {
+//					if(selectedReq.getId()==removeReqID) {
+//						System.out.println(selectedReq.getId());
+//						model.removeTeachingRequirement(selectedReq);
+//						view.updateClassDirScreen();
+//					}
+//				}
 			}
 		}
 		
@@ -184,7 +194,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 
 			//3.4. add teachers
-			if(e.getSource()==view.adminAddTeachersButton() || e.getSource()==view.adminTrainTeachersButton()) {
+			if(e.getSource()==view.adminAddTeachersButton()) {// || e.getSource()==view.adminTrainTeachersButton()
 				//add selected teachers can
 				//sub number of teachers from current teaching requirement
 				String s=(String)view.getTeacherList().getSelectedValue();				
@@ -195,32 +205,29 @@ public class Controller implements ActionListener, ListSelectionListener{
 				
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-						if(e.getSource()==view.adminAddTeachersButton()) {
 							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
 							int decrementNumOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
 							addTeachersInReq.setNumOfTeachers(decrementNumOfTeachers);
-						}else {
-							model.organiseTraining((Teacher)i);
-						}
+						
 						view.updateAdminScreen();
 					}
 				}				
 			}
-			//3.5. train teachers
-//			if(e.getSource()==view.adminTrainTeachersButton()) {
-//				String s=(String)view.getTeacherList().getSelectedValue();
-//				selectedTeacherName=s.split(" ");
-//				firstName=selectedTeacherName[0];
-//				lastName=selectedTeacherName[1];
-//				
-//				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-//				for(Employee i: listOfTeachers) {
-//					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
-//						model.organiseTraining((Teacher)i);
-//						view.updateAdminScreen();
-//					}
-//				}
-//			}
+//			3.5. train teachers
+			if(e.getSource()==view.adminTrainTeachersButton()) {
+				String s=(String)view.getTeacherList().getSelectedValue();
+				selectedTeacherName=s.split(" ");
+				firstName=selectedTeacherName[0];
+				lastName=selectedTeacherName[1];
+				
+				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
+				for(Employee i: listOfTeachers) {
+					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
+						model.organiseTraining((Teacher)i);
+						view.updateAdminScreen();
+					}
+				}
+			}
 		}
 		
 		//4. PTT Director Screen
