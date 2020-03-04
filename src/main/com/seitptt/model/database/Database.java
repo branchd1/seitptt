@@ -380,6 +380,13 @@ public class Database {
 	 * @param teachingRequirement the TeachingRequirement object to be deleted
 	 */
 	public static void removeTeachingRequirementFromDB(TeachingRequirement teachingRequirement) {
+		
+		// first delete all teaching requests with foreign key to this requirement i.e CASCADE
+		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
+		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+			Database.removeTeachingRequestFromDB(teachingRequest);
+		}
+		
 		//database file
 		final String dbFile = Database.dbDir + "teaching_requirements.txt";
 		
@@ -427,11 +434,6 @@ public class Database {
 			fw.close();
 		} catch(IOException e) {
 			
-		}
-		
-		ListOfTeachingRequests listOfTeachingRequests = Database.getTeachingRequestsFromDB().filterByTeachingRequirement(teachingRequirement);
-		for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-			Database.removeTeachingRequestFromDB(teachingRequest);
 		}
 		
 	}
