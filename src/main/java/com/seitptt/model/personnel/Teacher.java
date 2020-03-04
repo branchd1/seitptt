@@ -1,5 +1,7 @@
 package main.java.com.seitptt.model.personnel;
 
+import main.java.com.seitptt.model.database.Database;
+
 /**
  * represents a teacher
  * @author arnoldumakhihe 2445734U
@@ -25,6 +27,7 @@ public class Teacher extends Employee{
 	 */
 	public void train() {
 		this.trained = true;
+		Database.trainTeacherOnDB(this);
 	}
 	
 	/**
