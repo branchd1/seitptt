@@ -5,7 +5,7 @@ import main.java.com.seitptt.view.View;
 
 /**
  * Main class that initializes model, view and controller
- * @author 
+ * @author Bokyung Lee (2431088L)
  *
  */
 public class Main {

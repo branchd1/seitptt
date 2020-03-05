@@ -23,6 +23,11 @@ import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 
+/**
+ * represents ptt director view
+ * @author Anne-Marie Gill (2431989G)
+ *
+ */
 public class PTTDirectorView extends JPanel {
 
 	// class attributes

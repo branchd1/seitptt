@@ -25,6 +25,11 @@ import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.Semester;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 
+/**
+ * represents class director view
+ * @author Anne-Marie Gill (2431989G)
+ *
+ */
 public class ClassDirectorView extends JPanel {
 
 	// class attributes

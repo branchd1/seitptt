@@ -21,6 +21,11 @@ import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 import main.java.com.seitptt.view.View;
 
+/**
+ * represents controller
+ * @author Bokyung Lee (2431088L)
+ *
+ */
 public class Controller implements ActionListener, ListSelectionListener{
 
 	private Core model;

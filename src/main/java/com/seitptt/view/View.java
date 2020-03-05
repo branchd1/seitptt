@@ -26,6 +26,7 @@ import main.java.com.seitptt.model.personnel.PTTDirector;
 
 /**
  * View - creates the GUI view for the teacher admin application
+ * @author Anne-Marie Gill (2431989G)
  */
 public class View extends JFrame {
 
