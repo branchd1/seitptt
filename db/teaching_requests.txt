@@ -1,2 +1,6 @@
 id teacher_username class_code teaching_requirement_id approval
 2 john_snow SE12 2 true
+3 aria_stark SE12 2 true
+4 aria_stark SE12 2 true
+5 ramsey_bolton SE12 4 true
+6 aria_stark SE12 4 true
