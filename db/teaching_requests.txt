@@ -12,3 +12,7 @@ id teacher_username class_code teaching_requirement_id approval
 12 cersei_lannister DB01 2 false
 2 john_snow SE12 2 true
 3 ramsey_bolton SE12 2 false
+4 aria_stark SE12 2 false
+5 john_snow AP49 3 false
+6 theon_greyjoy SE12 2 false
+7 cersei_lannister SE12 2 false

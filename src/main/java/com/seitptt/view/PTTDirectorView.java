@@ -87,14 +87,9 @@ public class PTTDirectorView extends JPanel {
 		ListOfTeachingRequests teachingRequestList =null;
 		if(controller.getFilterRequirementsIndex()==0){
 	       teachingRequestList = model.getListOfTeachingRequests().filterByApproval(false);
-	       approveButton.setEnabled(true);
-	       denyButton.setEnabled(true);
-
 		}
 		if(controller.getFilterRequirementsIndex()==1) {
 		       teachingRequestList = model.getListOfTeachingRequests().filterByApproval(true);
-		       approveButton.setEnabled(false);
-		       denyButton.setEnabled(true);
 		}
 	
 		for (TeachingRequest i : teachingRequestList) {
@@ -107,13 +102,6 @@ public class PTTDirectorView extends JPanel {
 		if(requirementsDisplay.isSelectionEmpty()) {
               approveButton.setEnabled(false);
               denyButton.setEnabled(false);
-		}
-		if(!requirementsDisplay.isSelectionEmpty() && filterRequirements.getSelectedIndex()!=1) {
-            approveButton.setEnabled(true);
-            if(controller.getFilterRequirementsIndex()==0) {
-                denyButton.setEnabled(true);
-            }
-    
 		}
 	}
 

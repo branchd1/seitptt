@@ -110,7 +110,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 				if(view.getTrainingSelectedIndex()==2) {
 					view.adminTrainTeachersButton().setEnabled(true);
 				}
-//				view.isTeacherListSelected();
 			}
 			else {
 				view.isTeacherListSelected();
@@ -120,7 +119,14 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//4.1
 		else if(currUser=="PTTDirector") {
 			if(!e.getValueIsAdjusting() && e.getSource()==view.pttDirRequirementsDisplay()) {
-				view.isPttDirDisplaySelected();
+				if(view.pttDirRequirementsFilterIndex()==1) {
+					view.approveRequestButton().setEnabled(false);
+					view.denyRequestButton().setEnabled(false);
+				}else {
+					view.approveRequestButton().setEnabled(true);
+					view.denyRequestButton().setEnabled(true);
+				}
+
 			}else {
 				view.isPttDirDisplaySelected();
 				return;
@@ -204,6 +210,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 					}
 					j++;
 				}
+				//if there is already selected list, enable adding button
+				view.getTeacherList().clearSelection();
 			}
 
 			//3.4. add teachers
@@ -218,16 +226,16 @@ public class Controller implements ActionListener, ListSelectionListener{
 				if(view.getRequirementSelectedIndex()==0) {
 					view.adminAddTeachersButton().setEnabled(false);
 				}else {
-				for(Employee i : listOfTeachers) {
-					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-						changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-						addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
-						
-						JOptionPane.showMessageDialog(view, "Added Successfully");
-						view.updateAdminScreen();
+					for(Employee i : listOfTeachers) {
+						if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
+							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+							addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
+
+							JOptionPane.showMessageDialog(view, "Added Successfully");
+							view.updateAdminScreen();
+						}
 					}
-				}
 				}				
 			}
 			//3.5. train teachers
@@ -253,6 +261,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 			//4.1. (JComboBox<String>)filterRequirements
 			if(e.getSource()==view.pttDirRequirementsFilter()) {
 				filterRequirementsIndex=view.pttDirRequirementsFilterIndex();
+				view.approveRequestButton().setEnabled(false);
+				view.denyRequestButton().setEnabled(false);
 				view.updatePTTDirScreen();
 			}
 
