@@ -1,4 +1,1 @@
 id teacher_username class_code teaching_requirement_id approval
-2 aria_stark SE12 3 true
-3 theon_greyjoy PG88 5 false
-5 aria_stark PG88 5 true
