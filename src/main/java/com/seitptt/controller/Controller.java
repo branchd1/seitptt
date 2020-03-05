@@ -3,6 +3,7 @@ package main.java.com.seitptt.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -184,7 +185,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 				int j=0;
 				for(TeachingRequirement i:teachingReqirementList) {
-					if(j==chosenReqIndex) {
+					if((j+1)==chosenReqIndex) {
 						setAddTeachersInReq(i);
 					}
 					j++;
@@ -206,7 +207,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
 							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
 							addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
-						
+						JOptionPane.showMessageDialog(view, "Added Successfully");
 						view.updateAdminScreen();
 					}
 				}				
@@ -222,6 +223,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				for(Employee i: listOfTeachers) {
 					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
 						model.organiseTraining((Teacher)i);
+						JOptionPane.showMessageDialog(view, "Training Success");
 						view.updateAdminScreen();
 					}
 				}
@@ -245,19 +247,6 @@ public class Controller implements ActionListener, ListSelectionListener{
 				lastName=teacherName[1];
 				String selectedClassName=selectedRequest[1];
 				
-//				ListOfTeachingRequests listOfTeachingRequests = model.getListOfTeachingRequests();
-//				
-//				for(TeachingRequest teachingRequest : listOfTeachingRequests) {
-//					if(teachingRequest.getTeacher().getFirstName().contentEquals(firstName) && 
-//							teachingRequest.getTeacher().getLastName().contentEquals(lastName) && 
-//							teachingRequest.getClassRef().getName().contentEquals(selectedClassName)) {
-//						
-//						model.approveTeachingRequest(teachingRequest);
-//						
-//						view.updatePTTDirScreen();
-//					}
-//				}
-				
 				ListOfClasses listOfClasses=model.getListOfClasses();
 				for(Classes loc: listOfClasses) {
 					if(loc.getName().equals(selectedClassName)) {
@@ -270,27 +259,12 @@ public class Controller implements ActionListener, ListSelectionListener{
 									i.getTeacher().getLastName().equals(lastName) &&
 									i.getClassRef().getCode().equals(findClass.getCode())) {
 								model.approveTeachingRequest(i);
-								System.out.println("approve button clicked: "+i.isApproved());
 								
 								view.updatePTTDirScreen();
 							}
 						}
 					}
 				}
-				
-//				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-//				
-//				for(TeachingRequest i : listOfRequests) {
-//					if(i.getTeacher().getFirstName().equals(firstName) &&
-//							i.getTeacher().getLastName().equals(lastName) &&
-//							i.getClassRef().getCode().equals(findClass.getCode())) {//i.getClassRef().getName().equals(selectedClassName)
-//						System.out.println(i);
-//						model.approveTeachingRequest((TeachingRequest)i);
-//						System.out.println("approve button clicked: "+i.isApproved());
-//						
-//						view.updatePTTDirScreen();
-//					}
-//				}
 			}
 			
 			//4.3. deny button
@@ -308,9 +282,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 					if(trequest.getTeacher().getFirstName().equals(firstName) &&
 							trequest.getTeacher().getLastName().equals(lastName) &&
 							trequest.getClassRef().getName().equals(className)) {
-						model.denyTeachingRequest(trequest);
-						System.out.println("denied button clicked: "+trequest.isApproved());
-						
+						model.denyTeachingRequest(trequest);						
 						view.updatePTTDirScreen();
 					}
 				}	
