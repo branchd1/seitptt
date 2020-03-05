@@ -65,5 +65,16 @@ public class TeachingRequirement  implements Hostable{
 	public String toString() {
 		return this.getNumOfTeachers() + " teachers required " + this.getClassRef();
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof TeachingRequirement) {
+			TeachingRequirement teachingRequirement = (TeachingRequirement) o;
+			if(teachingRequirement.getClassRef()==this.getClassRef()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
