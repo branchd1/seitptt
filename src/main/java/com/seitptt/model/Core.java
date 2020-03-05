@@ -16,13 +16,203 @@ import main.java.com.seitptt.model.processes.Semester;
 import main.java.com.seitptt.model.processes.TeachingRequest;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 
+/**
+ * The core model class to handle model logic
+ * @author Hope Elumeziem (2500799E)
+ *
+ */
 public class Core {
 
+	/**
+	 * current semester selected
+	 */
 	private Semester currentSemester;
+
+	/**
+	 * current user selected
+	 */
 	private Employee currentUser;
 
+	/**
+	 * creates a new core
+	 */
 	public Core() {
 		Database.LoadCaches();
+	}
+
+	/**
+	 * used to check permission
+	 * @param <T> generic class extends Employee
+	 * @param classWithPermission class with the permission needed
+	 */
+	private <T extends Employee> void checkPermission(Class<T> classWithPermission) {
+		if(this.getCurrentUser().getClass().equals(classWithPermission)) {
+			return;
+		}
+
+		// if current user is not of the appropriate class, throw exception
+		throw new RuntimeException("Sorry current user is not a " + classWithPermission.getName());
+	}
+
+	/**
+	 * create and add teaching request to database
+	 * @param numberOfTeachersNeeded represents the number of teachers needed
+	 * @param classObj represents the class object
+	 */
+	public void createAndAddTeachingRequirement(int numberOfTeachersNeeded, Classes classObj) {
+		this.checkPermission(ClassDirector.class);
+		new TeachingRequirement(numberOfTeachersNeeded, classObj);
+	}
+
+	/**
+	 * approve a teaching request
+	 * @param tr teaching request to be approved
+	 */
+	public void approveTeachingRequest(TeachingRequest tr) {
+		this.checkPermission(PTTDirector.class);
+		tr.approve();
+	}
+
+	/**
+	 * deny a teaching request
+	 * @param tr teaching request to be denied
+	 */
+	public void denyTeachingRequest(TeachingRequest tr) {
+		try {
+			this.checkPermission(PTTDirector.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
+		this.removeTeachingRequest(tr);
+	}
+
+	/**
+	 * remove a teaching requirement
+	 * @param tr teaching requirement to be removed
+	 */
+	public void removeTeachingRequirement(TeachingRequirement tr) {
+		this.checkPermission(ClassDirector.class);
+		Database.removeTeachingRequirementFromDB(tr);
+	}
+
+	/**
+	 * remove a teaching request
+	 * @param tr teaching request to be removed
+	 */
+	public void removeTeachingRequest(TeachingRequest tr) {
+		try {
+			this.checkPermission(PTTDirector.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
+		Database.removeTeachingRequestFromDB(tr);
+	}
+
+	/**
+	 * organise training
+	 * @param t teacher to be trained
+	 */
+	public void organiseTraining(Teacher t) {
+		this.checkPermission(Administrator.class);
+		t.train();
+	}
+
+	/**
+	 * create and add a teaching request
+	 * @param t represents the teacher
+	 * @param c represents the class
+	 * @param tr represents the associated teaching requirement
+	 */
+	public void createAndAddTeachingRequest(Teacher t, Classes c, TeachingRequirement tr) {
+		this.checkPermission(Administrator.class);
+		new TeachingRequest(t, c, tr);
+	}
+
+	/**
+	 * get the list of teaching requirements
+	 * @return ListOfTeachingRequirements object representing the list of teaching requirements
+	 */
+	public ListOfTeachingRequirements getListOfTeachingRequirements() {
+		try {
+			this.checkPermission(Administrator.class);
+		} catch(RuntimeException e) {
+			this.checkPermission(ClassDirector.class);
+		}
+		return Database.getTeachingRequirementsFromDB();
+	}
+
+	/**
+	 * get the list of teaching requests
+	 * @return ListOfTeachingRequests object representing the list of teaching requests
+	 */
+	public ListOfTeachingRequests getListOfTeachingRequests() {
+		this.checkPermission(PTTDirector.class);
+		return Database.getTeachingRequestsFromDB();
+	}
+
+	/**
+	 * get the list of semesters
+	 * @return ListOfSemesters object representing the list of semesters
+	 */
+	public ListOfSemesters getListOfSemesters() {
+		return Database.getSemestersFromDB();
+	}
+
+	/**
+	 * get the list of teachers 
+	 * @return ListOfEmployees object representing the list of teachers
+	 */
+	public ListOfEmployees getListOfTeachers() {
+		this.checkPermission(Administrator.class);
+		return Database.getEmployeesFromDB().getTeachers();
+	}
+
+	/**
+	 * get current semester
+	 * @return Semester object representing the current semester
+	 */
+	public Semester getCurrentSemester() {
+		return currentSemester;
+	}
+
+	/**
+	 * set current semester
+	 * @param currentSemester Semester object representing semester
+	 */
+	public void setCurrentSemester(Semester currentSemester) {
+		this.currentSemester = currentSemester;
+	}
+
+	/**
+	 * get current user
+	 * @return Employee object representing current user
+	 */
+	public Employee getCurrentUser() {
+		return currentUser;
+	}
+
+	/**
+	 * set current user. creates new user and sets as current user depending on the type of user needed.
+	 * @param currentUserType string denoting the type of user
+	 */
+	public void setCurrentUser(String currentUserType) {
+		if(currentUserType.equalsIgnoreCase("classdirector")) {
+			this.currentUser = new ClassDirector("current", "user");
+		}
+		if(currentUserType.equalsIgnoreCase("pttdirector")) {
+			this.currentUser = new PTTDirector("current", "user");
+		}
+		if(currentUserType.equalsIgnoreCase("administrator")) {
+			this.currentUser = new Administrator("current", "user");
+		}
+	}
+
+	/**
+	 * get list of classes
+	 * @return ListOfClasses object representing list of classes
+	 */
+	public ListOfClasses getListOfClasses() {
+		return Database.getClassesFromDB();
 	}
 
 	public static void main(String[] args) {
@@ -137,108 +327,5 @@ public class Core {
 		System.out.println("-------------------\nEND\n-------------------");
 
 	}
-
-	private <T extends Employee> void checkPermission(Class<T> classWithPermission) {
-		if(this.getCurrentUser().getClass().equals(classWithPermission)) {
-			return;
-		}
-		throw new RuntimeException("Sorry current user is not a " + classWithPermission.getName());
-	}
-
-
-	public void createAndAddTeachingRequirement(int numberOfTeachersNeeded, Classes classObj) {
-		this.checkPermission(ClassDirector.class);
-		new TeachingRequirement(numberOfTeachersNeeded, classObj);
-	}
-
-	public void approveTeachingRequest(TeachingRequest tr) {
-		this.checkPermission(PTTDirector.class);
-		tr.approve();
-	}
-	
-	public void denyTeachingRequest(TeachingRequest tr) {
-		try {
-			this.checkPermission(PTTDirector.class);
-		} catch(RuntimeException e) {
-			this.checkPermission(ClassDirector.class);
-		}
-		this.removeTeachingRequest(tr);
-	}
-
-	public void removeTeachingRequirement(TeachingRequirement tr) {
-		this.checkPermission(ClassDirector.class);
-		Database.removeTeachingRequirementFromDB(tr);
-	}
-
-	public void removeTeachingRequest(TeachingRequest tr) {
-		try {
-			this.checkPermission(PTTDirector.class);
-		} catch(RuntimeException e) {
-			this.checkPermission(ClassDirector.class);
-		}
-		Database.removeTeachingRequestFromDB(tr);
-	}
-
-	public void organiseTraining(Teacher t) {
-		this.checkPermission(Administrator.class);
-		t.train();
-	}
-
-	public void createAndAddTeachingRequest(Teacher t, Classes c, TeachingRequirement tr) {
-		this.checkPermission(Administrator.class);
-		new TeachingRequest(t, c, tr);
-	}
-
-	public ListOfTeachingRequirements getListOfTeachingRequirements() {
-		try {
-			this.checkPermission(Administrator.class);
-		} catch(RuntimeException e) {
-			this.checkPermission(ClassDirector.class);
-		}
-		return Database.getTeachingRequirementsFromDB();
-	}
-	
-	public ListOfTeachingRequests getListOfTeachingRequests() {
-		this.checkPermission(PTTDirector.class);
-		return Database.getTeachingRequestsFromDB();
-	}
-
-	public ListOfSemesters getListOfSemesters() {
-		return Database.getSemestersFromDB();
-	}
-
-	public ListOfEmployees getListOfTeachers() {
-		this.checkPermission(Administrator.class);
-		return Database.getEmployeesFromDB().getTeachers();
-	}
-
-	public Semester getCurrentSemester() {
-		return currentSemester;
-	}
-
-	public void setCurrentSemester(Semester currentSemester) {
-		this.currentSemester = currentSemester;
-	}
-
-	public Employee getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(String currentUserType) {
-		if(currentUserType.equalsIgnoreCase("classdirector")) {
-			this.currentUser = new ClassDirector("current", "user");
-		}
-		if(currentUserType.equalsIgnoreCase("pttdirector")) {
-			this.currentUser = new PTTDirector("current", "user");
-		}
-		if(currentUserType.equalsIgnoreCase("administrator")) {
-			this.currentUser = new Administrator("current", "user");
-		}
-	}
-
-	public ListOfClasses getListOfClasses() {
-		return Database.getClassesFromDB();
-	}
-
 
 }
