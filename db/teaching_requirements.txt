@@ -1,4 +1,4 @@
 id number_of_teachers class_code
-2 6 SE12
-3 4 ADS24
-4 12 AP49
+2 3 AP49
+3 2 SE12
+4 3 ADS24
