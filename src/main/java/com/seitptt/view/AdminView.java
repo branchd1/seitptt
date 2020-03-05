@@ -93,6 +93,8 @@ public class AdminView extends JPanel {
 		trainTeachers = new JButton("Train Teachers");
 		trainTeachers.addActionListener(controller);
 		
+		addTeachers.setEnabled(false);
+		trainTeachers.setEnabled(false);
 		buttonPanel.add(addTeachers);
 		buttonPanel.add(trainTeachers);
 		this.add(buttonPanel, BorderLayout.SOUTH);
@@ -104,7 +106,7 @@ public class AdminView extends JPanel {
 		ListOfEmployees listOfTeachers=null;
 		if(controller.getSelectedFilterIndexForAdmin()==0){
 			listOfTeachers = model.getListOfTeachers();
-			trainTeachers.setEnabled(true);
+			trainTeachers.setEnabled(false);
 
 		}
 		if(controller.getSelectedFilterIndexForAdmin()==1) {
@@ -131,10 +133,11 @@ public class AdminView extends JPanel {
 	protected void isTeacherListSelected() {
 		if(teacherList.isSelectionEmpty()) {
 			addTeachers.setEnabled(false);
+			trainTeachers.setEnabled(false);
 		}
-		if(!teacherList.isSelectionEmpty()) {
-			addTeachers.setEnabled(true);
-		}
+//		if(!teacherList.isSelectionEmpty()) {
+//			trainTeachers.setEnabled(true);
+//		}
 	}
 
 }
