@@ -185,7 +185,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 				int j=0;
 				for(TeachingRequirement i:teachingReqirementList) {
-					if((j+1)==chosenReqIndex) {
+					//if there are other selection in JComboBox such as {"Select","list1","list2"...}
+					//if((j+1)==choseReqIndex)
+					if((j)==chosenReqIndex) {
 						setAddTeachersInReq(i);
 					}
 					j++;
