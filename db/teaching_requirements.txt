@@ -1,2 +1,6 @@
 id number_of_teachers class_code
-2 -24 SE12
+3 5 PG88
+4 2 DB01
+5 1 AP49
+6 1 SE12
+7 4 ADS24
