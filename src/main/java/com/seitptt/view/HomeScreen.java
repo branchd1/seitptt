@@ -1,6 +1,7 @@
 package main.java.com.seitptt.view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -16,6 +17,11 @@ import javax.swing.border.Border;
 
 import main.java.com.seitptt.controller.Controller;
 
+/**
+ * represents home screen
+ * @author Anne-Marie Gill (2431989G)
+ *
+ */
 public class HomeScreen extends JPanel {
 
 	// class attributes

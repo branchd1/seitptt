@@ -20,6 +20,11 @@ import main.java.com.seitptt.model.personnel.ListOfEmployees;
 import main.java.com.seitptt.model.processes.ListOfTeachingRequirements;
 import main.java.com.seitptt.model.processes.TeachingRequirement;
 
+/**
+ * represents admin view
+ * @author Anne-Marie Gill (2431989G)
+ *
+ */
 public class AdminView extends JPanel {
 	
 	
