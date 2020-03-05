@@ -94,5 +94,16 @@ public class TeachingRequest  implements Hostable{
 	public String toString() {
 		return this.getTeacher() + " requested for " + this.getClassRef().getName();
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof TeachingRequest) {
+			TeachingRequest teachingRequest = (TeachingRequest) o;
+			if(teachingRequest.getClassRef()==this.getClassRef() && teachingRequest.getTeacher()==this.getTeacher()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
