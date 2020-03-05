@@ -239,11 +239,24 @@ public class Controller implements ActionListener, ListSelectionListener{
 			//4.2. approve button OR deny button
 			else if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
-				String[] selectedRequest=s.split("requested for ");
+				String[] selectedRequest=s.split(" requested for ");
 				String[] teacherName=selectedRequest[0].split(" ");
 				firstName=teacherName[0];
 				lastName=teacherName[1];
 				String selectedClassName=selectedRequest[1];
+				
+//				ListOfTeachingRequests listOfTeachingRequests = model.getListOfTeachingRequests();
+//				
+//				for(TeachingRequest teachingRequest : listOfTeachingRequests) {
+//					if(teachingRequest.getTeacher().getFirstName().contentEquals(firstName) && 
+//							teachingRequest.getTeacher().getLastName().contentEquals(lastName) && 
+//							teachingRequest.getClassRef().getName().contentEquals(selectedClassName)) {
+//						
+//						model.approveTeachingRequest(teachingRequest);
+//						
+//						view.updatePTTDirScreen();
+//					}
+//				}
 				
 				ListOfClasses listOfClasses=model.getListOfClasses();
 				for(Classes loc: listOfClasses) {

@@ -1,1 +1,2 @@
 id teacher_username class_code teaching_requirement_id approval
+2 john_snow SE12 2 true

@@ -231,11 +231,7 @@ public class Database {
 				Classes classObj = (Classes)Database.getClassesFromDB().find(classCode);
 				TeachingRequirement teachingRequirement = (TeachingRequirement)Database.getTeachingRequirementsFromDB().find(teachingRequirementId);
 				
-				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement);
-				
-				if(isApproved) {
-					teachingRequest.approve();
-				}
+				TeachingRequest teachingRequest = new TeachingRequest(id, teacher, classObj, teachingRequirement, isApproved);
 				
 				// add object to the list
 				listOfTeachingRequests.add(teachingRequest);
@@ -584,20 +580,21 @@ public class Database {
 		
 		// loop through the lines and add them to new file
 		while(s.hasNextLine()) {
-			int fileId = s.nextInt();
+			String line = s.nextLine();
+			String[] lineArr = line.split(" ");
+			
+			int fileId = Integer.parseInt(lineArr[0]);
 			
 			int trId = teachingRequirement.getId();
 
 			newDbString += "\n";
 			// except the line where the id is the same with the teaching requirement id to be updated
 			if (!(fileId==trId)){
-				newDbString += fileId;
-				newDbString += s.nextLine();
+				newDbString += line;
 			} else {
-				newDbString += fileId + " ";
-				int newNumber = s.nextInt() - 1;
-				newDbString += (newNumber) + " ";
-				newDbString += s.next();
+				lineArr[1] = "" + (Integer.parseInt(lineArr[1]) - 1);
+				line = String.join(" ", lineArr);
+				newDbString += line;
 			}
 		}
 		

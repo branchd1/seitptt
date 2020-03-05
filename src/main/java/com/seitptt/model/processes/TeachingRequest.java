@@ -25,11 +25,11 @@ public class TeachingRequest  implements Hostable{
 		this.accept(visitor);
 	}
 	
-	public TeachingRequest(int id, Teacher teacher, Classes classRef, TeachingRequirement teachingRequirement) {
+	public TeachingRequest(int id, Teacher teacher, Classes classRef, TeachingRequirement teachingRequirement, boolean approval) {
 		this.setTeacher(teacher);
 		this.setClassRef(classRef);
 		this.setTeachingRequirement(teachingRequirement);
-		this.approval = false;
+		this.approval = approval;
 		this.setId(id);
 	}
 	
@@ -38,6 +38,9 @@ public class TeachingRequest  implements Hostable{
 	}
 	
 	public void approve() {
+		if(this.approval==true) {
+			return;
+		}
 		this.approval = true;
 		Database.approveTeachingRequestOnDB(this);
 		Database.reduceTeachingRequirementCountOnDB(this.getTeachingRequirement());
