@@ -50,7 +50,7 @@ public class PTTDirectorView extends JPanel {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new GridLayout(2, 1));
 		this.add(headerPanel, BorderLayout.NORTH);
-		JLabel pttDirHeader = new JLabel("List of Requirements", SwingConstants.CENTER);
+		JLabel pttDirHeader = new JLabel("List of Requests", SwingConstants.CENTER);
 		pttDirHeader.setFont(new java.awt.Font("Arial", Font.BOLD, 30));
 		headerPanel.add(pttDirHeader);
 		// create and add filter to list of requirements
