@@ -1,2 +1,2 @@
 id number_of_teachers class_code
-2 2 SE12
+2 0 SE12
