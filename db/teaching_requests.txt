@@ -1,3 +1,4 @@
 id teacher_username class_code teaching_requirement_id approval
-2 john_snow SE12 2 true
-3 cersei_lannister SE12 2 true
+2 john_snow AP49 2 true
+3 ramsey_bolton SE12 3 false
+4 theon_greyjoy ADS24 4 false
