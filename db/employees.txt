@@ -1,6 +1,6 @@
 type username first_name last_name trained
 teacher john_snow John Snow false
 teacher cersei_lannister Cersei Lannister false
-teacher ramsey_bolton Ramsey Bolton false
+teacher ramsey_bolton Ramsey Bolton true
 teacher aria_stark Aria Stark true
 teacher theon_greyjoy Theon Greyjoy true

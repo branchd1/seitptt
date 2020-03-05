@@ -553,6 +553,67 @@ public class Database {
 	}
 	
 	/**
+	 * increase a teaching requirement count for number of teachers needed from the database
+	 * @param teachingRequirement the TeachingRequirement object to be updated
+	 */
+	public static void increaseTeachingRequirementCountOnDB(TeachingRequirement teachingRequirement, int add) {
+		
+		//database file
+		final String dbFile = Database.dbDir + "teaching_requirements.txt";
+		
+		// string to contain contents of the new file
+		String newDbString = "";
+		
+		// initialize file reader and scanner
+		FileReader fr = null;
+		
+		try {
+			fr = new FileReader(dbFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		final Scanner s = new Scanner(fr);
+		
+		// add first line to new file
+		newDbString += s.nextLine();
+		
+		// loop through the lines and add them to new file
+		while(s.hasNextLine()) {
+			String line = s.nextLine();
+			String[] lineArr = line.split(" ");
+			
+			int fileId = Integer.parseInt(lineArr[0]);
+			
+			int trId = teachingRequirement.getId();
+
+			newDbString += "\n";
+			// except the line where the id is the same with the teaching requirement id to be updated
+			if (!(fileId==trId)){
+				newDbString += line;
+			} else {
+				lineArr[1] = "" + (Integer.parseInt(lineArr[1]) + add);
+				line = String.join(" ", lineArr);
+				newDbString += line;
+			}
+		}
+		
+		// close scanner
+		s.close();
+		
+		// overwrite old file with new file and close file writer
+		try {
+			FileWriter fw = null;
+			fw = new FileWriter(dbFile);
+			fw.write(newDbString);
+			fw.close();
+		} catch(IOException e) {
+			
+		}
+		
+	}
+	
+	/**
 	 * reduce a teaching requirement count for number of teachers needed from the database
 	 * @param teachingRequirement the TeachingRequirement object to be updated
 	 */

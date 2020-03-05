@@ -10,3 +10,4 @@ id teacher_username class_code teaching_requirement_id approval
 10 theon_greyjoy AP49 4 false
 11 cersei_lannister AP49 4 false
 12 cersei_lannister DB01 2 false
+2 john_snow SE12 2 true

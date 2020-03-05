@@ -1,5 +1,9 @@
 id number_of_teachers class_code
+<<<<<<< HEAD
 2 2 DB01
 3 0 PG88
 4 0 AP49
 5 3 ADS24
+=======
+2 0 SE12
+>>>>>>> 697083a5c3356fc03b55a8f6f2cc5e0e91e829ec

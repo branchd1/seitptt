@@ -25,14 +25,14 @@ public class Controller implements ActionListener, ListSelectionListener{
 
 	private Core model;
 	private View view;
-	
+
 	private Semester chosenSemester;
 	private TeachingRequirement addTeachersInReq;
-	
+
 	private int selectedFilterIndexForAdmin;
 	private String currUser;
 	private int changedNumberOfTeachers, filterRequirementsIndex;
-	
+
 	/**
 	 * @param Core model
 	 * @param View view
@@ -45,7 +45,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 		this.view=view;
 	}
 
-	
+
 	private void setAddTeachersInReq(TeachingRequirement addTeachersInReq) {
 		this.addTeachersInReq = addTeachersInReq;
 	}
@@ -57,7 +57,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 	public Semester getChosenSemester() {
 		return chosenSemester;
 	}
-	
+
 
 	/**
 	 * For Administrator screen when getTrainingSelector passes actionListener
@@ -67,13 +67,13 @@ public class Controller implements ActionListener, ListSelectionListener{
 		return selectedFilterIndexForAdmin;
 	}
 
-	
-	
+
+
 	public int getChangedNumberOfTeachers() {
 		return changedNumberOfTeachers;
 	}
-	
-	
+
+
 
 	public int getFilterRequirementsIndex() {
 		return filterRequirementsIndex;
@@ -97,13 +97,13 @@ public class Controller implements ActionListener, ListSelectionListener{
 		}
 		//3.3. when teacher selected, call button enabling method
 		else if(currUser=="Administrator") {					
-				if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
-					view.isTeacherListSelected();
-				}
-				else {
-					view.isTeacherListSelected();
-					return;
-				}
+			if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
+				view.isTeacherListSelected();
+			}
+			else {
+				view.isTeacherListSelected();
+				return;
+			}
 		}
 		//4.1
 		else if(currUser=="PTTDirector") {
@@ -115,17 +115,17 @@ public class Controller implements ActionListener, ListSelectionListener{
 			}
 		}
 	}
-	
-	
+
+
 	private void createOtherController(String currUser, ActionEvent e) {
 		String firstName, lastName;
 		String[] selectedTeacherName;
 		Classes findClass;
-		
+
 		if(e.getSource()==view.logoutButton) {
 			view.createHomeScreen();
 		}
-		
+
 		//2. Class Director Screen
 		else if(currUser.equals("ClassDirector")) {
 			if(e.getSource()==view.getSemesterSelector()) {
@@ -139,7 +139,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 				view.enableClassList();
 			}
-			
+
 			//2.2. add requirements
 			else if(e.getSource()==view.getAddRequirementButton()) {
 				ListOfClasses listOfClasses=model.getListOfClasses().filterBySemester(chosenSemester);
@@ -164,13 +164,15 @@ public class Controller implements ActionListener, ListSelectionListener{
 				for(TeachingRequirement i : listOfRequirements) {
 					if(j==reqIndex) {
 						model.removeTeachingRequirement(i);
+						JOptionPane.showMessageDialog(view, "Requirement Removed");
+
 						view.updateClassDirScreen();
 					}
 					j++;
 				}
 			}
 		}
-		
+
 		//3. Administrator Screen
 		else if(currUser.equals("Administrator")) {
 			//3.1. (JComboBox) filter list of teachers
@@ -185,9 +187,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				ListOfTeachingRequirements teachingReqirementList=model.getListOfTeachingRequirements();
 				int j=0;
 				for(TeachingRequirement i:teachingReqirementList) {
-					//if there are other selection in JComboBox such as {"Select","list1","list2"...}
-					//if((j+1)==choseReqIndex)
-					if((j)==chosenReqIndex) {
+					if((j+1)==chosenReqIndex) {
 						setAddTeachersInReq(i);
 					}
 					j++;
@@ -203,24 +203,25 @@ public class Controller implements ActionListener, ListSelectionListener{
 				firstName=selectedTeacherName[0];
 				lastName=selectedTeacherName[1];
 				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-				
+
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
-							model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
-							changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
-							addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
+						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
+						changedNumberOfTeachers=addTeachersInReq.getNumOfTeachers()-1;
+						addTeachersInReq.setNumOfTeachers(changedNumberOfTeachers);
+						
 						JOptionPane.showMessageDialog(view, "Added Successfully");
 						view.updateAdminScreen();
 					}
 				}				
 			}
-//			3.5. train teachers
+			//3.5. train teachers
 			if(e.getSource()==view.adminTrainTeachersButton()) {
 				String s=(String)view.getTeacherList().getSelectedValue();
 				selectedTeacherName=s.split(" ");
 				firstName=selectedTeacherName[0];
 				lastName=selectedTeacherName[1];
-				
+
 				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
 				for(Employee i: listOfTeachers) {
 					if(i.getFirstName().equals(firstName) && i.getLastName().equals(lastName)) {
@@ -231,7 +232,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 				}
 			}
 		}
-		
+
 		//4. PTT Director Screen
 		else if (currUser.equals("PTTDirector")){
 			//4.1. (JComboBox<String>)filterRequirements
@@ -239,8 +240,8 @@ public class Controller implements ActionListener, ListSelectionListener{
 				filterRequirementsIndex=view.pttDirRequirementsFilterIndex();
 				view.updatePTTDirScreen();
 			}
-			
-			//4.2. approve button OR deny button
+
+			//4.2. approve button
 			else if(e.getSource()==view.approveRequestButton() ) {//|| e.getSource()==view.denyRequestButton()
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
 				String[] selectedRequest=s.split(" requested for ");
@@ -248,27 +249,28 @@ public class Controller implements ActionListener, ListSelectionListener{
 				firstName=teacherName[0];
 				lastName=teacherName[1];
 				String selectedClassName=selectedRequest[1];
-				
+
 				ListOfClasses listOfClasses=model.getListOfClasses();
 				for(Classes loc: listOfClasses) {
 					if(loc.getName().equals(selectedClassName)) {
 						findClass=loc;
-						
+
 						ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-						
+
 						for(TeachingRequest i : listOfRequests) {
 							if(i.getTeacher().getFirstName().equals(firstName) &&
 									i.getTeacher().getLastName().equals(lastName) &&
 									i.getClassRef().getCode().equals(findClass.getCode())) {
 								model.approveTeachingRequest(i);
-								
+								JOptionPane.showMessageDialog(view, "Approved Successfully");
+
 								view.updatePTTDirScreen();
 							}
 						}
 					}
 				}
 			}
-			
+
 			//4.3. deny button
 			else if(e.getSource()==view.denyRequestButton()) {
 				String s=(String)view.pttDirRequirementsDisplay().getSelectedValue();
@@ -277,22 +279,24 @@ public class Controller implements ActionListener, ListSelectionListener{
 				firstName=teacherName[0];
 				lastName=teacherName[1];
 				String className=selectedRequest[1];
-				
+
 				ListOfTeachingRequests listOfRequests=model.getListOfTeachingRequests();
-				
+
 				for(TeachingRequest trequest : listOfRequests) {
 					if(trequest.getTeacher().getFirstName().equals(firstName) &&
 							trequest.getTeacher().getLastName().equals(lastName) &&
 							trequest.getClassRef().getName().equals(className)) {
-						model.denyTeachingRequest(trequest);						
+						model.denyTeachingRequest(trequest);	
+						JOptionPane.showMessageDialog(view, "Request Denied");
+
 						view.updatePTTDirScreen();
 					}
 				}	
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * actionPerformed called from view (actionListener)
 	 * */
@@ -303,19 +307,19 @@ public class Controller implements ActionListener, ListSelectionListener{
 			model.setCurrentUser(currUser);
 			view.createClassDirScreen();
 		}
-		
+
 		else if(e.getSource()==view.adminLogin()) {
 			currUser="Administrator";
 			model.setCurrentUser(currUser);
 			view.createAdminScreen();
 		}
-		
+
 		else if(e.getSource()==view.pttDirLogin()) {
 			currUser="PTTDirector";
 			model.setCurrentUser(currUser);
 			view.createPTTDirScreen();
 		}
-		
+
 		else {
 			createOtherController(currUser, e);
 		}
