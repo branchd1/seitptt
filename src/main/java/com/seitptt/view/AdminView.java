@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,6 +32,7 @@ public class AdminView extends JPanel {
 	
 	protected JList teacherList;
 	private DefaultListModel listModel;
+	private DefaultComboBoxModel comboModel;
 	
 	protected JButton addTeachers;
 	protected JButton trainTeachers;
@@ -62,14 +64,16 @@ public class AdminView extends JPanel {
 		filterPanel.add(trainingFilter);
 		
 		//create and add list of teaching requirements filter
-		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements().filterByValidation();
 		ArrayList<String> listRequirements = new ArrayList();
 		listRequirements.add("Select Requirement");
 		for (TeachingRequirement i : listOfRequirements) {
 			listRequirements.add(i.toString());
 		}
-		
-		requirementFilter = new JComboBox(listRequirements.toArray());
+		comboModel=new DefaultComboBoxModel(listRequirements.toArray());
+	
+		requirementFilter = new JComboBox();
+		requirementFilter.setModel(comboModel);
 		requirementFilter.addActionListener(controller);
 		filterPanel.add(requirementFilter);
 		this.add(filterPanel, BorderLayout.NORTH);
@@ -93,6 +97,8 @@ public class AdminView extends JPanel {
 		trainTeachers = new JButton("Train Teachers");
 		trainTeachers.addActionListener(controller);
 		
+		addTeachers.setEnabled(false);
+		trainTeachers.setEnabled(false);
 		buttonPanel.add(addTeachers);
 		buttonPanel.add(trainTeachers);
 		this.add(buttonPanel, BorderLayout.SOUTH);
@@ -100,22 +106,35 @@ public class AdminView extends JPanel {
 	}
 	
 	protected void update() {
+		requirementFilter.removeAllItems();
+		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
+		ArrayList<String> listRequirements = new ArrayList();
+		listRequirements.add("Select Requirement");
+		for (TeachingRequirement i : listOfRequirements) {
+			if(i.getNumOfTeachers()>0) {
+				listRequirements.add(i.toString());
+			}
+			
+		}
+		comboModel=new DefaultComboBoxModel(listRequirements.toArray());
+		requirementFilter.setModel(comboModel);
+        
 		listModel.removeAllElements();
 		ListOfEmployees listOfTeachers=null;
 		if(controller.getSelectedFilterIndexForAdmin()==0){
 			listOfTeachers = model.getListOfTeachers();
-			trainTeachers.setEnabled(true);
+//			trainTeachers.setEnabled(false);
 
 		}
 		if(controller.getSelectedFilterIndexForAdmin()==1) {
 	        listOfTeachers = model.getListOfTeachers().getTrainedTeachers();
-			trainTeachers.setEnabled(false);
+//			trainTeachers.setEnabled(false);
 		}
 		
 
 		if(controller.getSelectedFilterIndexForAdmin()==2) {
 			   listOfTeachers = model.getListOfTeachers().getUntrainedTeachers();	
-				trainTeachers.setEnabled(true);
+//				trainTeachers.setEnabled(true);
 
 		}
 	
@@ -131,10 +150,11 @@ public class AdminView extends JPanel {
 	protected void isTeacherListSelected() {
 		if(teacherList.isSelectionEmpty()) {
 			addTeachers.setEnabled(false);
+			trainTeachers.setEnabled(false);
 		}
-		if(!teacherList.isSelectionEmpty()) {
-			addTeachers.setEnabled(true);
-		}
+//		if(!teacherList.isSelectionEmpty()) {
+//			trainTeachers.setEnabled(true);
+//		}
 	}
 
 }

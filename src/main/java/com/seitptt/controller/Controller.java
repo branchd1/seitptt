@@ -98,7 +98,19 @@ public class Controller implements ActionListener, ListSelectionListener{
 		//3.3. when teacher selected, call button enabling method
 		else if(currUser=="Administrator") {					
 			if(!e.getValueIsAdjusting() && e.getSource()==view.getTeacherList()) {
-				view.isTeacherListSelected();
+				if(view.getRequirementSelectedIndex()==0) {
+					view.adminAddTeachersButton().setEnabled(false);
+				}
+				if(view.getRequirementSelectedIndex()!=0){
+					view.adminAddTeachersButton().setEnabled(true);
+				}
+				if(view.getTrainingSelectedIndex()==1) {
+					view.adminTrainTeachersButton().setEnabled(false);
+				}
+				if(view.getTrainingSelectedIndex()==2) {
+					view.adminTrainTeachersButton().setEnabled(true);
+				}
+//				view.isTeacherListSelected();
 			}
 			else {
 				view.isTeacherListSelected();
@@ -203,7 +215,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 				firstName=selectedTeacherName[0];
 				lastName=selectedTeacherName[1];
 				ListOfEmployees listOfTeachers=model.getListOfTeachers();	
-
+				if(view.getRequirementSelectedIndex()==0) {
+					view.adminAddTeachersButton().setEnabled(false);
+				}else {
 				for(Employee i : listOfTeachers) {
 					if(i.getFirstName().equals(firstName)&&i.getLastName().equals(lastName)) {
 						model.createAndAddTeachingRequest((Teacher) i, addTeachersInReq.getClassRef(), addTeachersInReq);
@@ -213,6 +227,7 @@ public class Controller implements ActionListener, ListSelectionListener{
 						JOptionPane.showMessageDialog(view, "Added Successfully");
 						view.updateAdminScreen();
 					}
+				}
 				}				
 			}
 			//3.5. train teachers
