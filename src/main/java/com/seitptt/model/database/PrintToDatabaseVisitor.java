@@ -39,7 +39,7 @@ public class PrintToDatabaseVisitor {
 		ListOfTeachingRequirements listOfTeachingRequirements = Database.getTeachingRequirementsFromDB();
 		for(TeachingRequirement teachingRequirementsForLoop : listOfTeachingRequirements) {
 			if(teachingRequirementsForLoop.equals(teachingRequirement)) {
-				Database.increaseTeachingRequirementCountOnDB(teachingRequirement, teachingRequirement.getNumOfTeachers());
+				Database.increaseTeachingRequirementCountOnDB(teachingRequirementsForLoop, teachingRequirement.getNumOfTeachers());
 				return;
 			}
 		}
