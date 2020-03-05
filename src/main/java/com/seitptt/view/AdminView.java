@@ -64,7 +64,7 @@ public class AdminView extends JPanel {
 		//create and add list of teaching requirements filter
 		ListOfTeachingRequirements listOfRequirements = model.getListOfTeachingRequirements();
 		ArrayList<String> listRequirements = new ArrayList();
-		
+		listRequirements.add("Select Requirement");
 		for (TeachingRequirement i : listOfRequirements) {
 			listRequirements.add(i.toString());
 		}
