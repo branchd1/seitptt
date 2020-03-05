@@ -521,21 +521,23 @@ public class Database {
 		
 		// loop through the file and add the lines to new file
 		while(s.hasNextLine()) {
-			int fileId = s.nextInt();
+			String line = s.nextLine();
+			String[] lineArr = line.split(" ");
+			
+			int fileId = Integer.parseInt(lineArr[0]);
 			
 			int trId = teachingRequest.getId();
 
 			newDbString += "\n";
 			// except for the line where id is the same with the TeachingRequest id to be updated
 			if (!(fileId==trId)){
-				newDbString += fileId;
-				newDbString += s.nextLine();
+				newDbString += line;
 			} else{
-				newDbString += fileId + " ";
-				newDbString += s.next() + " ";
-				newDbString += s.next() + " ";
-				newDbString += s.nextInt() + " ";
-				newDbString += true;
+				lineArr[4] = "true";
+				
+				line = String.join(" ", lineArr);
+				
+				newDbString += line;
 			}
 		}
 		
