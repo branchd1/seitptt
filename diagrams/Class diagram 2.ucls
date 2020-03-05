@@ -288,6 +288,7 @@
     <end type="TARGET" refId="18"/>  
   </dependency>  
   <dependency id="37">    
+    <bendpoint x="1673" y="3748"/>    
     <bendpoint x="1708" y="3664"/>    
     <bendpoint x="1708" y="3343"/>    
     <end type="SOURCE" refId="8"/>    
@@ -673,7 +674,7 @@
     <end type="TARGET" refId="17"/>  
   </dependency>  
   <dependency id="101">    
-    <bendpoint x="1388" y="3664"/>    
+    <bendpoint x="1380" y="3718"/>    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
@@ -823,6 +824,7 @@
   <dependency id="129">    
     <bendpoint x="1687" y="3343"/>    
     <bendpoint x="1687" y="3664"/>    
+    <bendpoint x="1652" y="3740"/>    
     <end type="SOURCE" refId="21"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
@@ -998,7 +1000,7 @@
     <end type="TARGET" refId="15"/>  
   </dependency>  
   <dependency id="160">    
-    <bendpoint x="1367" y="3664"/>    
+    <bendpoint x="1363" y="3722"/>    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
