@@ -107,6 +107,9 @@ public class Controller implements ActionListener, ListSelectionListener{
 				if(view.getTrainingSelectedIndex()==1) {
 					view.adminTrainTeachersButton().setEnabled(false);
 				}
+				if(view.getTrainingSelectedIndex()==2) {
+					view.adminTrainTeachersButton().setEnabled(true);
+				}
 //				view.isTeacherListSelected();
 			}
 			else {
